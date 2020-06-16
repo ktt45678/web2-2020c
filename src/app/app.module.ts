@@ -9,6 +9,11 @@ import { BannerComponent } from './shared/banner/banner.component';
 import { FeaturedCardsComponent } from './shared/featured-cards/featured-cards.component';
 import { BgAComponent } from './shared/bg-a/bg-a.component';
 
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HomeComponent } from './pages/home/home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +21,11 @@ import { BgAComponent } from './shared/bg-a/bg-a.component';
     FooterComponent,
     BannerComponent,
     FeaturedCardsComponent,
-    BgAComponent
+    BgAComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

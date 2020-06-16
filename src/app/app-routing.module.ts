@@ -15,12 +15,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    HomeComponent
-  ],
+  declarations: [],
   imports: [RouterModule.forRoot(routes), CommonModule],
   exports: [RouterModule]
 })
