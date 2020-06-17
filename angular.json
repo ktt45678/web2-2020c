@@ -29,8 +29,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
               "src/styles.scss"
             ],
             "scripts": [
@@ -99,6 +99,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -130,6 +131,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "whitefoobank"
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-bg-a',
-  templateUrl: './bg-a.component.html',
-  styleUrls: ['./bg-a.component.scss']
+  selector: 'app-bga',
+  templateUrl: './bga.component.html',
+  styleUrls: ['./bga.component.scss']
 })
 export class BgAComponent implements OnInit {
 

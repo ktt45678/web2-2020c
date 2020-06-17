@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BgAComponent } from './bg-a.component';
+import { BgAComponent } from './bga.component';
 
 describe('BgAComponent', () => {
   let component: BgAComponent;

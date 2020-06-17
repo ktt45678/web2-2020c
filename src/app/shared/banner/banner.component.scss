@@ -1,0 +1,23 @@
+.carousel {
+    .carousel-item {
+        height: 500px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        img {
+            object-fit: cover;
+            height: 500px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel {
+        .carousel-item {
+            height: 200px;
+            img {
+                object-fit: cover;
+                height: 200px;
+            }
+        }
+    }
+}
