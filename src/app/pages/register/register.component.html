@@ -1,27 +1,5 @@
 <div class="mat-body">
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-    <a class="navbar-brand" routerLink="/">
-      <img src="/assets/img/whitefoologohead.png" alt="logo">
-      <img src="/assets/img/whitefoologocap.png" alt="logo">
-    </a>
-    <button mat-icon-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a mat-button routerLink="/">Trang chủ</a>
-        </li>
-        <li class="nav-item">
-          <a mat-button routerLink="/login">Đăng nhập</a>
-        </li>
-        <li class="nav-item">
-          <a mat-button routerLink="/register">Đăng ký</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <app-matheader></app-matheader>
   <div class="mat-page">
     <div class="container">
       <div class="row">
@@ -122,4 +100,5 @@
       </div>
     </div>
   </div>
+  <app-matfooter></app-matfooter>
 </div>

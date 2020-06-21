@@ -133,8 +133,5 @@
       }
     }
   },
-  "defaultProject": "whitefoobank",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "whitefoobank"
 }

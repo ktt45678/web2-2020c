@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { MatheaderComponent } from './shared/matheader/matheader.component';
+import { MatfooterComponent } from './shared/matfooter/matfooter.component';
 import { BannerComponent } from './shared/banner/banner.component';
 import { FeaturedComponent } from './shared/featured/featured.component';
 import { BgAComponent } from './shared/bga/bga.component';
@@ -53,6 +55,8 @@ export function tokenGetter() {
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    MatheaderComponent,
+    MatfooterComponent,
     BannerComponent,
     FeaturedComponent,
     BgAComponent,
