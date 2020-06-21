@@ -1,16 +1,67 @@
-<div class="form-login">
-    <div class="mt-4 mb-4 ml-4 mr-4">
-        <h3 class="text-center form-header">Đăng Nhập</h3>
-        <form>
-            <div class="form-group">
-                <label class="form-label" for="username">Tên đăng nhập hoặc email</label>
-                <input type="text" class="form-control form-input" id="username" name="username">
+<div class="mat-body">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+      <a class="navbar-brand" routerLink="/">
+        <img src="/assets/img/whitefoologohead.png" alt="logo">
+        <img src="/assets/img/whitefoologocap.png" alt="logo">
+      </a>
+      <button mat-icon-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a mat-button routerLink="/">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a mat-button routerLink="/login">Đăng nhập</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="mat-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="signup-image"></div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="signup-form">
+              <h2 class="mb-3">ĐĂNG NHẬP</h2>
+              <form>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Email / Tên người dùng</mat-label>
+                    <input type="text" formControlName="address" matInput placeholder="Customer@gmail.com / Customer123">
+                    <mat-hint>Sử dụng địa chỉ mà bạn đã đăng ký</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Mật khẩu</mat-label>
+                      <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput>
+                      <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-hint>Sử dụng mật khẩu bạn đã đăng ký cho tài khoản</mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex">  
+                  <div>
+                    <a routerLink="/register" mat-button color="primary">Bạn chưa có tải khoản?</a>
+                  </div>
+                  <div class="ml-auto">
+                    <button type="submit" mat-flat-button color="primary" [disabled]="loading">
+                      <span *ngIf="loading"></span>
+                      Đăng nhập</button>
+                  </div>
+                </div>
+              </form>
             </div>
-            <div class="form-group">
-                <label class="form-label" for="password">Mật khẩu</label>
-                <input type="password" class="form-control form-input" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-        </form>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
