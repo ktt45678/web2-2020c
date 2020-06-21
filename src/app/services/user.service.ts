@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 
 export class UserService {
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
-    auth() {
+    login(username: string, password: string) {
         //Login go here
-        let options = {
-            headers: new HttpHeaders().set(
-                "Content-Type",
-                "application/x-www-form-urlencoded"
-            )
+        const options = {
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
         }
-        return this.http.post("http://localhost:3000/api/login", options);
+        const body = new URLSearchParams();
+        body.set('email', username);
+        body.set('password', password);
+        body.set('clientId', environment.clientId);
+        body.set('secretKey', environment.clientSecret);
+        return this.http.post(environment.apiUrl + '/api/auth/login', body.toString(), options);
     }
 }
