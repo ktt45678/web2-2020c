@@ -23,8 +23,8 @@ body {
 }
 
 .signup-image {
-    margin-top: 3rem;
-    height: 100%;
+    margin-top: 2rem;
+    height: 95%;
     width: 100%;
     background-image: url(/assets/img/example1080pdark.png);
     background-size: cover;
@@ -32,13 +32,16 @@ body {
 }
 
 .signup-form {
-    margin-top: 3rem;
+    margin-top: 2rem;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid rgba(0, 0, 0, .1);
-    padding: 32px;
-    border-radius: 5px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+    border-radius: 10px;
+    overflow: hidden;
+    .signup-inner {
+        padding: 32px;
+    }
 }
 
 @media only screen and (max-width: 991px) {
