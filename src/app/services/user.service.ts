@@ -17,6 +17,6 @@ export class UserService {
         body.set('password', password);
         body.set('clientId', environment.clientId);
         body.set('secretKey', environment.clientSecret);
-        return this.http.post(environment.apiUrl + '/api/auth/login', body.toString(), options);
+        return this.http.post(environment.apiUrl + '/api/login', body.toString(), options);
     }
 }

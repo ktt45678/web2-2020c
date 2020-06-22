@@ -13,87 +13,118 @@
             </div>
             <div class="signup-inner">
               <h2 class="mb-3">ĐĂNG KÝ</h2>
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Họ</mat-label>
-                    <input type="text" formControlName="firstname" matInput>
-                  </mat-form-field>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Họ</mat-label>
+                      <input type="text" formControlName="firstname" matInput [attr.disabled]="loading">
+                      <mat-error *ngIf="firstname.errors?.required">
+                        Họ là thông tin <strong>bắt buộc</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Tên</mat-label>
+                      <input type="text" formControlName="lastname" matInput [attr.disabled]="loading">
+                      <mat-error *ngIf="lastname.errors?.required">
+                        Tên là thông tin <strong>bắt buộc</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Tên</mat-label>
-                    <input type="text" formControlName="lastname" matInput>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Ngày sinh</mat-label>
-                  <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="birth">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker touchUi #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Tên người dùng</mat-label>
-                    <input type="text" formControlName="username" matInput>
-                    <mat-hint>Dùng để đăng nhập</mat-hint>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Số điện thoại</mat-label>
-                    <input type="tel" formControlName="tel" matInput>
-                    <mat-hint>Dùng để xác thực</mat-hint>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Địa chỉ</mat-label>
-                  <input type="text" formControlName="address" matInput placeholder="Vd. 227 Đường Nguyễn Văn Cừ, Phường 4, Quận 5, Hồ Chí Minh">
-                  <mat-hint>Sử dụng chính xác địa chỉ của bạn</mat-hint>
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Địa chỉ email</mat-label>
-                  <input type="email" formControlName="email" matInput>
-                  <mat-hint>Tài khoản sẽ được xác thực qua email</mat-hint>
-                </mat-form-field>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Mật khẩu</mat-label>
-                    <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput>
-                    <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-                      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Xác nhận</mat-label>
-                    <input [type]="hidePassword ? 'password' : 'text'" formControlName="confirmpassword" matInput>
-                  </mat-form-field>
-                </div>
-              </div>
-              <re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey="6LfReqcZAAAAAA2CC5SjI_bqNSNOJPwrOjjdAHHE"></re-captcha>
-              <div class="d-flex">
                 <div>
-                  <a routerLink="/login" mat-button color="primary">Đăng nhập</a>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="birth" [attr.disabled]="loading">
+                    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="loading"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                    <mat-error *ngIf="birth.errors?.required">
+                      Ngày sinh là <strong>bắt buộc</strong>
+                    </mat-error>
+                  </mat-form-field>
                 </div>
-                <div class="ml-auto">
-                  <button type="submit" (click)="captchaRef.execute()" mat-flat-button color="primary" [disabled]="loading">
-                    <span *ngIf="loading"></span>Đăng ký</button>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Tên người dùng</mat-label>
+                      <input type="text" formControlName="username" matInput [attr.disabled]="loading">
+                      <mat-hint>Dùng để đăng nhập</mat-hint>
+                      <mat-error *ngIf="username.errors?.required">
+                        Tên người dùng là <strong>bắt buộc</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Số điện thoại</mat-label>
+                      <input type="tel" formControlName="tel" matInput [attr.disabled]="loading">
+                      <mat-hint>Dùng để xác thực</mat-hint>
+                      <mat-error *ngIf="tel.errors?.required">
+                        Số điện thoại là <strong>bắt buộc</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
                 </div>
-              </div>
-            </form>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Địa chỉ</mat-label>
+                    <input type="text" formControlName="address" matInput [attr.disabled]="loading"
+                      placeholder="Vd. 227 Đường Nguyễn Văn Cừ, Phường 4, Quận 5, Hồ Chí Minh">
+                    <mat-hint>Sử dụng chính xác địa chỉ của bạn</mat-hint>
+                    <mat-error *ngIf="address.errors?.required">
+                      Địa chỉ là <strong>bắt buộc</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Địa chỉ email</mat-label>
+                    <input type="email" formControlName="email" matInput [attr.disabled]="loading">
+                    <mat-hint>Tài khoản sẽ được xác thực qua email</mat-hint>
+                    <mat-error *ngIf="email.invalid && !email.errors.required">
+                      Vui lòng nhập một địa chỉ email hợp lệ
+                    </mat-error>
+                    <mat-error *ngIf="email.errors?.required">
+                      Email là <strong>bắt buộc</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Mật khẩu</mat-label>
+                      <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput [attr.disabled]="loading">
+                      <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [disabled]="loading"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-error *ngIf="password.errors?.required">
+                        Mật khẩu là <strong>bắt buộc</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Xác nhận</mat-label>
+                      <input [type]="hidePassword ? 'password' : 'text'" formControlName="confirmpassword" matInput [attr.disabled]="loading">
+                      <mat-error *ngIf="confirmpassword.errors?.required">
+                        Xác nhận mật khẩu là <strong>bắt buộc</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey="6LfReqcZAAAAAA2CC5SjI_bqNSNOJPwrOjjdAHHE"></re-captcha>
+                <div class="d-flex">
+                  <div>
+                    <a routerLink="/login" mat-button color="primary" [disabled]="loading">Đăng nhập</a>
+                  </div>
+                  <div class="ml-auto">
+                    <button type="submit" (click)="captchaRef.execute()" mat-flat-button color="primary"[disabled]="loading">Đăng ký</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

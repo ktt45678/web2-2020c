@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -16,22 +16,33 @@ export class RegisterComponent implements OnInit {
   registerForm;
   ngOnInit(): void {}
   constructor(private user: UserService, private formBuilder: FormBuilder) {
-    this.registerForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      birth: ['', Validators.required],
-      username: ['', Validators.required],
-      tel: ['', Validators.required],
-      address: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
-      confirmpassword: ['', Validators.required]
+    this.registerForm = new FormGroup({
+      'firstname': new FormControl('', [Validators.required]),
+      'lastname': new FormControl('', [Validators.required]),
+      'birth': new FormControl('', [Validators.required]),
+      'username': new FormControl('', [Validators.required]),
+      'tel': new FormControl('', [Validators.required]),
+      'address': new FormControl('', [Validators.required]),
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'password': new FormControl('', [Validators.required]),
+      'confirmpassword': new FormControl('', [Validators.required])
     });
   }
 
+  get firstname() { return this.registerForm.get('firstname'); }
+  get lastname() { return this.registerForm.get('lastname'); }
+  get birth() { return this.registerForm.get('birth'); }
+  get username() { return this.registerForm.get('username'); }
+  get tel() { return this.registerForm.get('tel'); }
+  get address() { return this.registerForm.get('address'); }
+  get email() { return this.registerForm.get('email'); }
+  get password() { return this.registerForm.get('password'); }
+  get confirmpassword() { return this.registerForm.get('confirmpassword'); }
+
   onSubmit(registerData) {
     //this.registerForm.reset();
-    console.log(registerData.firstname);
+    this.loading = true;
+    console.log(registerData);
   }
 
   Register() {
