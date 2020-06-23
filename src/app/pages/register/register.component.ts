@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -43,12 +44,6 @@ export class RegisterComponent implements OnInit {
     //this.registerForm.reset();
     this.loading = true;
     console.log(registerData);
-  }
-
-  Register() {
-    this.user.login('admin123@admin.com', 'kocopass').subscribe(data => {
-      console.log(data);
-    });
   }
 
   resolved(captchaResponse: string) {

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroupDirective, NgForm, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+
 import { UserService } from '../../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,9 +23,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class LoginComponent implements OnInit {
   hidePassword = true;
   loading = false;
+  error = '';
   loginForm;
   ngOnInit(): void {}
-  constructor(private user: UserService, private formBuilder: FormBuilder) {
+  constructor(private authentication: AuthenticationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
@@ -33,10 +37,15 @@ export class LoginComponent implements OnInit {
   get password() { return this.loginForm.get('password'); }
 
   onSubmit(loginData) {
-    console.log(loginData);
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.loading = true;
-    this.user.login(loginData.username, loginData.password).subscribe(data => {
-      console.log(data);
+    this.authentication.login(loginData.username, loginData.password).subscribe(data => {
+      this.router.navigate(['/dashboard']);
+    }, error => {
+      this.loading = false;
+      this.error = error;
     });
   }
 

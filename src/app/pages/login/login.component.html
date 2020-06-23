@@ -12,7 +12,7 @@
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Email hoặc tên người dùng</mat-label>
-                <input type="text" formControlName="username" matInput [attr.disabled]="loading">
+                <input type="text" formControlName="username" matInput>
                 <mat-error *ngIf="password.invalid && password.errors.required">
                   Email hoặc tên người dùng là <strong>bắt buộc</strong>
                 </mat-error>
@@ -21,7 +21,7 @@
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Mật khẩu</mat-label>
-                <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput [attr.disabled]="loading">
+                <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput>
                 <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [disabled]="loading"
                   [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                   <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -39,6 +39,7 @@
                 <button type="submit" mat-flat-button color="primary" [disabled]="loading">Đăng nhập</button>
               </div>
             </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">An error occurred</div>
           </form>
         </div>
       </div>
