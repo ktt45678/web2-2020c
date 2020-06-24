@@ -6,8 +6,6 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('staticNavbar') staticNavbar: ElementRef;
-  sticky: boolean = false;
   navbarPosition: any;
 
   constructor() { }
