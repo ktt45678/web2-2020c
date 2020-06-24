@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
-import { UserService } from '../../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  providers: [AuthenticationService]
 })
 export class RegisterComponent implements OnInit {
   loading = false;
@@ -16,17 +17,17 @@ export class RegisterComponent implements OnInit {
   hidePassword = true;
   registerForm;
   ngOnInit(): void {}
-  constructor(private user: UserService, private formBuilder: FormBuilder) {
+  constructor(private auth: AuthenticationService, private formBuilder: FormBuilder) {
     this.registerForm = new FormGroup({
-      'firstname': new FormControl('', [Validators.required]),
-      'lastname': new FormControl('', [Validators.required]),
-      'birth': new FormControl('', [Validators.required]),
-      'username': new FormControl('', [Validators.required]),
-      'tel': new FormControl('', [Validators.required]),
-      'address': new FormControl('', [Validators.required]),
-      'email': new FormControl('', [Validators.required, Validators.email]),
-      'password': new FormControl('', [Validators.required]),
-      'confirmpassword': new FormControl('', [Validators.required])
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      birth: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      tel: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      confirmpassword: new FormControl('', [Validators.required])
     });
   }
 

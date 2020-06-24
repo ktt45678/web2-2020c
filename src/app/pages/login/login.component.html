@@ -12,7 +12,7 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Email hoặc tên người dùng</mat-label>
                 <input type="text" formControlName="username" matInput [attr.disabled]="loading ? '' : null">
-                <mat-error *ngIf="password.invalid && password.errors.required">
+                <mat-error *ngIf="username.errors?.required">
                   Email hoặc tên người dùng là <strong>bắt buộc</strong>
                 </mat-error>
               </mat-form-field>
@@ -25,14 +25,17 @@
                   [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                   <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error *ngIf="password.invalid && password.errors.required">
+                <mat-error *ngIf="password.errors?.required">
                   Mật khẩu là <strong>bắt buộc</strong>
                 </mat-error>
               </mat-form-field>
             </div>
+            <div class="mt-2">
+              <a routerLink="/passwordrecovery" mat-button color="primary" [disabled]="loading">Bạn quên mật khẩu?</a>
+            </div>
             <div class="d-flex">
               <div>
-                <a routerLink="/register" mat-button color="primary" [disabled]="loading">Bạn chưa có tài khoản?</a>
+                <a routerLink="/register" mat-button color="primary" [disabled]="loading">Tạo tài khoản</a>
               </div>
               <div class="ml-auto">
                 <button type="submit" mat-flat-button color="primary" [disabled]="loading">Đăng nhập</button>

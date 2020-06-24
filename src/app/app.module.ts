@@ -18,10 +18,11 @@ import { BannerComponent } from './shared/banner/banner.component';
 import { FeaturedComponent } from './shared/featured/featured.component';
 import { BgAComponent } from './shared/bga/bga.component';
 
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HomeComponent } from './pages/home/home.component';
 
 import { UserService } from './services/user.service';
 
@@ -60,10 +61,11 @@ export function tokenGetter() {
     BannerComponent,
     FeaturedComponent,
     BgAComponent,
+    HomeComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
-    HomeComponent
+    PasswordRecoveryComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

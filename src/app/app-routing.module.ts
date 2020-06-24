@@ -7,15 +7,17 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { MatheaderComponent } from './shared/matheader/matheader.component';
 import { MatfooterComponent } from './shared/matfooter/matfooter.component';
 
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: '' },
   { path: '', component: HeaderComponent, outlet: "header" },
