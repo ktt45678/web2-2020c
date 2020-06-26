@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationService } from '../../services/authentication.service';
 
@@ -11,13 +12,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class RegisterComponent implements OnInit {
   loading = false;
-  submitted = false;
   returnUrl: string;
   error = '';
   hidePassword = true;
   registerForm;
   ngOnInit(): void {}
-  constructor(private auth: AuthenticationService, private formBuilder: FormBuilder) {
+  constructor(private auth: AuthenticationService, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     this.registerForm = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
@@ -42,13 +42,21 @@ export class RegisterComponent implements OnInit {
   get confirmpassword() { return this.registerForm.get('confirmpassword'); }
 
   onSubmit(registerData) {
-    //this.registerForm.reset();
+    if (this.registerForm.invalid) {
+      return;
+    }
     this.loading = true;
-    console.log(registerData);
+    this.auth.register(registerData).subscribe(data => {
+      this.snackBar.open('Đăng kí thành công, vui lòng kiểm tra email của bạn', 'Xong');
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+      this.error = error;
+    });
   }
 
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    //console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 
 }

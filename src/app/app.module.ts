@@ -44,6 +44,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 //JWT
@@ -95,15 +96,10 @@ export function tokenGetter() {
     MatProgressBarModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     RecaptchaModule,
     RecaptchaFormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: [environment.apiUrl],
-        blacklistedRoutes: [ environment.apiUrl + '/api/auth']
-      }
-    })
+    JwtModule
   ],
   providers: [
     UserService,
