@@ -24,7 +24,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
-import { SupportComponent } from './pages/support/support.component';
+import { AboutComponent } from './pages/about/about.component';
 
 import { UserService } from './services/user.service';
 
@@ -47,8 +47,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ContactComponent } from './pages/contact/contact.component';
+import { PolicyComponent } from './pages/policy/policy.component';
 
 
 //JWT
@@ -72,7 +75,9 @@ export function tokenGetter() {
     PasswordRecoveryComponent,
     DashboardComponent,
     FAQComponent,
-    SupportComponent
+    AboutComponent,
+    ContactComponent,
+    PolicyComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +111,7 @@ export function tokenGetter() {
     RecaptchaFormsModule,
     MatExpansionModule,
     MatDividerModule,
+    MatGridListModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

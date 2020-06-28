@@ -13,7 +13,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
-import { SupportComponent } from './pages/support/support.component';
+import { AboutComponent } from './pages/about/about.component'
+import { ContactComponent } from './pages/contact/contact.component';
+import { PolicyComponent } from './pages/policy/policy.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,8 +23,10 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'passwordrecovery', component: PasswordRecoveryComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'faq', component: FAQComponent},
-  { path: 'support', component: SupportComponent },
+  { path: 'faq', component: FAQComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'policy', component: PolicyComponent },
   { path: '**', redirectTo: '' },
   { path: '', component: HeaderComponent, outlet: "header" },
   { path: '', component: FooterComponent, outlet: "footer" },
