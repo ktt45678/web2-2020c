@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 export class HeaderComponent implements OnInit {
   navbarPosition: any;
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit(): void {
   }

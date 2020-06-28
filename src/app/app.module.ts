@@ -23,6 +23,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { FAQComponent } from './pages/faq/faq.component';
+import { SupportComponent } from './pages/support/support.component';
 
 import { UserService } from './services/user.service';
 
@@ -45,6 +47,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 //JWT
 export function tokenGetter() {
@@ -65,7 +70,9 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     PasswordRecoveryComponent,
-    DashboardComponent
+    DashboardComponent,
+    FAQComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +104,8 @@ export function tokenGetter() {
     MatDatepickerModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    MatExpansionModule,
+    MatDividerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
