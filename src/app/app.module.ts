@@ -52,6 +52,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 //JWT
@@ -112,6 +113,7 @@ export function tokenGetter() {
     MatExpansionModule,
     MatDividerModule,
     MatGridListModule,
+    MatStepperModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

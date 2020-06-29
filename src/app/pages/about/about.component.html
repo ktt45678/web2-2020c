@@ -1,1 +1,134 @@
-<p>about works!</p>
+<div class="mat-body">
+    <div class="mat-page">
+      <br><br>
+      <h2>THÔNG TIN VỀ NHÓM</h2>
+      <div class="main-container">
+        <mat-horizontal-stepper #stepper>
+            <mat-step>
+                <ng-template matStepLabel>Frontend</ng-template>
+                <div class="container">
+                    <div class="fe-container">
+                        <mat-card class="personal-info-card" id="fe01">
+                            <mat-card-header>
+                              <div mat-card-avatar class="profile-image"></div>
+                              <mat-card-title>PEPEGA 1</mat-card-title>
+                              <mat-card-subtitle>COOMER</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="main-image">
+                                <img mat-card-image src="../../../assets/img/pepega.png" alt="Photo of a COOMER">
+                            </div>
+                            <mat-card-content>
+                              <p>
+                                BORN TO COOM
+                              </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button id="facebook-button"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></button>
+                                <button mat-button id="github-button"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></button>
+                             <mat-icon></mat-icon>
+                            </mat-card-actions>
+                          </mat-card>
+                          
+                          <mat-card class="personal-info-card" id="fe02">
+                            <mat-card-header>
+                              <div mat-card-avatar class="profile-image"></div>
+                              <mat-card-title>PEPEGA 2</mat-card-title>
+                              <mat-card-subtitle>BOOMER</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="main-image">
+                                <img mat-card-image src="../../../assets/img/pepega.png" alt="Photo of a BOOMER">
+                            </div>
+                            <mat-card-content>
+                              <p>
+                                BORN TO BOOM
+                              </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button id="facebook-button"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></button>
+                                <button mat-button id="github-button"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></button>
+                            </mat-card-actions>
+                          </mat-card>
+                    </div>
+                    <br><br>
+                  </div>
+                <div class="stepnav">
+                  <button mat-button matStepperNext id="nextButton">Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Backend</ng-template>
+                <div class="container">
+                    <div class="be-container">
+                        <mat-card class="personal-info-card" id="be01">
+                            <mat-card-header>
+                              <div mat-card-avatar class="profile-image"></div>
+                              <mat-card-title>PEPEGA 3</mat-card-title>
+                              <mat-card-subtitle>DOOMER</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="main-image">
+                                <img mat-card-image src="../../../assets/img/pepega.png" alt="Photo of a DOOMER">
+                            </div>
+                            <mat-card-content>
+                              <p>
+                                BORN TO DOOM
+                              </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button id="facebook-button"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></button>
+                                <button mat-button id="github-button"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></button>
+                            </mat-card-actions>
+                          </mat-card>
+                          
+                          <mat-card class="personal-info-card" id="be02">
+                            <mat-card-header>
+                              <div mat-card-avatar class="profile-image"></div>
+                              <mat-card-title>PEPEGA 4</mat-card-title>
+                              <mat-card-subtitle>ZOOMER</mat-card-subtitle>
+                            </mat-card-header>
+                            <div class="main-image">
+                                <img mat-card-image src="../../../assets/img/pepega.png" alt="Photo of a ZOOMER">
+                            </div>
+                            <mat-card-content>
+                              <p>
+                                BORN TO ZOOM
+                              </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button id="facebook-button"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></button>
+                                <button mat-button id="github-button"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></button>
+                            </mat-card-actions>
+                          </mat-card>
+                    </div>
+                </div>
+                <br><br>
+                <div class="stepnav">
+                  <button mat-button matStepperPrevious id="backButton">Back</button>
+                  <button mat-button matStepperNext id="nextButton">Next</button>
+                </div>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Project</ng-template>
+              <div class="project-container">
+                <div class="list">
+                    <mat-list style="align-items: center;">
+                        <mat-list-item> Thành phần frontend </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> Thành phần backend </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> Các dịch vụ lưu trữ </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list> 
+                </div> 
+                <button mat-button id="github-button"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></button>
+                <button mat-button id="github-button"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></button>
+              </div>
+              <br><br>
+              <div class="stepnav">
+                <button mat-button matStepperPrevious id="backButton">Back</button>
+                <button mat-button (click)="stepper.reset()" id="restartButton">Restart</button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+      </div>  
+    </div>
+</div>

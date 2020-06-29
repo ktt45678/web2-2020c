@@ -1,0 +1,62 @@
+.personal-info-card {
+    max-width: 400px;
+    background-color: rgba($color: #212121, $alpha: 0.1);
+}
+  
+.profile-image {
+    background-image: url('../../../assets/img/pepega.png');
+    background-size: cover;
+}
+
+.mat-card-image {
+    border-radius: 5px;
+}
+
+
+.fe-container {
+    display: flex;
+}
+.be-container { 
+    display: flex;
+}
+
+#fe02 {
+    left: 170px;
+}
+
+#be02 {
+    left: 170px;
+}
+
+#fe01 {
+    right: -130px;
+}
+
+#be01 {
+    right: -130px;
+}
+
+#facebook-button {
+    font-size: 30px;
+}
+#github-button {
+    font-size: 30px;
+}
+
+.project-container {
+    text-align: center;
+}
+
+.list {
+    text-align: center;
+}
+
+.backButton .nextButton .restartButton{
+    text-align: center;
+}  
+.stepnav{
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
