@@ -1,0 +1,23 @@
+.sidemenu{
+    height: 22%;
+    width: 185px;
+    background-color:cornflowerblue;
+    left: 0px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    padding-top: 0;
+    padding-bottom: 0;
+    position: absolute;
+}
+
+.container{
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    padding-bottom: 15px;
+}
+
+h6{
+    text-align: center;
+}
+
+.redirector a{
+    color: #3f51b5;
+}
