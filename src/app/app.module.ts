@@ -53,7 +53,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 //JWT
 export function tokenGetter() {
@@ -114,6 +114,7 @@ export function tokenGetter() {
     MatDividerModule,
     MatGridListModule,
     MatStepperModule,
+    MatTooltipModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
