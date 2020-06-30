@@ -46,6 +46,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
@@ -108,6 +109,7 @@ export function tokenGetter() {
     MatProgressBarModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     RecaptchaModule,
     RecaptchaFormsModule,
     MatExpansionModule,
@@ -122,6 +124,7 @@ export function tokenGetter() {
         blacklistedRoutes: [ environment.apiUrl + '/api/auth']
       }
     })
+    
   ],
   providers: [
     UserService,
