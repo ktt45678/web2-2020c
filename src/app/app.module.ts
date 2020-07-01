@@ -54,7 +54,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
 

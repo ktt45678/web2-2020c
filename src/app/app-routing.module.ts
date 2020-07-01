@@ -17,21 +17,34 @@ import { AboutComponent } from './pages/about/about.component'
 import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 
+import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
+import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'passwordrecovery', component: PasswordRecoveryComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'faq', component: FAQComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'policy', component: PolicyComponent },
-  { path: '**', redirectTo: '' },
-  { path: '', component: HomeHeaderComponent, outlet: "header" },
-  { path: '', component: HomeFooterComponent, outlet: "footer" },
-  { path: 'matheader', component: MatHeaderComponent, outlet: "header" },
-  { path: 'matfooter', component: MatFooterComponent, outlet: "footer" }
+  // Home routes
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent }
+    ]
+  },
+  // App routes
+  {
+    path: '',
+    component: MatLayoutComponent,
+    children: [
+      { path: 'faq', component: FAQComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'policy', component: PolicyComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'passwordrecovery', component: PasswordRecoveryComponent },
+      { path: 'dashboard', component: DashboardComponent },
+    ]
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
