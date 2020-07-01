@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { MatheaderComponent } from './shared/matheader/matheader.component';
-import { MatfooterComponent } from './shared/matfooter/matfooter.component';
+import { HomeHeaderComponent } from './shared/home-header/home-header.component';
+import { HomeFooterComponent } from './shared/home-footer/home-footer.component';
+import { MatHeaderComponent } from './shared/mat-header/mat-header.component';
+import { MatFooterComponent } from './shared/mat-footer/mat-footer.component';
 
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -28,10 +28,10 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'policy', component: PolicyComponent },
   { path: '**', redirectTo: '' },
-  { path: '', component: HeaderComponent, outlet: "header" },
-  { path: '', component: FooterComponent, outlet: "footer" },
-  { path: 'matheader', component: MatheaderComponent, outlet: "header" },
-  { path: 'matfooter', component: MatfooterComponent, outlet: "footer" }
+  { path: '', component: HomeHeaderComponent, outlet: "header" },
+  { path: '', component: HomeFooterComponent, outlet: "footer" },
+  { path: 'matheader', component: MatHeaderComponent, outlet: "header" },
+  { path: 'matfooter', component: MatFooterComponent, outlet: "footer" }
 ];
 
 @NgModule({

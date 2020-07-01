@@ -10,12 +10,12 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { MatheaderComponent } from './shared/matheader/matheader.component';
-import { MatfooterComponent } from './shared/matfooter/matfooter.component';
-import { BannerComponent } from './shared/banner/banner.component';
-import { FeaturedComponent } from './shared/featured/featured.component';
+import { HomeHeaderComponent } from './shared/home-header/home-header.component';
+import { HomeFooterComponent } from './shared/home-footer/home-footer.component';
+import { MatHeaderComponent } from './shared/mat-header/mat-header.component';
+import { MatFooterComponent } from './shared/mat-footer/mat-footer.component';
+import { HomeBannerComponent } from './shared/home-banner/home-banner.component';
+import { HomeFeaturedComponent } from './shared/home-featured/home-featured.component';
 import { BgAComponent } from './shared/bga/bga.component';
 
 import { HomeComponent } from './pages/home/home.component';
@@ -55,6 +55,8 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
+import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
 
 //JWT
 export function tokenGetter() {
@@ -64,12 +66,12 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    MatheaderComponent,
-    MatfooterComponent,
-    BannerComponent,
-    FeaturedComponent,
+    HomeHeaderComponent,
+    HomeFooterComponent,
+    MatHeaderComponent,
+    MatFooterComponent,
+    HomeBannerComponent,
+    HomeFeaturedComponent,
     BgAComponent,
     HomeComponent,
     LoginComponent,
@@ -80,6 +82,8 @@ export function tokenGetter() {
     AboutComponent,
     ContactComponent,
     PolicyComponent,
+    HomeLayoutComponent,
+    MatLayoutComponent,
   ],
   imports: [
     BrowserModule,

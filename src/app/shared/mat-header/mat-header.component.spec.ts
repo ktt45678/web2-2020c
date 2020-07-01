@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatheaderComponent } from './matheader.component';
+import { MatHeaderComponent } from './mat-header.component';
 
-describe('MatheaderComponent', () => {
-  let component: MatheaderComponent;
-  let fixture: ComponentFixture<MatheaderComponent>;
+describe('MatHeaderComponent', () => {
+  let component: MatHeaderComponent;
+  let fixture: ComponentFixture<MatHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatheaderComponent ]
+      declarations: [ MatHeaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatheaderComponent);
+    fixture = TestBed.createComponent(MatHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

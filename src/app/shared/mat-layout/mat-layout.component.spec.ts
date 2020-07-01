@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatfooterComponent } from './matfooter.component';
+import { MatLayoutComponent } from './mat-layout.component';
 
-describe('MatfooterComponent', () => {
-  let component: MatfooterComponent;
-  let fixture: ComponentFixture<MatfooterComponent>;
+describe('MatLayoutComponent', () => {
+  let component: MatLayoutComponent;
+  let fixture: ComponentFixture<MatLayoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatfooterComponent ]
+      declarations: [ MatLayoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatfooterComponent);
+    fixture = TestBed.createComponent(MatLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
