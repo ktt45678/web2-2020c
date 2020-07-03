@@ -19,6 +19,7 @@ import { PolicyComponent } from './pages/policy/policy.component';
 
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+import { SideLayoutComponent } from './shared/side-layout/side-layout.component';
 
 const routes: Routes = [
   // Home routes
@@ -40,10 +41,18 @@ const routes: Routes = [
       { path: 'policy', component: PolicyComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'passwordrecovery', component: PasswordRecoveryComponent },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'passwordrecovery', component: PasswordRecoveryComponent }
     ]
   },
+  // Dashboard routes
+  {
+    path: 'dashboard',
+    component: SideLayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent }
+    ]
+  },
+  // No layout
   { path: '**', redirectTo: '' }
 ];
 

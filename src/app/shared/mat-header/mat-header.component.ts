@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mat-header.component.scss']
 })
 export class MatHeaderComponent implements OnInit {
+  shouldRun = true;
 
   constructor() { }
 

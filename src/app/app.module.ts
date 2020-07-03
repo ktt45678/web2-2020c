@@ -14,9 +14,13 @@ import { HomeHeaderComponent } from './shared/home-header/home-header.component'
 import { HomeFooterComponent } from './shared/home-footer/home-footer.component';
 import { MatHeaderComponent } from './shared/mat-header/mat-header.component';
 import { MatFooterComponent } from './shared/mat-footer/mat-footer.component';
+import { MatSidenavComponent } from './shared/mat-sidenav/mat-sidenav.component';
 import { HomeBannerComponent } from './shared/home-banner/home-banner.component';
 import { HomeFeaturedComponent } from './shared/home-featured/home-featured.component';
 import { BgAComponent } from './shared/bga/bga.component';
+import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
+import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+import { SideLayoutComponent } from './shared/side-layout/side-layout.component';
 
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -55,8 +59,6 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
-import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
 
 //JWT
 export function tokenGetter() {
@@ -70,6 +72,7 @@ export function tokenGetter() {
     HomeFooterComponent,
     MatHeaderComponent,
     MatFooterComponent,
+    MatSidenavComponent,
     HomeBannerComponent,
     HomeFeaturedComponent,
     BgAComponent,
@@ -84,6 +87,7 @@ export function tokenGetter() {
     PolicyComponent,
     HomeLayoutComponent,
     MatLayoutComponent,
+    SideLayoutComponent
   ],
   imports: [
     BrowserModule,
