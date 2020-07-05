@@ -10,40 +10,39 @@ $ltblue: #15e0ff;
 $magenta: #d000c5;
 
 html {
-    font-family: $font-primary;
+  font-family: $font-primary;
 }
 
 a {
-    transition: 0.5s;
-    transition-property: all;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
-    outline: 0 !important;
+  transition: 0.5s;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  outline: 0 !important;
 }
 
-a, a:hover {
-    text-decoration: none;
+a,
+a:hover {
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 991px) {
-
 }
 
 @media only screen and (max-width: 768px) {
-
 }
 
 .mat-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    input {
-        height: 100%;
-    }
-    button:focus {
-        outline: none;
-    }
-    .mat-page {
-        padding-top: 65px;
-    }
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  input {
+    height: 100%;
+  }
+  button:focus {
+    outline: none;
+  }
+  .mat-page {
+    padding-top: 65px;
+  }
 }

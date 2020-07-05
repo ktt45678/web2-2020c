@@ -1,3 +1,4 @@
+// Core modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -6,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
+// Shared components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeHeaderComponent } from './shared/home-header/home-header.component';
@@ -20,6 +22,7 @@ import { HomeLayoutComponent } from './shared/home-layout/home-layout.component'
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
 import { SideLayoutComponent } from './shared/side-layout/side-layout.component';
 
+// Dynamic components
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -29,9 +32,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
 
+// Services, modules
 import { JwtInterceptor } from './modules/jwt-interceptor.module';
 import { ErrorInterceptor } from './modules/error-interceptor.module';
+import { SidenavService } from './services/component.service';
 
+// Angular material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -123,6 +129,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ],
   providers: [
+    SidenavService,
     { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

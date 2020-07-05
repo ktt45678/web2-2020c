@@ -8,6 +8,10 @@
   right: 0;
 }
 
+.mat-body {
+  margin: 0;
+}
+
 .sidenav-toolbar {
   background: #f8f9fa;
   box-shadow: 0 7px 13px 0 rgba(0, 0, 0, .1);
@@ -21,6 +25,7 @@
 
 a.app-title {
   margin-left: 8px;
+  margin-right: 20px;
   img {
     &:first-child {
       height: 25px;

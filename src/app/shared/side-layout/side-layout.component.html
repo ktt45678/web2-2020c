@@ -1,24 +1,25 @@
 <div class="mat-body">
-  <div class="mat-page">
-    <div class="page-container" *ngIf="shouldRun">
-      <mat-toolbar class="sidenav-toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <a class="app-title" routerLink="/">
-          <img src="/assets/img/whitefoologohead.png" alt="logo">
-          <img src="/assets/img/whitefoologocap.png" alt="logo">
-        </a>
-      </mat-toolbar>
-      <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #snav mode="side" opened>
-          <app-mat-sidenav></app-mat-sidenav>
-        </mat-sidenav>
-        <mat-sidenav-content>
+  <div class="page-container" *ngIf="shouldRun">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #sideNav mode="over" class="sidenav">
+        <mat-toolbar class="sidenav-toolbar">
+          <button mat-icon-button (click)="sideNav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <a class="app-title" routerLink="/">
+            <img src="/assets/img/whitefoologohead.png" alt="logo">
+            <img src="/assets/img/whitefoologocap.png" alt="logo">
+          </a>
+        </mat-toolbar>
+        <app-mat-sidenav></app-mat-sidenav>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <app-mat-header></app-mat-header>
+        <div class="mat-page">
           <router-outlet></router-outlet>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
-      <app-mat-footer></app-mat-footer>
-    </div>
+        </div>
+        <app-mat-footer></app-mat-footer>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
 </div>

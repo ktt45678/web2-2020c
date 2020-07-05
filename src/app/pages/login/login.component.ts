@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['continue'] || '/dashboard';
   }
 
   get username() { return this.loginForm.get('username'); }
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     }, error => {
       this.loading = false;
-      const message = JSON.parse(JSON.stringify(error.error));
+      const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
     });
   }

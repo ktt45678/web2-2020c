@@ -1,5 +1,8 @@
 <div class="mat-body">
   <nav *ngIf="shouldRun" class="navbar fixed-top navbar-expand-lg navbar-light">
+    <button *ngIf="showSideNavButton" mat-icon-button (click)="openSideNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <a class="navbar-brand" routerLink="/">
       <img src="/assets/img/whitefoologohead.png" alt="logo">
       <img src="/assets/img/whitefoologocap.png" alt="logo">
