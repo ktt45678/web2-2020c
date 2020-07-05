@@ -1,4 +1,4 @@
-export class TokenModel {
+export class UserModel {
   id: number;
   email: string;
   citizenIdentificationId?: string;
@@ -8,6 +8,4 @@ export class TokenModel {
   phoneNumber: string;
   username: string;
   address: string;
-  token?: string;
-  message?: string;
 }

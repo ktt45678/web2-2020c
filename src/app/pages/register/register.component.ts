@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../services/authentication.service';
 
@@ -46,12 +47,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.auth.register(registerData).subscribe(data => {
-      this.snackBar.open('Đăng kí thành công, vui lòng kiểm tra email của bạn', 'Xong');
+    this.auth.register(registerData).pipe(first()).subscribe(
+    data => {
+      this.snackBar.open('Đăng kí thành công, vui lòng kiểm tra email của bạn', 'Đóng', { duration: 10000 });
       this.loading = false;
     }, error => {
       this.loading = false;
-      this.error = error;
+      const message = JSON.parse(JSON.stringify(error.error));
+      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
     });
   }
 

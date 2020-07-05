@@ -3,10 +3,8 @@ import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
-import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,12 +23,14 @@ import { SideLayoutComponent } from './shared/side-layout/side-layout.component'
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
 
-import { UserService } from './services/user.service';
+import { JwtInterceptor } from './modules/jwt-interceptor.module';
+import { ErrorInterceptor } from './modules/error-interceptor.module';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -60,11 +60,6 @@ import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-//JWT
-export function tokenGetter() {
-  return localStorage.getItem('access_token');
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +74,7 @@ export function tokenGetter() {
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ActivationComponent,
     PasswordRecoveryComponent,
     DashboardComponent,
     FAQComponent,
@@ -124,19 +120,12 @@ export function tokenGetter() {
     MatDividerModule,
     MatGridListModule,
     MatStepperModule,
-    MatTooltipModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: [environment.apiUrl],
-        blacklistedRoutes: [ environment.apiUrl + '/api/auth']
-      }
-    })
-    
+    MatTooltipModule
   ],
   providers: [
-    UserService,
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
