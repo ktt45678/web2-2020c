@@ -57,6 +57,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 //JWT
 export function tokenGetter() {
@@ -121,14 +123,18 @@ export function tokenGetter() {
     MatGridListModule,
     MatStepperModule,
     MatTooltipModule,
+    AgmCoreModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         whitelistedDomains: [environment.apiUrl],
         blacklistedRoutes: [ environment.apiUrl + '/api/auth']
       }
+    }),   
+    // Google maps api key 
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBMDWSXICYtxQo_-8Gwm3sCKX4RabQ0Aew'
     })
-    
   ],
   providers: [
     UserService,

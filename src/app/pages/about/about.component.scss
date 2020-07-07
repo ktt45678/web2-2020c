@@ -2,7 +2,7 @@
     max-width: 400px;
     background-color: rgba($color: #212121, $alpha: 0.1);
 }
-  
+
 .profile-image {
     background-image: url('../../../assets/img/pepega.png');
     background-size: cover;
@@ -11,7 +11,6 @@
 .mat-card-image {
     border-radius: 5px;
 }
-
 
 .fe-container {
     display: flex;
@@ -64,3 +63,7 @@ h2{
     text-align: center;
 }
 
+[matStepLabel]:hover{
+    pointer-events: none;
+
+}
