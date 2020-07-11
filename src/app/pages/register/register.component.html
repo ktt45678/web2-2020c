@@ -12,7 +12,7 @@
             </div>
             <div class="signup-inner">
               <h2 class="mb-3">ĐĂNG KÝ</h2>
-              <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+              <form [formGroup]="registerForm">
                 <div class="row">
                   <div class="col-md-6">
                     <mat-form-field appearance="outline" class="w-100">
@@ -114,13 +114,13 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <!--re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey="6LfReqcZAAAAAA2CC5SjI_bqNSNOJPwrOjjdAHHE"></re-captcha-->
+                <re-captcha formControlName="recaptcha" size="invisible" #captchaRef="reCaptcha" (resolved)="$event && onSubmit($event, registerForm.value)"></re-captcha>
                 <div class="d-flex mt-2">
                   <div>
                     <a routerLink="/login" mat-button color="primary" [disabled]="loading">Đăng nhập</a>
                   </div>
                   <div class="ml-auto">
-                    <button type="submit" mat-flat-button color="primary"[disabled]="loading">Đăng ký</button>
+                    <button (click)="captchaRef.execute()" mat-flat-button color="primary"[disabled]="loading">Đăng ký</button>
                   </div>
                 </div>
               </form>

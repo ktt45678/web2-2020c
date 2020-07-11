@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 import { TokenModel } from '../models/token.model';
 import { Router } from '@angular/router';
 
+const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +27,6 @@ export class AuthenticationService {
   }
 
   register(registerData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('firstName', registerData.firstname);
     body.set('lastName', registerData.lastname);
@@ -42,7 +43,6 @@ export class AuthenticationService {
   }
 
   activate(token) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('activeCode', token);
     body.set('clientId', environment.clientId);
@@ -51,7 +51,6 @@ export class AuthenticationService {
   }
 
   login(loginData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('username', loginData.username);
     body.set('password', loginData.password);
@@ -68,7 +67,6 @@ export class AuthenticationService {
     // Remove user from local storage to log user out
     localStorage.removeItem('token');
     this.accessTokenSubject.next(null);
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const params = new HttpParams();
     params.set('clientId', environment.clientId);
     params.set('secretKey', environment.clientSecret);

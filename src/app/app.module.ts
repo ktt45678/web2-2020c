@@ -5,7 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { environment } from '../environments/environment';
 
 // Shared components
 import { AppRoutingModule } from './app-routing.module';
@@ -132,7 +133,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SidenavService,
     { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.reCaptchaKey } as RecaptchaSettings }
   ],
   bootstrap: [AppComponent]
 })
