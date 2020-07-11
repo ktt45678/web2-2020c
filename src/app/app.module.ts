@@ -39,6 +39,7 @@ import { ErrorInterceptor } from './modules/error-interceptor.module';
 import { SidenavService } from './services/component.service';
 
 // Angular material
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -103,6 +104,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMomentDateModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    MatMenuModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

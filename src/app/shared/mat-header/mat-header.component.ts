@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SidenavService } from '../../services/component.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-mat-header',
@@ -10,18 +11,23 @@ import { SidenavService } from '../../services/component.service';
 })
 export class MatHeaderComponent implements OnInit {
   shouldRun = true;
-  showSideNavButton = false;
+  isDashboard = false;
 
-  constructor(private router: Router, private sideNavService: SidenavService) { }
+  constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService) { }
 
   ngOnInit(): void {
     if (this.router.url.startsWith('/dashboard')) {
-      this.showSideNavButton = true;
+      this.isDashboard = true;
     }
   }
 
   openSideNav() {
     this.sideNavService.open();
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
 }
