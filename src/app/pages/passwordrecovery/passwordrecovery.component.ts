@@ -31,7 +31,7 @@ export class PasswordRecoveryComponent implements OnInit {
   get password() { return this.resetPasswordForm.get('password'); }
   get confirmpassword() { return this.resetPasswordForm.get('confirmpassword'); }
 
-  onRecovry(recoveryData) {
+  onRecovery(recoveryData) {
     if (this.recoveryForm.invalid) {
       return;
     }
