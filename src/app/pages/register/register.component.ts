@@ -64,12 +64,11 @@ export class RegisterComponent implements OnInit {
     this.auth.register(registerData).pipe(first()).subscribe(
     data => {
       this.snackBar.open('Đăng kí thành công, vui lòng kiểm tra email của bạn', 'Đóng', { duration: 10000 });
-      this.loading = false;
     }, error => {
-      this.loading = false;
       const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
     });
+    this.loading = false;
     this.captchaRef.reset();
   }
 

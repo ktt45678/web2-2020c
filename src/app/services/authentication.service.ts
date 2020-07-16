@@ -50,6 +50,32 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/api/auth/active`, body.toString(), { headers });
   }
 
+  passwordRecovery(recoveryData) {
+    const body = new URLSearchParams();
+    body.set('email', recoveryData.email);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/forgotpassword`, body.toString(), { headers });
+  }
+
+  validatePasswordRecovery(token) {
+    const body = new URLSearchParams();
+    body.set('forgotCode', token);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/verifyforgotcode`, body.toString(), { headers });
+  }
+
+  resetPassword(resetPasswordData, token) {
+    const body = new URLSearchParams();
+    body.set('newPassword', resetPasswordData.password);
+    body.set('confirmPassword', resetPasswordData.confirmpassword);
+    body.set('forgotCode', token);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/updatenewpassword`, body.toString(), { headers });
+  }
+
   login(loginData) {
     const body = new URLSearchParams();
     body.set('username', loginData.username);

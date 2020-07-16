@@ -43,12 +43,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.auth.login(loginData).pipe(first()).subscribe(data => {
       this.router.navigate([this.returnUrl]);
-      this.loading = false;
     }, error => {
-      this.loading = false;
       const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
     });
+    this.loading = false;
   }
 
 }

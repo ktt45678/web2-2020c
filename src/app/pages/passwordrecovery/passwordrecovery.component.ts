@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationService } from '../../services/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-passwordrecovery',
@@ -13,11 +15,12 @@ export class PasswordRecoveryComponent implements OnInit {
   loading = false;
   hasToken = false;
   hidePassword = true;
+  token: string;
   error = '';
   recoveryForm;
   resetPasswordForm;
-  ngOnInit(): void {}
-  constructor(private authentication: AuthenticationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {
+  
+  constructor(private auth: AuthenticationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     this.recoveryForm = new FormGroup({
       email: new FormControl('', [Validators.required])
     });
@@ -31,16 +34,42 @@ export class PasswordRecoveryComponent implements OnInit {
   get password() { return this.resetPasswordForm.get('password'); }
   get confirmpassword() { return this.resetPasswordForm.get('confirmpassword'); }
 
+  ngOnInit(): void {
+    this.token = this.route.snapshot.queryParams['token'];
+    if (this.token) {
+      this.auth.validatePasswordRecovery(this.token).pipe(first()).subscribe(data => {
+        this.hasToken = true;
+      }, error => {
+        this.snackBar.open('Liên kết khôi phục mật khẩu không hợp lệ', 'Đóng', { duration: 10000 });
+      });
+    }
+  }
+
   onRecovery(recoveryData) {
     if (this.recoveryForm.invalid) {
       return;
     }
     this.loading = true;
+    this.auth.passwordRecovery(recoveryData).pipe(first()).subscribe(data => {
+      this.snackBar.open('Liên kết khôi phục mật khẩu đang được gửi tới Email của bạn', 'Đóng', { duration: 10000 });
+    }, error => {
+      const message = JSON.parse(JSON.stringify(error));
+      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+    });
+    this.loading = false;
   }
+  
   onResetPassword(resetPasswordData) {
     if (this.resetPasswordForm.invalid) {
       return;
     }
     this.loading = true;
+    this.auth.resetPassword(resetPasswordData, this.token).pipe(first()).subscribe(data => {
+      this.snackBar.open('Mật khẩu đã được cập nhật thành công', 'Đóng', { duration: 10000 });
+    }, error => {
+      const message = JSON.parse(JSON.stringify(error));
+      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+    });
+    this.loading = false;
   }
 }
