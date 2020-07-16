@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { TokenModel } from 'src/app/models/token.model';
 
 @Component({
   selector: 'app-mat-header',
@@ -12,12 +13,14 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class MatHeaderComponent implements OnInit {
   shouldRun = true;
   isDashboard = false;
+  currentUser: TokenModel;
 
-  constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService) { }
+  constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService) {}
 
   ngOnInit(): void {
     if (this.router.url.startsWith('/dashboard')) {
       this.isDashboard = true;
+      this.currentUser = this.auth.accessTokenValue;
     }
   }
 

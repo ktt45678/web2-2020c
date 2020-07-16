@@ -16,6 +16,14 @@
   }
 }
 
+.user-info {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  .avatar {
+    height: 80px;
+    border-radius: 50%;
+  }
+}
+
 .mat-menu-item {
   outline: none;
 }
