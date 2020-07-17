@@ -59,6 +59,9 @@ import { HomeLayoutComponent } from './shared/home-layout/home-layout.component'
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
 import { AgmCoreModule } from '@agm/core';
 
+import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
+
+
 
 //JWT
 export function tokenGetter() {
@@ -86,6 +89,7 @@ export function tokenGetter() {
     PolicyComponent,
     HomeLayoutComponent,
     MatLayoutComponent,
+    ExchangerateComponent,
   ],
   imports: [
     BrowserModule,

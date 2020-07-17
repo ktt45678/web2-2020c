@@ -7,6 +7,7 @@ import { HomeFooterComponent } from './shared/home-footer/home-footer.component'
 import { MatHeaderComponent } from './shared/mat-header/mat-header.component';
 import { MatFooterComponent } from './shared/mat-footer/mat-footer.component';
 
+
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -16,9 +17,11 @@ import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component'
 import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
+import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
 
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+
 
 const routes: Routes = [
   // Home routes
@@ -42,6 +45,7 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'passwordrecovery', component: PasswordRecoveryComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'exchangerate', component: ExchangerateComponent },
     ]
   },
   { path: '**', redirectTo: '' }
