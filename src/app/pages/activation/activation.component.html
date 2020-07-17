@@ -1,0 +1,19 @@
+<div class="mat-body">
+  <div class="mat-page">
+    <div class="container">
+      <div class="activation-form">
+        <div class="activation-inner">
+          <h2 class="mb-3 text-center">KÍCH HOẠT TÀI KHOẢN</h2>
+          <div *ngIf="!success">
+            <p>Liên kết kích hoạt không hợp lệ</p>
+            <a routerLink="/" mat-button color="primary">Quay lại</a>
+          </div>
+          <div *ngIf="success">
+            <p>Kích hoạt thành công</p>
+            <a routerLink="/login" mat-button color="primary">Tiếp tục</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,8 +2,8 @@
   <div class="mat-page">
     <div class="container">
       <div class="login-form">
-        <div class="progress-bar">
-          <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        <div class="progress-bar" [class.visible]="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </div>
         <div class="login-inner">
           <h2 class="mb-3 text-center">ĐĂNG NHẬP</h2>

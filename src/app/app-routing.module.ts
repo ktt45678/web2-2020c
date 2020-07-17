@@ -2,15 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HomeHeaderComponent } from './shared/home-header/home-header.component';
-import { HomeFooterComponent } from './shared/home-footer/home-footer.component';
-import { MatHeaderComponent } from './shared/mat-header/mat-header.component';
-import { MatFooterComponent } from './shared/mat-footer/mat-footer.component';
+import { AuthGuard } from './modules/auth-guard.module';
 
 
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
@@ -21,6 +19,7 @@ import { ExchangerateComponent } from './pages/exchangerate/exchangerate.compone
 
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+import { SideLayoutComponent } from './shared/side-layout/side-layout.component';
 
 
 const routes: Routes = [
@@ -46,8 +45,18 @@ const routes: Routes = [
       { path: 'passwordrecovery', component: PasswordRecoveryComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'exchangerate', component: ExchangerateComponent },
+      { path: 'activate', component: ActivationComponent },
     ]
   },
+  // Dashboard routes
+  {
+    path: 'dashboard',
+    component: SideLayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent, canActivate:[AuthGuard] }
+    ]
+  },
+  // No layout
   { path: '**', redirectTo: '' }
 ];
 

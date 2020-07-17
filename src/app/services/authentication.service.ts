@@ -2,68 +2,91 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { JwtHelperService } from "@auth0/angular-jwt";
-import { Moment } from 'moment';
 
 import { environment } from '../../environments/environment';
 import { TokenModel } from '../models/token.model';
+import { Router } from '@angular/router';
 
-@Injectable({ providedIn: 'root' })
+const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<TokenModel>;
-  public currentUser: Observable<TokenModel>;
 
-  constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<TokenModel>(JSON.parse(localStorage.getItem('token')));
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  public get currentUserValue(): TokenModel {
-    return this.currentUserSubject.value;
+  getToken() {
+    return JSON.parse(localStorage.getItem('token'));
   }
 
   register(registerData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('firstName', registerData.firstname);
     body.set('lastName', registerData.lastname);
     body.set('email', registerData.email);
-    body.set('userName', registerData.username);
-    body.set('dateOfBirth', registerData.birth.format('MM-DD-YYYY'));
+    body.set('username', registerData.username);
+    body.set('dateOfBirth', registerData.birth.format('DD/MM/YYYY'));
     body.set('phoneNumber', registerData.tel);
     body.set('address', registerData.address);
     body.set('password', registerData.password);
-    body.set('confirmpassword', registerData.password);
+    body.set('confirmPassword', registerData.password);
     body.set('clientId', environment.clientId);
     body.set('secretKey', environment.clientSecret);
-    return this.http.post<any>(`${environment.apiUrl}/api/register`, body.toString(), { headers }).pipe(map(user => {
-      return user;
-    }));
+    return this.http.post(`${environment.apiUrl}/api/register`, body.toString(), { headers });
+  }
+
+  activate(token) {
+    const body = new URLSearchParams();
+    body.set('activeCode', token);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/auth/active`, body.toString(), { headers });
+  }
+
+  passwordRecovery(recoveryData) {
+    const body = new URLSearchParams();
+    body.set('email', recoveryData.email);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/forgotpassword`, body.toString(), { headers });
+  }
+
+  validatePasswordRecovery(token) {
+    const body = new URLSearchParams();
+    body.set('forgotCode', token);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/verifyforgotcode`, body.toString(), { headers });
+  }
+
+  resetPassword(resetPasswordData, token) {
+    const body = new URLSearchParams();
+    body.set('newPassword', resetPasswordData.password);
+    body.set('confirmPassword', resetPasswordData.confirmpassword);
+    body.set('forgotCode', token);
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post(`${environment.apiUrl}/api/updatenewpassword`, body.toString(), { headers });
   }
 
   login(loginData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('username', loginData.username);
     body.set('password', loginData.password);
     body.set('clientId', environment.clientId);
     body.set('secretKey', environment.clientSecret);
-    return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/login`, body.toString(), { headers }).pipe(map(user => {
-      // Store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('token', JSON.stringify(user.token));
-      this.currentUserSubject.next(user);
-      return user;
+    return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/login`, body.toString(), { headers }).pipe(map(data => {
+      localStorage.setItem('token', JSON.stringify(data.token));
+      return data;
     }));
   }
 
   logout() {
     // Remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    localStorage.removeItem('token');
     const params = new HttpParams();
     params.set('clientId', environment.clientId);
     params.set('secretKey', environment.clientSecret);
-    return this.http.get<any>(`${environment.apiUrl}/api/auth/logout`, { headers, params }).subscribe();
+    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers, params });
+    this.router.navigate(['/']);
   }
 }

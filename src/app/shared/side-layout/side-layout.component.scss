@@ -1,0 +1,57 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.mat-body {
+  margin: 0;
+}
+
+.sidenav-toolbar {
+  background: #f8f9fa;
+  box-shadow: 0 7px 13px 0 rgba(0, 0, 0, 0.1);
+}
+
+a.app-title {
+  margin-left: 8px;
+  margin-right: 20px;
+  img {
+    &:first-child {
+      height: 25px;
+    }
+    &:nth-child(2) {
+      margin-left: 0.5rem;
+      height: 25px;
+    }
+  }
+}
+
+.sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+@media only screen and (max-width: 991px) {
+  a.app-title {
+    img {
+      &:first-child {
+        display: none;
+      }
+      &:nth-child(2) {
+        height: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 559px) {
+  .mat-toolbar-row, .mat-toolbar-single-row {
+    height: 64px;
+  }
+}

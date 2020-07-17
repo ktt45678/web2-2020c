@@ -7,12 +7,12 @@
         </div>
         <div class="col-lg-6 col-md-12">
           <div class="signup-form">
-            <div class="progress-bar">
-              <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+            <div class="progress-bar" [class.visible]="loading">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
             </div>
             <div class="signup-inner">
               <h2 class="mb-3">ĐĂNG KÝ</h2>
-              <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+              <form [formGroup]="registerForm">
                 <div class="row">
                   <div class="col-md-6">
                     <mat-form-field appearance="outline" class="w-100">
@@ -114,13 +114,16 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <re-captcha size="invisible" #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey="6LfReqcZAAAAAA2CC5SjI_bqNSNOJPwrOjjdAHHE"></re-captcha>
+                <re-captcha class="recaptcha-badge" formControlName="recaptcha" size="invisible" #captchaRef="reCaptcha" (resolved)="$event && onSubmit($event, registerForm.value)"></re-captcha>
+                <div class="recaptcha-policy text-muted">
+                  <small>Trang web này được bảo vệ bởi reCAPTCHA cùng với các <a href="https://policies.google.com/privacy">Chính sách bảo mật</a> và <a href="https://policies.google.com/terms">Điều khoản sử dụng</a> từ Google.</small>
+                </div>
                 <div class="d-flex mt-2">
                   <div>
                     <a routerLink="/login" mat-button color="primary" [disabled]="loading">Đăng nhập</a>
                   </div>
                   <div class="ml-auto">
-                    <button type="submit" (click)="captchaRef.execute()" mat-flat-button color="primary"[disabled]="loading">Đăng ký</button>
+                    <button (click)="captchaRef.execute()" mat-flat-button color="primary"[disabled]="loading">Đăng ký</button>
                   </div>
                 </div>
               </form>

@@ -3,51 +3,46 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;1,500&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
 $font-primary: "DM Mono", Arial, sans-serif;
-$font-secondary: "Nunito", Arial, sans-serif;
+$font-secondary: Roboto, "Helvetica Neue", sans-serif;
 $purple: #8a15ff;
 $blue: #3800e7;
 $ltblue: #15e0ff;
 $magenta: #d000c5;
 
 html {
-    font-family: $font-primary;
+  font-family: $font-primary;
 }
 
 a {
-    transition: 0.5s;
-    transition-property: all;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
-    outline: 0 !important;
+  transition: 0.5s;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  outline: 0 !important;
 }
 
-a, a:hover {
-    text-decoration: none;
+a,
+a:hover {
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 991px) {
-
 }
 
 @media only screen and (max-width: 768px) {
-
 }
 
 .mat-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  font-family: $font-secondary;
+  input {
     height: 100%;
-    input {
-        height: 100%;
-    }
-    button {
-        height: 100%;
-    }
-    button:focus {
-        outline: none;
-    }
-    .mat-page {
-        padding-top: 65px;
-    }
+  }
+  button:focus {
+    outline: none;
+  }
+  .mat-page {
+    padding-top: 65px;
+  }
 }

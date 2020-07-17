@@ -1,33 +1,46 @@
+// Core modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
-import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { environment } from '../environments/environment';
 
+// Shared components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeHeaderComponent } from './shared/home-header/home-header.component';
 import { HomeFooterComponent } from './shared/home-footer/home-footer.component';
 import { MatHeaderComponent } from './shared/mat-header/mat-header.component';
 import { MatFooterComponent } from './shared/mat-footer/mat-footer.component';
+import { MatSidenavComponent } from './shared/mat-sidenav/mat-sidenav.component';
 import { HomeBannerComponent } from './shared/home-banner/home-banner.component';
 import { HomeFeaturedComponent } from './shared/home-featured/home-featured.component';
 import { BgAComponent } from './shared/bga/bga.component';
+import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
+import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
+import { SideLayoutComponent } from './shared/side-layout/side-layout.component';
 
+// Dynamic components
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordrecovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
 
-import { UserService } from './services/user.service';
+// Services, modules
+import { ErrorInterceptor } from './modules/error-interceptor.module';
+import { SidenavService } from './services/component.service';
 
+// Angular material
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -55,11 +68,8 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
-import { MatLayoutComponent } from './shared/mat-layout/mat-layout.component';
 import { AgmCoreModule } from '@agm/core';
 
-import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
 
 
 
@@ -75,12 +85,14 @@ export function tokenGetter() {
     HomeFooterComponent,
     MatHeaderComponent,
     MatFooterComponent,
+    MatSidenavComponent,
     HomeBannerComponent,
     HomeFeaturedComponent,
     BgAComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    ActivationComponent,
     PasswordRecoveryComponent,
     DashboardComponent,
     FAQComponent,
@@ -90,6 +102,7 @@ export function tokenGetter() {
     HomeLayoutComponent,
     MatLayoutComponent,
     ExchangerateComponent,
+    SideLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +115,7 @@ export function tokenGetter() {
     MatMomentDateModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    MatMenuModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -130,9 +144,10 @@ export function tokenGetter() {
     AgmCoreModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: [environment.apiUrl],
-        blacklistedRoutes: [ environment.apiUrl + '/api/auth']
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: [environment.apiUrl]
       }
     }),   
     // Google maps api key 
@@ -141,8 +156,10 @@ export function tokenGetter() {
     })
   ],
   providers: [
-    UserService,
-    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
+    SidenavService,
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.reCaptchaKey } as RecaptchaSettings }
   ],
   bootstrap: [AppComponent]
 })
