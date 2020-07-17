@@ -8,4 +8,6 @@ export class UserModel {
   phoneNumber: string;
   username: string;
   address: string;
+  userType: string;
+  status: string;
 }

@@ -50,13 +50,15 @@ export class PasswordRecoveryComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.auth.passwordRecovery(recoveryData).pipe(first()).subscribe(data => {
+    this.auth.passwordRecovery(recoveryData).pipe(first()).subscribe(
+    data => {
       this.snackBar.open('Liên kết khôi phục mật khẩu đang được gửi tới Email của bạn', 'Đóng', { duration: 10000 });
+      this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.afterRespone();
     });
-    this.loading = false;
   }
   
   onResetPassword(resetPasswordData) {
@@ -64,12 +66,18 @@ export class PasswordRecoveryComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.auth.resetPassword(resetPasswordData, this.token).pipe(first()).subscribe(data => {
+    this.auth.resetPassword(resetPasswordData, this.token).pipe(first()).subscribe(
+    data => {
       this.snackBar.open('Mật khẩu đã được cập nhật thành công', 'Đóng', { duration: 10000 });
+      this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.afterRespone();
     });
+  }
+
+  afterRespone() {
     this.loading = false;
   }
 }

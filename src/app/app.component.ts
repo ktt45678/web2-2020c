@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from './services/authentication.service';
-import { UserModel } from './models/user.model';
-import { TokenModel } from './models/token.model';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +7,6 @@ import { TokenModel } from './models/token.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  currentUser: TokenModel;
-  constructor(private router: Router, private auth: AuthenticationService) {
-    this.auth.accessToken.subscribe(x => this.currentUser = x);
-  }
+  constructor(private router: Router) {}
   title = 'WhiteFoo Bank';
 }

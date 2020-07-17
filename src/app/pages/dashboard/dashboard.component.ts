@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 
-import { TokenModel } from 'src/app/models/token.model';
+import { AuthenticationService } from '../../services/authentication.service';
+import { UserService } from '../../services/user.service';
+import { UserModel } from 'src/app/models/user.model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +11,14 @@ import { TokenModel } from 'src/app/models/token.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  currentUser: TokenModel;
+  currentUser: UserModel;
 
-  constructor(private auth: AuthenticationService) {
-    this.currentUser = this.auth.accessTokenValue;
+  constructor(private auth: AuthenticationService, private user: UserService) {
+    this.user.getCurrentUser().pipe(first()).subscribe(
+      data => {
+        this.currentUser = JSON.parse(JSON.stringify(data));
+      }
+    );
   }
 
   ngOnInit(): void {

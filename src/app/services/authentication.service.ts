@@ -9,21 +9,13 @@ import { Router } from '@angular/router';
 
 const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private accessTokenSubject: BehaviorSubject<TokenModel>;
-  public accessToken: Observable<TokenModel>;
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.accessTokenSubject = new BehaviorSubject<TokenModel>(JSON.parse(localStorage.getItem('token')));
-    this.accessToken = this.accessTokenSubject.asObservable();
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  public get accessTokenValue(): TokenModel {
-    this.accessTokenSubject.next(JSON.parse(localStorage.getItem('token')));
-    return this.accessTokenSubject.value;
+  getToken() {
+    return JSON.parse(localStorage.getItem('token'));
   }
 
   register(registerData) {
@@ -83,8 +75,7 @@ export class AuthenticationService {
     body.set('clientId', environment.clientId);
     body.set('secretKey', environment.clientSecret);
     return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/login`, body.toString(), { headers }).pipe(map(data => {
-      localStorage.setItem('token', JSON.stringify(data));
-      this.accessTokenSubject.next(data);
+      localStorage.setItem('token', JSON.stringify(data.token));
       return data;
     }));
   }
@@ -92,7 +83,6 @@ export class AuthenticationService {
   logout() {
     // Remove user from local storage to log user out
     localStorage.removeItem('token');
-    this.accessTokenSubject.next(null);
     const params = new HttpParams();
     params.set('clientId', environment.clientId);
     params.set('secretKey', environment.clientSecret);

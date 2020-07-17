@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 
 // Shared components
@@ -34,7 +35,6 @@ import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
 
 // Services, modules
-import { JwtInterceptor } from './modules/jwt-interceptor.module';
 import { ErrorInterceptor } from './modules/error-interceptor.module';
 import { SidenavService } from './services/component.service';
 
@@ -129,12 +129,19 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatDividerModule,
     MatGridListModule,
     MatStepperModule,
-    MatTooltipModule
+    MatTooltipModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: [environment.apiUrl]
+      }
+    })
   ],
   providers: [
     SidenavService,
     { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.reCaptchaKey } as RecaptchaSettings }
   ],

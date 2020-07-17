@@ -53,21 +53,24 @@ export class RegisterComponent implements OnInit {
     }
     this.loading = true;
     this.reCaptcha.verify(captchaResponse).pipe(first()).subscribe(
-      data => {
-      },
-      error => {
-        this.snackBar.open('Lỗi xác thực captcha', 'Đóng', { duration: 10000 });
-        this.captchaRef.reset();
-        return;
-      }
-    );
+    data => {
+    }, error => {
+      this.snackBar.open('Lỗi xác thực captcha', 'Đóng', { duration: 10000 });
+      this.afterRespone();
+      return;
+    });
     this.auth.register(registerData).pipe(first()).subscribe(
     data => {
       this.snackBar.open('Đăng kí thành công, vui lòng kiểm tra email của bạn', 'Đóng', { duration: 10000 });
+      this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.afterRespone();
     });
+  }
+
+  afterRespone() {
     this.loading = false;
     this.captchaRef.reset();
   }
