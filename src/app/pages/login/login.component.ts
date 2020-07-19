@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   loginForm;
 
   constructor(private auth: AuthenticationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
-    if (this.auth.getToken()) {
+    if (this.auth.accessTokenValue) {
       this.router.navigate(['/dashboard']);
     }
   }

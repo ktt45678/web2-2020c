@@ -1,8 +1,11 @@
-<div *ngIf="currentUser" class="personal-info text-center">
-  <p>Xin chào {{currentUser.firstName}} {{currentUser.lastName}}</p>
-  <p>Bạn đã đăng ký tài khoản với các thông tin sau</p>
-  <p>Email: {{currentUser.email}}</p>
-  <p>Địa chỉ: {{currentUser.address}}</p>
-  <p>Số điện thoại: {{currentUser.phoneNumber}}</p>
-  <p>Ngày sinh: {{currentUser.dateOfBirth}}</p>
+<div class="mat-body">
+  <mat-progress-bar *ngIf="!currentUser" mode="indeterminate" class="fixed-top"></mat-progress-bar>
+  <div *ngIf="currentUser" class="personal-info text-center">
+    <p>Xin chào {{currentUser.firstName}} {{currentUser.lastName}}</p>
+    <p>Bạn đã đăng ký tài khoản với các thông tin sau</p>
+    <p>Email: {{currentUser.email}}</p>
+    <p>Địa chỉ: {{currentUser.address}}</p>
+    <p>Số điện thoại: {{currentUser.phoneNumber}}</p>
+    <p>Ngày sinh: {{currentUser.dateOfBirth}}</p>
+  </div>
 </div>

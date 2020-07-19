@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { TokenModel } from 'src/app/models/token.model';
 import { UserService } from 'src/app/services/user.service';
-import { first } from 'rxjs/operators';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-mat-header',
@@ -15,14 +14,10 @@ import { first } from 'rxjs/operators';
 export class MatHeaderComponent implements OnInit {
   shouldRun = true;
   isDashboard = false;
-  currentUser: TokenModel;
+  currentUser: UserModel;
 
   constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService, private user: UserService) {
-    this.user.getCurrentUser().pipe(first()).subscribe(
-      data => {
-        this.currentUser = JSON.parse(JSON.stringify(data));
-      }
-    );
+    this.currentUser = auth.currentUserValue;
   }
 
   ngOnInit(): void {

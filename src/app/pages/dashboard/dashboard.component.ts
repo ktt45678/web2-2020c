@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from 'src/app/models/user.model';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,15 +12,11 @@ import { first } from 'rxjs/operators';
 export class DashboardComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
 
-  constructor(private auth: AuthenticationService, private user: UserService) {
-    this.user.getCurrentUser().pipe(first()).subscribe(
-      data => {
-        this.currentUser = JSON.parse(JSON.stringify(data));
-      }
-    );
-  }
+  constructor(private auth: AuthenticationService, private user: UserService) {}
 
   ngOnInit(): void {
+    this.auth.currentUser.subscribe(data => { this.currentUser = data });
+    this.auth.setCurrentUser();
   }
 
   ngOnDestroy() {

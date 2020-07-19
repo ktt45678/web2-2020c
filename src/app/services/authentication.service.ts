@@ -1,24 +1,48 @@
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { environment } from '../../environments/environment';
-import { TokenModel } from '../models/token.model';
-import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+import { TokenModel } from '../models/token.model';
+import { UserModel } from '../models/user.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  private currentUserSubject: BehaviorSubject<UserModel>;
+  public currentUser: Observable<UserModel>;
+  
+  constructor(private http: HttpClient) {
+    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
+    this.currentUserSubject = new BehaviorSubject<UserModel>(user);
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
 
-  getToken() {
+  public get accessTokenValue() {
     return JSON.parse(localStorage.getItem('token'));
   }
 
+  public get currentUserValue(): UserModel {
+    return this.currentUserSubject.value;
+  }
+
+  getCurrentUser() {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded', 'token': this.accessTokenValue});
+    const body = new URLSearchParams();
+    body.set('clientId', environment.clientId);
+    body.set('secretKey', environment.clientSecret);
+    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, body.toString(), { headers });
+  }
+
+  setCurrentUser() {
+    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
+    this.currentUserSubject.next(user);
+  }
+
   register(registerData) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('firstName', registerData.firstname);
     body.set('lastName', registerData.lastname);
@@ -35,6 +59,7 @@ export class AuthenticationService {
   }
 
   activate(token) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('activeCode', token);
     body.set('clientId', environment.clientId);
@@ -43,6 +68,7 @@ export class AuthenticationService {
   }
 
   passwordRecovery(recoveryData) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('email', recoveryData.email);
     body.set('clientId', environment.clientId);
@@ -51,6 +77,7 @@ export class AuthenticationService {
   }
 
   validatePasswordRecovery(token) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('forgotCode', token);
     body.set('clientId', environment.clientId);
@@ -59,6 +86,7 @@ export class AuthenticationService {
   }
 
   resetPassword(resetPasswordData, token) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('newPassword', resetPasswordData.password);
     body.set('confirmPassword', resetPasswordData.confirmpassword);
@@ -69,6 +97,7 @@ export class AuthenticationService {
   }
 
   login(loginData) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('username', loginData.username);
     body.set('password', loginData.password);
@@ -76,17 +105,20 @@ export class AuthenticationService {
     body.set('secretKey', environment.clientSecret);
     return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/login`, body.toString(), { headers }).pipe(map(data => {
       localStorage.setItem('token', JSON.stringify(data.token));
+      const user = new JwtHelperService().decodeToken(data.token);
+      this.currentUserSubject.next(user);
       return data;
     }));
   }
 
   logout() {
     // Remove user from local storage to log user out
-    localStorage.removeItem('token');
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded', 'token': this.accessTokenValue});
     const params = new HttpParams();
     params.set('clientId', environment.clientId);
     params.set('secretKey', environment.clientSecret);
-    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers, params });
-    this.router.navigate(['/']);
+    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers, params }).subscribe();
+    this.currentUserSubject.next(null);
+    localStorage.removeItem('token');
   }
 }

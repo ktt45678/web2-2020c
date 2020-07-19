@@ -37,6 +37,7 @@ import { AboutComponent } from './pages/about/about.component';
 // Services, modules
 import { ErrorInterceptor } from './modules/error-interceptor.module';
 import { SidenavService } from './services/component.service';
+import { AuthenticationService } from './services/authentication.service';
 
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';

@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
-import { TokenModel } from 'src/app/models/token.model';
-import { first } from 'rxjs/operators';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-mat-sidenav',
@@ -13,14 +12,10 @@ import { first } from 'rxjs/operators';
 })
 export class MatSidenavComponent implements OnInit {
   shouldRun = true;
-  currentUser: TokenModel;
+  currentUser: UserModel;
 
   constructor(private router: Router, private auth: AuthenticationService, private user: UserService) {
-    this.user.getCurrentUser().pipe(first()).subscribe(
-      data => {
-        this.currentUser = JSON.parse(JSON.stringify(data));
-      }
-    );
+    this.currentUser = auth.currentUserValue;
   }
 
   ngOnInit(): void {
