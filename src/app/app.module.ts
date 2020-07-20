@@ -69,7 +69,7 @@ import { PolicyComponent } from './pages/policy/policy.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AgmCoreModule } from '@agm/core';
-
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 
@@ -142,6 +142,7 @@ export function tokenGetter() {
     MatStepperModule,
     MatTooltipModule,
     AgmCoreModule,
+    LazyLoadImageModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
