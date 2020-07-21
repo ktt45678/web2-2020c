@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthenticationService, private user: UserService) {}
 
   ngOnInit(): void {
-    this.auth.currentUser.subscribe(data => { this.currentUser = data });
-    this.auth.setCurrentUser();
+    this.currentUser = this.auth.currentUserValue;
   }
 
   ngOnDestroy() {

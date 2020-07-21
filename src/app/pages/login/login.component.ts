@@ -15,7 +15,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class LoginComponent implements OnInit {
   hidePassword = true;
   loading = false;
-  error = '';
   returnUrl: string;
   loginForm;
 
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit {
     this.auth.login(loginData).pipe(first()).subscribe(
     data => {
       this.router.navigate([this.returnUrl]);
-      this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
       this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });

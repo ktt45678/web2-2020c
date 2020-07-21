@@ -1,14 +1,14 @@
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { TokenModel } from '../models/token.model';
 import { UserModel } from '../models/user.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<UserModel>;
@@ -25,6 +25,8 @@ export class AuthenticationService {
   }
 
   public get currentUserValue(): UserModel {
+    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
+    this.currentUserSubject.next(user);
     return this.currentUserSubject.value;
   }
 
@@ -117,7 +119,7 @@ export class AuthenticationService {
     const params = new HttpParams();
     params.set('clientId', environment.clientId);
     params.set('secretKey', environment.clientSecret);
-    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers, params }).subscribe();
+    //this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers, params }).subscribe();
     this.currentUserSubject.next(null);
     localStorage.removeItem('token');
   }

@@ -36,8 +36,6 @@ import { AboutComponent } from './pages/about/about.component';
 
 // Services, modules
 import { ErrorInterceptor } from './modules/error-interceptor.module';
-import { SidenavService } from './services/component.service';
-import { AuthenticationService } from './services/authentication.service';
 
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';
@@ -141,7 +139,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     })
   ],
   providers: [
-    SidenavService,
     { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.reCaptchaKey } as RecaptchaSettings }

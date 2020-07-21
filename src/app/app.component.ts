@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { AuthenticationService } from './services/authentication.service';
-import { UserModel } from './models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +6,6 @@ import { UserModel } from './models/user.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  currentUser: UserModel;
-  constructor(private router: Router, private auth: AuthenticationService) {
-    auth.currentUser.subscribe(data => { this.currentUser = data });
-  }
+  constructor() {}
   title = 'WhiteFoo Bank';
 }

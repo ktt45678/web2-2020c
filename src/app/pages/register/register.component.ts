@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
   @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
   loading = false;
   returnUrl: string;
-  error = '';
   hidePassword = true;
   registerForm;
   constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {}

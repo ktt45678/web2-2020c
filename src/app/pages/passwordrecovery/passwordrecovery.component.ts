@@ -16,7 +16,6 @@ export class PasswordRecoveryComponent implements OnInit {
   hasToken = false;
   hidePassword = true;
   token: string;
-  error = '';
   recoveryForm;
   resetPasswordForm;
   
