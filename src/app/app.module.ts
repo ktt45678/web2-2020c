@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings } from 'ng-recaptcha';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 
@@ -33,6 +34,9 @@ import { PasswordRecoveryComponent } from './pages/passwordrecovery/passwordreco
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { PolicyComponent } from './pages/policy/policy.component';
 
 // Services, modules
 import { JwtInterceptor } from './modules/jwt-interceptor.module';
@@ -59,14 +63,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ContactComponent } from './pages/contact/contact.component';
-import { PolicyComponent } from './pages/policy/policy.component';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -91,6 +93,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     PolicyComponent,
     HomeLayoutComponent,
     MatLayoutComponent,
+    ExchangerateComponent,
     SideLayoutComponent
   ],
   imports: [
@@ -130,6 +133,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatGridListModule,
     MatStepperModule,
     MatTooltipModule,
+    LazyLoadImageModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

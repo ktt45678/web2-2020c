@@ -10,6 +10,7 @@ import { FAQComponent } from '../pages/faq/faq.component';
 import { AboutComponent } from '../pages/about/about.component';
 import { ContactComponent } from '../pages/contact/contact.component';
 import { PolicyComponent } from '../pages/policy/policy.component';
+import { ExchangerateComponent } from '../pages/exchangerate/exchangerate.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'activate', component: ActivationComponent },
-      { path: 'passwordrecovery', component: PasswordRecoveryComponent }
+      { path: 'passwordrecovery', component: PasswordRecoveryComponent },
+      { path: 'exchangerate', component: ExchangerateComponent },
     ]
   }
 ];

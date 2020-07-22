@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import { AuthGuard } from './modules/auth-guard.module';
 
+
 import { HomeComponent } from './pages/home/home.component';
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 
 const matModule = () => import('./modules/mat.module').then(x => x.PageModule);
 const sideModule = () => import('./modules/side.module').then(x => x.SideModule);
+
 
 const routes: Routes = [
   // Home routes

@@ -1,7 +1,7 @@
 .signup-image {
   height: 95.4%;
   width: 100%;
-  background-image: url(/assets/img/signup-image.jpg);
+  //background-image: url(/assets/img/signup-image.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10px;
@@ -40,4 +40,13 @@
   .signup-image {
     display: none;
   }
+}
+
+
+.signup-image { 
+  animation: fadein 3s;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; } 
 }

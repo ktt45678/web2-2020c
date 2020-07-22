@@ -2,16 +2,17 @@
     max-width: 400px;
     background-color: rgba($color: #212121, $alpha: 0.1);
 }
-  
+
 .profile-image {
-    background-image: url('../../../assets/img/pepega.png');
+    //background-image: url('../../../assets/img/upper.png');
     background-size: cover;
 }
 
 .mat-card-image {
     border-radius: 5px;
+    //padding-top: 50px;
+    //box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
 }
-
 
 .fe-container {
     display: flex;
@@ -64,3 +65,24 @@ h2{
     text-align: center;
 }
 
+[matStepLabel]:hover{
+    pointer-events: none;
+}
+
+img { 
+    animation: fadein 3s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }  
+}
+
+.profile-image{
+    animation: fadein 3s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }  
+}

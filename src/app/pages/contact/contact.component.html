@@ -1,95 +1,38 @@
 <div class="mat-body">
   <div class="mat-page">
-    <div class="container">
-      <div class="sidemenu">
-        <mat-nav-list>
-            <a mat-list-item href="/home">
-              <span matLine>Mở đầu</span>
-                <button mat-icon-button id="test">
-                  <mat-icon>account_balance</mat-icon>
-                </button>
-            </a>
-
-            <a mat-list-item href="/home">
-              <span matLine>Quyền lợi</span>
-                <button mat-icon-button id="test">
-                  <mat-icon>assignment_ind</mat-icon>
-                </button>
-            </a>
-
-            <a mat-list-item href="/home">
-              <span matLine>Trách nhiệm</span>
-                <button mat-icon-button id="test">
-                  <mat-icon>fact_check</mat-icon>
-                </button>
-            </a>
-          </mat-nav-list>
-      </div>
-
-        <br>
-        <h6>
-            Nội dung của các Điều Khoản và Điều Kiện dưới đây cùng với Phiếu đăng ký dịch vụ iWhitefoo tạo thành một Hợp Đồng sử dụng dịch vụ iWhitefoo giữa WhitefooBank và Khách hàng (sau đây gọi tắt là Hợp đồng). 
-            Bằng chứng là việc ký vào Phiếu đăng ký dịch vụ iWhitefoo, Khách hàng và WhitefooBank đã chấp nhận bị ràng buộc bởi các quyền và nghĩa vụ theo Hợp đồng này.
-        </h6>
-        <br>  
-        <mat-divider></mat-divider>
-        <br>
-        <h6>Điều 1. Một số Định nghĩa dùng cho các thỏa thuận liên quan đến việc sử dụng iWhitefoo</h6>
-        <p> -  WhitefooBank là Ngân hàng thương mại cổ phần Waifu Thương Tín thực hiện cung cấp iWhitefoo theo quy định của Ngân hàng Nhà Nước Việt Nam.</p>
-        <p> -  Khách hàng (KH) là các tổ chức, cá nhân là chủ tài khoản tiền gửi được mở tại WhitefooBank và là chủ thể đứng tên trên bản đăng ký sử dụng dịch vụ liên quan đến iWhitefoo.</p>
-        <p> -  Điểm giao dịch là các Chi nhánh, Sở giao dịch, Phòng giao dịch trên lãnh thổ Việt Nam.</p>
-        <p> -  Dịch vụ ngân hàng trên Internet (iWhitefoo) là 1 loại kênh giao dịch Ngân hàng điện tử do WhitefooBank cung cấp cho KH thông qua mạng internet, theo đó KH có thể  truy cập vào trang web của WhitefooBank bằng thông tin đăng nhập để thực hiện các Giao dịch, sử dụng các sản phẩm dịch vụ do WhitefooBank cung cấp qua kênh này trên các Tài khoản mà KH có đăng ký sử dụng dịch vụ iWhitefoo.</p>
-        <p> -  Người dùng (User) là các cá nhân được KH đăng ký cấp quyền với WhitefooBank để có thể trực tiếp sử dụng kênh và các sản phẩm dịch vụ qua kênh iWhitefoo theo phân quyền được cấp.</p>
-        <p> -  Tài khoản là tài khoản tiền gửi bằng đồng Việt Nam (VND) do KH mở tại WhitefooBank.</p>
-        <p> -  Thông tin kích hoạt: Gồm Tên đăng nhập (Login ID) và mật khẩu tạm thời (Để người dùng đăng nhập lần đầu tiên qua trang web www.iWhitefooBank.com.vn của WhitefooBank)</p>
-        <p> -  Thông tin đăng nhập: bao gồmTên đăng nhập (Login ID), Mật khẩu (Được Người dùng tự tạo lập, từ lần đăng nhập đầu tiên khi kích hoạt sử dụng iWhitefoo) và Mã xác nhận do hệ thống cung cấp mỗi lần đăng nhập được hiển thị trên màn hình.</p>
-        <p> -  Mã xác thực: là mã số mật được cung cấp thông qua các Thiết bị xác thực nhằm để  Người dùng sử dụng cho việc duyệt thực thi các lệnh giao dịch phát sinh của các sản phẩm cung cấp qua kênh iWhitefoo</p>
-        <p> -  Loại hình xác thực: là phương thức cấp phát Mã xác thực mà KH đăng ký lựa chọn cho từng người dùng khi đăng ký sử  dụng iWhitefoo, có chức năng cung cấp Mã xác thực cho KH sử  dụng mỗi khi thực hiện giao dịch.</p>
-        <p> -  Thiết bị xác thực: là thiết bị dùng cấp phát Mã xác thực mà KH đăng ký lựa chọn cho từng người dùng khi đăng ký sử dụng Internet Banking, có chức năng cung cấp Mã xác thực cho KH sử dụng mỗi khi thực hiện giao dịch.</p>
-        <p> -  Token là 1 loại Thiết bị xác thực, hoạt động theo phương thức tự tạo các ký tự một cách ngẫu nhiên và thay đổi theo thời gian, là 1 thiết bị ngoài, có thời hạn sử dụng.</p>
-        <p> -  Sao kê: là bảng kê chi tiết các khoản giao dịch cùng các khoản phí phát sinh liên quan đến việc sử dụng Tài khoản trong một thời gian nhất định.</p>
-        <p> -  Hạn mức giao dịch trong ngày là tổng số  tiền tối đa KH được phép thực hiện tính trên tổng giá trị các giao dịch được thực hiện trên iWhitefoo trong cùng ngày, do KH đăng ký trong mức quy định của WhitefooBank, ngoại trừ các giao dịch phí và giao dịch mở  tiền gửi trực tuyến, hạn mức tính chung cho 1 KH không phân biệt số lượng Người dùng thuộc KH đó.</p>
-        <p> -  Hạn mức thanh toán cho 1 giao dịch là tổng số  tiền tối đa 1 Người dùng được phép thực hiện trên một giao dịch do KH đăng ký trong mức quy định của  WhitefooBank, ngoại trừ  các giao dịch phí và giao dịch mở tiền gửi trực tuyến, hạn mức này phải nhỏ hơn hoặc bằng Hạn mức giao dịch trong ngày của KH.</p>        
-        <p> -  Tài khoản đồng chủ  sở  hữu: không áp dụng tính chất đồng chủ  sở  hữu tài khoản tiền gửi không kỳ hạn/tiết kiệm không kỳ hạn đối với các giao dịch qua kênh iWhitefoo.</p>
-        <p> -  Giao dịch tương lai: là giao dịch được Khách hàng  tạo sẵn và định một ngày hiệu lực trong tương lai.</p>
-        <p> -  Ngày làm việc: được hiểu là các ngày từ Thứ Hai (từ 7:30 sáng tới 5:00 chiều) tới Thứ Bảy (từ 7:30 sáng tới 11:30 trưa), hoặc thời gian làm việc thực tế  của WhitefooBank theo từng thời kỳ, ngoại trừ các ngày nghỉ lễ do Luật Lao động Việt Nam quy định.</p>
-        <br>
-        <mat-divider></mat-divider>
-        <br>
-        <h6>Điều 2. Quyền và trách nhiệm của KH</h6>
-        <p style="font-weight: bold;">2.1 Quyền của KH</p>
-        <p> - Được truy cập vào trang web của kênh iWhitefoo và sử dụng các dịch vụ cung cấp qua kênh này theo gói dịch vụ KH đã đăng ký.</p>
-        <p> - Được quyền đăng ký 1 người dùng khi sử dụng iWhitefoo phân hệ thanh toán đối với trường hợp KH là tổ chức không đăng ký chữ ký kế toán trưởng trong bộ chữ ký hữu quyền.</p>
-        <p> - Có quyền khiếu nại về các sai sót, vi phạm (nếu có) phát sinh trong quá trình sử dụng Dịch vụ theo quy định của pháp luật. Khiếu nại phải được lập thành văn bản và gửi cho WhitefooBank trong vòng 7 ngày làm việc kể từ ngày quyền lợi của KH bị vi phạm. Quá thời hạn trên WhitefooBank sẽ không chịu trách nhiệm giải quyết. Trường hợp khiếu nại của KH không liên quan đến lỗi của WhitefooBank, KH sẽ phải chịu phí phát sinh từ việc xử lý khiếu nại theo quy định của WhitefooBank.</p>
-        <p> - Yêu cầu WhitefooBank cập nhật các thông tin đăng ký sử dụng, yêu cầu cấp lại mật khẩu, Mã xác thực theo thủ tục đăng ký cập nhật mà WhitefooBank quy định. WhitefooBank sẽ thay đổi tương ứng sau khi tiến hành kiểm tra xác nhận và chấp nhận yêu cầu thay đổi thông tin của KH.</p>
-        <p> - Được thực hiện giao dịch mở tài khoản tiền gửi,tất toán tài khoản, hưởng lãi cho số tiền trên tài khoản theo đúng quy định tại Điều kiện và Điều khoản này, quy định của WhitefooBank và pháp luật.</p>
-        <p> - Các quyền khác theo quy định của bản Điều kiện và Điều khoản sử  dụng này và các quy định có liên quan đến pháp luật.</p>
-        <p style="font-weight: bold;">2.2 Trách nhiệm của KH</p>
-        <p> - Mở tài khoản tiền gửi không kỳ hạn tại WhitefooBank và tuân thủ các quy định về mở, sử dụng tài khoản của WhitefooBank và pháp luật.</p>
-        <p> - Đọc, hiểu, tuân thủ và ràng buộc bởi các quy định, hướng dẫn liên quan đến Hợp đồng này trước khi sử dụng.</p>
-        <p> - Cung cấp đầy đủ, chính xác các thông tin cần thiết theo yêu cầu của WhitefooBank khi đăng ký sử dụng iWhitefoo và trong quá trình sử dụng các sản phẩm dịch vụ cung cấp qua kênh iWhitefoo.</p>
-        <p> - Đồng ý cho WhitefooBank trích tài khoản để thanh toán các giá trị Giao dịch, các loại phí liên quan đến giao dịch, các loại phí liên quan đến khiếu nại, tranh chấp theo quy định của WhitefooBank và Pháp luật.</p>
-        <p> - Chịu trách nhiệm đối với các giao dịch được thực hiện bằng Thông tin đăng nhập và Mã xác thực của KH (kể cả khi KH tạm ngưng, chấm dứt sử dụng iWhitefoo) mà không được hủy, phủ nhận, từ chối, thay đổi, thoái thác với bất kỳ lý do nào trừ khi thỏa mãn các điều kiện tại Điều dưới đây và phụ thuộc vào sự xem xét, chấp thuận của WhitefooBank.</p>
-        <p> - Hoàn trả cho WhitefooBank những khoản thanh toán thừa, thanh toán quá số dư được phép trên tài khoản và lãi phát sinh theo quy định của WhitefooBank, những khoản tiền ghi có nhầm, thừa vào tài khoản theo nhận định của WhitefooBank (nếu có).</p>
-        <p> - Trực tiếp đến WhitefooBank nhận Token hoặc ủy quyền cho người khác đến nhận Token. Đối với Khách hàng cá nhân việc ủy quyền phải được KH lập trực tiếp bằng văn bản ngay tại  WhitefooBank  hoặc phải được công chứng, chứng thực. Đối với Khách hàng Doanh nghiệp, văn bản uỷ quyền phải được ký tên, đóng dấu của Chủ tài khoản.</p>
-        <p> - Mỗi lần đăng nhập vào iWhitefoo, KH không được rời khỏi máy tính hoặc để người khác sử dụng máy tính đến khi KH thoát ra khỏi đăng nhập. KH có trách nhiệm thoát ra khỏi đăng nhập sau mỗi lần truy cập dịch vụ iWhitefoo.</p>
-        <p> - Khi phát hiện hoặc nghi ngờ có hiện tượng truy cập trái phép vào iWhitefoo mà  WhitefooBank cung cấp cho KH, hoặc nghi ngờ Thông tin đăng nhập của KH không còn bảo mật, hoặc KH làm mất Thiết bị  xác thực, KH cần thông báo bằng hình thức nhanh nhất cho WhitefooBank, theo số điện thoại (+84)1234567890.</p>
-        <p> - Thanh toán đầy đủ các khoản phí liên quan đến Dịch vụ theo biểu phí được WhitefooBank quy định theo từng thời kỳ.</p>
-        <p> - Không sử dụng dịch vụ để thực hiện Giao dịch khi tài khoản không còn đủ tiền.</p>
-        <p> - Thông báo ngay cho WhitefooBank những thay đổi về địa chỉ thường trú, địa chỉ liên lạc hoặc các thông tin khác theo yêu cầu của  WhitefooBank. Đối với KH là tổ chức phải thông báo ngay cho WhitefooBank những thay đổi thông tin liên quan đến người đại diện theo pháp luật của tổ chức, chủ tài khoản. Trường hợp không thông báo kịp thời thì KH phải chịu hoàn toàn trách nhiệm đối với mọi thiệt hại, trách nhiệm đối với bên thứ ba (nếu có) do việc sử dụng tài khoản, dịch vụ iWhitefoo.</p>
-        <p> - Chịu hoàn toàn trách nhiệm liên quan tới những rủi ro phát sinh từ  giao dịch của KH tổ  chức (không đăng ký chữ ký kế toán trưởng) đăng ký một người dùng (bao gồm User tạo và duyệt).</p>
-        <p> - Chịu trách nhiệm bảo mật Thông tin đăng nhập, Mã xác thực, bảo quản Thiết bị xác thực và thực hiện tất cả các biện pháp cần thiết ở mức độ cao nhất nhằm phòng việc sử dụng trái phép các thông tin này.Cho mục đích này, KH cam kết và  WhitefooBank đương nhiên hiểu KH không bao giờ viết, tiết lộ dù vô tình hay cố ý Thông tin đăng nhập, Mã xác thực cho bất kỳ  ai tại bất kỳ nơi nào và vào bất kỳ thời điểm nào. KH sẽ có nghĩa vụ sử dụng ngay Thông tin kích hoạt mật khẩu vừa được cung cấp bởi WhitefooBank để tự tạo, tự chọn ra Thông tin đăng nhập sử dụng dịch vụ của mình, WhitefooBank khuyến cáo KH không chọn Mật khẩu là số dễ đoán như ngày sinh, số điện thoại, không lưu Thông tin đăng nhập tại tất cả phần mềm nào có khả năng lưu lại tự động (ví dụ tính năng “nhớ mật khẩu” hoặc tính năng tương tự trên trang web đang sử dụng) và thận trọng, hạn chế dùng máy tính công cộng, mạng không dây công cộng để truy cập vào hệ thống iWhitefoo.</p>
-        <p> - Hợp tác và cung cấp thông tin cần thiết theo yêu cầu của  WhitefooBank  phù hợp với thỏa thuận, với WhitefooBank và quy định pháp luật.</p>
-        <p> - Sử dụng dịch vụ và quản lý tài khoản theo đúng quy định của  WhitefooBank, của Ngân hàng nhà nước Việt Nam.</p>
-        <p> - Cam kết không thực hiện các giao dịch trái với luật pháp.</p>
-        <p> - Các trách nhiệm khác theo quy định của WhitefooBank và các quy định có liên quan của pháp luật.</p>
-
-        <div class="redirector">
-            <button mat-button>
-                <a href="">Liên hệ trực tiếp để giải đáp các thắc mắc &#8594;</a>
-            </button>
-        </div>
+    <div class="main-title">
+      <h1>Địa chỉ và thông tin liên lạc</h1>
     </div>
-        <br>
+    <div class="container">
+      <!-- <agm-map [zoom]="zoomvalue" [latitude]="lat" [longitude]="lng">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map> -->
+          <div class="map-container">
+            <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20Khoa%20h%E1%BB%8Dc%20T%E1%BB%B1%20nhi%C3%AAn%20-%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20Qu%E1%BB%91c%20Gia%20TP.HCM&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+          </div>
+          <div class="seperator"></div>
+          <div class="text-container">
+            <h5>Địa chỉ</h5>
+              <p>227 Đường Nguyễn Văn Cừ, Phường 4, Quận 5, Hồ Chí Minh</p>
+               <mat-divider></mat-divider>
+            <h5>Thông tin liên lạc</h5>
+              <p>Email:admin@whitefoo.com</p>
+              <p>Phone:(+84) 1234567890</p>
+               <mat-divider></mat-divider>
+            <h5>Giờ làm việc</h5>
+              <p>Sáng :  08:00 - 11:30</p>
+              <p>Chiều: 13:00 - 17:00</p>
+               <mat-divider></mat-divider>
+            <h5>Lịch làm việc</h5>
+              <p>Thứ 2 - Thứ 7 (Hàng tuần)</p>
+              <p>Ngày chủ nhật sẽ chỉ diễn ra các giao dịch trực tuyến.</p>
+              <p>Nghỉ vào các dịp lễ lớn và lễ lao động trong năm</p>
+          </div>      
+    </div>
+    <div class="redirector">
+      <button mat-button>
+          <a href="/policy">Tìm hiểu về các chính sách khác &#8594;</a>
+      </button>
+    </div>
   </div>
 </div>

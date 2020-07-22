@@ -20,6 +20,8 @@ export class RegisterComponent implements OnInit {
   returnUrl: string;
   hidePassword = true;
   registerForm;
+  defaultImage ="../../../assets/img/placeholder.png";
+  lazyloadedImage ="../../../assets/img/signup-image.jpg";
   constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
