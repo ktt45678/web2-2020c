@@ -7,13 +7,13 @@ import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private auth: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401) {
         // Auto logout if 401 response returned from api
-        this.authenticationService.logout();
+        this.auth.logout();
         location.reload(true);
       }
       const error = err.error || err.statusText;

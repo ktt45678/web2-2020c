@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
@@ -13,18 +13,16 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class MatSidenavComponent implements OnInit, OnDestroy {
   shouldRun = true;
-  currentUser: UserModel;
-  currentUserSubscription: Subscription;
+  currentUser: Observable<UserModel>;
 
   constructor(private router: Router, private auth: AuthenticationService, private user: UserService) {
   }
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    this.currentUser = this.auth.currentUser;
   }
 
   ngOnDestroy() {
-    this.currentUserSubscription.unsubscribe();
   }
 
   logout() {

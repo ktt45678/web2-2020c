@@ -25,8 +25,6 @@ export class AuthenticationService {
   }
 
   public get currentUserValue(): UserModel {
-    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
-    this.currentUserSubject.next(user);
     return this.currentUserSubject.value;
   }
 
@@ -35,12 +33,10 @@ export class AuthenticationService {
     const body = new URLSearchParams();
     body.set('clientId', environment.clientId);
     body.set('secretKey', environment.clientSecret);
-    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, body.toString(), { headers });
-  }
-
-  setCurrentUser() {
-    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
-    this.currentUserSubject.next(user);
+    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, body.toString(), { headers }).pipe(map(data => {
+      this.currentUserSubject.next(data);
+      return data;
+    }));
   }
 
   register(registerData) {

@@ -11,7 +11,7 @@ import { RecaptchaComponent } from 'ng-recaptcha';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  providers: [AuthenticationService, ReCaptchaService]
+  providers: [ReCaptchaService]
 })
 export class RegisterComponent implements OnInit {
   @ViewChild('captchaRef') captchaRef: RecaptchaComponent;

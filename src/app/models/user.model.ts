@@ -9,6 +9,10 @@ export class UserModel {
   username: string;
   address: string;
   userType: number;
+  status: number;
+  enable2fa: number;
+  need2fa?: number;
   approveStatus: number;
   emailVerified: number;
+  message?: string;
 }

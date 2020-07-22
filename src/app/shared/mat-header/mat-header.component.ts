@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -15,20 +15,18 @@ import { UserModel } from 'src/app/models/user.model';
 export class MatHeaderComponent implements OnInit, OnDestroy {
   shouldRun = true;
   isDashboard = false;
-  currentUser: UserModel;
-  currentUserSubscription: Subscription;
+  currentUser: Observable<UserModel>;
 
   constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService, private user: UserService) {}
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    this.currentUser = this.auth.currentUser;
     if (this.router.url.startsWith('/dashboard')) {
       this.isDashboard = true;
     }
   }
 
   ngOnDestroy() {
-    this.currentUserSubscription.unsubscribe();
   }
 
   openSideNav() {

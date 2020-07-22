@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from 'src/app/models/user.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
