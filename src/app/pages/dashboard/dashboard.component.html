@@ -1,17 +1,17 @@
-<div class="mat-body">
-  <mat-progress-bar *ngIf="!currentUser" mode="indeterminate" class="fixed-top"></mat-progress-bar>
+<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+<div class="container mt-2r">
   <div *ngIf="currentUser" class="user-info">
-    <div class="container task-cards">
+    <div class="task-cards">
       <mat-card class="task-card" *ngIf="currentUser.emailVerified !== 1">
         <mat-card-header>
           <mat-icon class="task-icon" mat-card-avatar>mail</mat-icon>
           <mat-card-title>Xác thực email</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Bạn chưa xác thực email, vui lòng truy cập vào email của bạn để hoàn tất quá trình đăng ký tài khoản.</p>
+          <p>Bạn chưa xác thực email, vui lòng kiểm tra email của bạn để hoàn tất quá trình đăng ký tài khoản.</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Đóng</button>
+          <button mat-button>Gửi lại email</button>
         </mat-card-actions>
       </mat-card>
       <mat-card class="task-card" *ngIf="!currentUser.citizenIdentificationId">
@@ -20,10 +20,70 @@
           <mat-card-title>Kích hoạt tài khoản</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo các chỉ dẫn để bắt đầu quá trình kích hoạt.</p>
+          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo hướng dẫn để bắt đầu quá trình kích hoạt.</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Tiếp tục</button>
+          <button mat-button (click)="showIdCardSubmitter()">Tiếp tục</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="task-card" *ngIf="!currentUser.citizenIdentificationId">
+        <mat-card-header>
+          <mat-icon class="task-icon" mat-card-avatar>lock</mat-icon>
+          <mat-card-title>Kích hoạt tài khoản</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo hướng dẫn để bắt đầu quá trình kích hoạt.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="showIdCardSubmitter()">Tiếp tục</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="task-card" *ngIf="!currentUser.citizenIdentificationId">
+        <mat-card-header>
+          <mat-icon class="task-icon" mat-card-avatar>lock</mat-icon>
+          <mat-card-title>Kích hoạt tài khoản</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo hướng dẫn để bắt đầu quá trình kích hoạt.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="showIdCardSubmitter()">Tiếp tục</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="task-card" *ngIf="!currentUser.citizenIdentificationId">
+        <mat-card-header>
+          <mat-icon class="task-icon" mat-card-avatar>lock</mat-icon>
+          <mat-card-title>Kích hoạt tài khoản</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo hướng dẫn để bắt đầu quá trình kích hoạt.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="showIdCardSubmitter()">Tiếp tục</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="task-card" *ngIf="!currentUser.citizenIdentificationId">
+        <mat-card-header>
+          <mat-icon class="task-icon" mat-card-avatar>lock</mat-icon>
+          <mat-card-title>Kích hoạt tài khoản</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo hướng dẫn để bắt đầu quá trình kích hoạt.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="showIdCardSubmitter()">Tiếp tục</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card class="task-card" *ngIf="!currentUser.citizenIdentificationId">
+        <mat-card-header>
+          <mat-icon class="task-icon" mat-card-avatar>lock</mat-icon>
+          <mat-card-title>Kích hoạt tài khoản</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>tiếp tục</strong> và làm theo hướng dẫn để bắt đầu quá trình kích hoạt.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="showIdCardSubmitter()">Tiếp tục</button>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 import { AuthenticationService } from '../services/authentication.service'
 
@@ -11,11 +12,12 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
     const accessToken = this.auth.accessTokenValue;
+    request = request.clone({
+      headers: request.headers.set('Accept', 'application/json')
+    });
     if (accessToken) {
       request = request.clone({
-        setHeaders: {
-          token: accessToken
-        }
+        headers: request.headers.set('token', accessToken)
       });
     }
     return next.handle(request);

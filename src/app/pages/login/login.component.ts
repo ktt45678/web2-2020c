@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../services/authentication.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   loginForm;
 
-  constructor(private auth: AuthenticationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
+  constructor(private auth: AuthenticationService, private notification: NotificationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     if (this.auth.accessTokenValue) {
       this.router.navigate(['/dashboard']);
     }
@@ -41,10 +42,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.auth.login(loginData).pipe(first()).subscribe(
     data => {
+      this.notification.close();
       this.router.navigate([this.returnUrl]);
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.notification.showError(message[0]?.message || message?.message);
       this.afterRespone();
     });
   }

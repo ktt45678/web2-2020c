@@ -35,6 +35,7 @@ import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
 
 // Services, modules
+import { JwtInterceptor } from './modules/jwt-interceptor.module';
 import { ErrorInterceptor } from './modules/error-interceptor.module';
 
 // Angular material
@@ -140,6 +141,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: RECAPTCHA_SETTINGS, useValue: { siteKey: environment.reCaptchaKey } as RecaptchaSettings }
   ],

@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthenticationService } from '../../services/authentication.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-passwordrecovery',
@@ -19,9 +20,9 @@ export class PasswordRecoveryComponent implements OnInit {
   recoveryForm;
   resetPasswordForm;
   
-  constructor(private auth: AuthenticationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
+  constructor(private auth: AuthenticationService, private notification: NotificationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     this.recoveryForm = new FormGroup({
-      email: new FormControl('', [Validators.required])
+      email: new FormControl('', [Validators.required, Validators.email])
     });
     this.resetPasswordForm = new FormGroup({
       password: new FormControl('', [Validators.required]),
@@ -39,7 +40,7 @@ export class PasswordRecoveryComponent implements OnInit {
       this.auth.validatePasswordRecovery(this.token).pipe(first()).subscribe(data => {
         this.hasToken = true;
       }, error => {
-        this.snackBar.open('Liên kết khôi phục mật khẩu không hợp lệ', 'Đóng', { duration: 10000 });
+        this.notification.showError('Liên kết khôi phục mật khẩu không hợp lệ');
       });
     }
   }
@@ -51,11 +52,11 @@ export class PasswordRecoveryComponent implements OnInit {
     this.loading = true;
     this.auth.passwordRecovery(recoveryData).pipe(first()).subscribe(
     data => {
-      this.snackBar.open('Liên kết khôi phục mật khẩu đang được gửi tới Email của bạn', 'Đóng', { duration: 10000 });
+      this.notification.showSuccess('Liên kết khôi phục mật khẩu đang được gửi tới Email của bạn');
       this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.notification.showError(message[0]?.message || message?.message);
       this.afterRespone();
     });
   }
@@ -67,11 +68,11 @@ export class PasswordRecoveryComponent implements OnInit {
     this.loading = true;
     this.auth.resetPassword(resetPasswordData, this.token).pipe(first()).subscribe(
     data => {
-      this.snackBar.open('Mật khẩu đã được cập nhật thành công', 'Đóng', { duration: 10000 });
+      this.notification.showSuccess('Mật khẩu đã được cập nhật thành công');
       this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.notification.showError(message[0]?.message || message?.message);
       this.afterRespone();
     });
   }

@@ -8,6 +8,8 @@ import { environment } from '../../environments/environment';
 import { TokenModel } from '../models/token.model';
 import { UserModel } from '../models/user.model';
 
+const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
@@ -15,8 +17,7 @@ export class AuthenticationService {
   public currentUser: Observable<UserModel>;
   
   constructor(private http: HttpClient) {
-    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
-    this.currentUserSubject = new BehaviorSubject<UserModel>(user);
+    this.currentUserSubject = new BehaviorSubject<UserModel>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -29,18 +30,19 @@ export class AuthenticationService {
   }
 
   getCurrentUser() {
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded', 'token': this.accessTokenValue});
     const body = new URLSearchParams();
     body.set('clientId', environment.clientId);
     body.set('secretKey', environment.clientSecret);
-    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, body.toString(), { headers }).pipe(map(data => {
-      this.currentUserSubject.next(data);
-      return data;
+    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, body.toString(), { headers }).pipe(map(user => {
+      return user;
     }));
   }
 
+  setCurrentUser(user: UserModel) {
+    this.currentUserSubject.next(user);
+  }
+
   register(registerData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('firstName', registerData.firstname);
     body.set('lastName', registerData.lastname);
@@ -57,7 +59,6 @@ export class AuthenticationService {
   }
 
   activate(token) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('activeCode', token);
     body.set('clientId', environment.clientId);
@@ -66,7 +67,6 @@ export class AuthenticationService {
   }
 
   passwordRecovery(recoveryData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('email', recoveryData.email);
     body.set('clientId', environment.clientId);
@@ -75,7 +75,6 @@ export class AuthenticationService {
   }
 
   validatePasswordRecovery(token) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('forgotCode', token);
     body.set('clientId', environment.clientId);
@@ -84,7 +83,6 @@ export class AuthenticationService {
   }
 
   resetPassword(resetPasswordData, token) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('newPassword', resetPasswordData.password);
     body.set('confirmPassword', resetPasswordData.confirmpassword);
@@ -95,7 +93,6 @@ export class AuthenticationService {
   }
 
   login(loginData) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     const body = new URLSearchParams();
     body.set('username', loginData.username);
     body.set('password', loginData.password);
@@ -111,7 +108,6 @@ export class AuthenticationService {
 
   logout() {
     // Remove user from local storage to log user out
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded', 'token': this.accessTokenValue});
     const params = new HttpParams();
     params.set('clientId', environment.clientId);
     params.set('secretKey', environment.clientSecret);

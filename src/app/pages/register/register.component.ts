@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RecaptchaComponent } from 'ng-recaptcha';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ReCaptchaService } from '../../services/recaptcha.service';
-import { RecaptchaComponent } from 'ng-recaptcha';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   returnUrl: string;
   hidePassword = true;
   registerForm;
-  constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
+  constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -54,17 +55,17 @@ export class RegisterComponent implements OnInit {
     this.reCaptcha.verify(captchaResponse).pipe(first()).subscribe(
     data => {
     }, error => {
-      this.snackBar.open('Lỗi xác thực captcha', 'Đóng', { duration: 10000 });
+      this.notification.showError('Lỗi xác thực captcha');
       this.afterRespone();
       return;
     });
     this.auth.register(registerData).pipe(first()).subscribe(
     data => {
-      this.snackBar.open('Đăng kí thành công, vui lòng kiểm tra email của bạn', 'Đóng', { duration: 10000 });
+      this.notification.showSuccess('Đăng kí thành công, vui lòng kiểm tra email của bạn');
       this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.snackBar.open(message[0] ? message[0].message : message ? message.message : "Đã có lỗi xảy ra", 'Đóng', { duration: 10000 });
+      this.notification.showError(message[0]?.message || message?.message);
       this.afterRespone();
     });
   }
