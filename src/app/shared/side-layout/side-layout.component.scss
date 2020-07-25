@@ -6,10 +6,15 @@
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-.mat-body {
-  margin: 0;
+  .mat-page {
+    padding-top: 0;
+    position:absolute;
+    top: 65px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow-y: auto;
+  }
 }
 
 .sidenav-toolbar {
@@ -50,7 +55,7 @@ a.app-title {
   }
 }
 
-@media only screen and (max-width: 559px) {
+@media only screen and (max-width: 768px) {
   .mat-toolbar-row, .mat-toolbar-single-row {
     height: 64px;
   }

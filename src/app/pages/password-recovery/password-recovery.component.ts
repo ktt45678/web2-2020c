@@ -8,17 +8,17 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
-  selector: 'app-passwordrecovery',
-  templateUrl: './passwordrecovery.component.html',
-  styleUrls: ['./passwordrecovery.component.scss']
+  selector: 'app-password-recovery',
+  templateUrl: './password-recovery.component.html',
+  styleUrls: ['./password-recovery.component.scss']
 })
 export class PasswordRecoveryComponent implements OnInit {
   loading = false;
   hasToken = false;
   hidePassword = true;
   token: string;
-  recoveryForm;
-  resetPasswordForm;
+  recoveryForm: FormGroup;
+  resetPasswordForm: FormGroup;
   
   constructor(private auth: AuthenticationService, private notification: NotificationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     this.recoveryForm = new FormGroup({

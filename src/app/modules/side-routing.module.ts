@@ -3,13 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SideLayoutComponent } from '../shared/side-layout/side-layout.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { UpdateIdCardComponent } from '../pages/update-idcard/update-idcard.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: '',
     component: SideLayoutComponent,
     children: [
-      { path: '', component: DashboardComponent }
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'updateidcard', component: UpdateIdCardComponent }
     ]
   }
 ];

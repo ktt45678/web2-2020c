@@ -1,8 +1,8 @@
 <div class="mat-body">
   <div class="mat-page mt-2r">
     <div class="container">
-      <div class="login-form">
-        <div class="progress-bar" [class.visible]="loading">
+      <div class="login-form ml-auto mr-auto">
+        <div [ngClass]="loading ? 'visible' : 'invisible'">
           <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </div>
         <div class="login-inner">

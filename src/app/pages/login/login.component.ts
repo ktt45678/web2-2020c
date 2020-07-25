@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   hidePassword = true;
   loading = false;
   returnUrl: string;
-  loginForm;
+  loginForm: FormGroup;
 
   constructor(private auth: AuthenticationService, private notification: NotificationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     if (this.auth.accessTokenValue) {

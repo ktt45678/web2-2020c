@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   returnUrl: string;
   hidePassword = true;
-  registerForm;
+  registerForm: FormGroup;
   defaultImage ="../../../assets/img/placeholder.png";
   lazyloadedImage ="../../../assets/img/signup-image.jpg";
   constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService, private formBuilder: FormBuilder) {}

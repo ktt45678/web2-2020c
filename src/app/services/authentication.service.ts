@@ -8,8 +8,6 @@ import { environment } from '../../environments/environment';
 import { TokenModel } from '../models/token.model';
 import { UserModel } from '../models/user.model';
 
-const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
@@ -30,10 +28,8 @@ export class AuthenticationService {
   }
 
   getCurrentUser() {
-    const body = new URLSearchParams();
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
-    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, body.toString(), { headers }).pipe(map(user => {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, {}, { headers }).pipe(map(user => {
       return user;
     }));
   }
@@ -43,6 +39,7 @@ export class AuthenticationService {
   }
 
   register(registerData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('firstName', registerData.firstname);
     body.set('lastName', registerData.lastname);
@@ -53,51 +50,44 @@ export class AuthenticationService {
     body.set('address', registerData.address);
     body.set('password', registerData.password);
     body.set('confirmPassword', registerData.password);
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
     return this.http.post(`${environment.apiUrl}/api/register`, body.toString(), { headers });
   }
 
   activate(token) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('activeCode', token);
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
     return this.http.post(`${environment.apiUrl}/api/auth/active`, body.toString(), { headers });
   }
 
   passwordRecovery(recoveryData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('email', recoveryData.email);
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
     return this.http.post(`${environment.apiUrl}/api/forgotpassword`, body.toString(), { headers });
   }
 
   validatePasswordRecovery(token) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('forgotCode', token);
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
     return this.http.post(`${environment.apiUrl}/api/verifyforgotcode`, body.toString(), { headers });
   }
 
   resetPassword(resetPasswordData, token) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('newPassword', resetPasswordData.password);
     body.set('confirmPassword', resetPasswordData.confirmpassword);
     body.set('forgotCode', token);
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
     return this.http.post(`${environment.apiUrl}/api/updatenewpassword`, body.toString(), { headers });
   }
 
   login(loginData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('username', loginData.username);
     body.set('password', loginData.password);
-    body.set('clientId', environment.clientId);
-    body.set('secretKey', environment.clientSecret);
     return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/login`, body.toString(), { headers }).pipe(map(data => {
       localStorage.setItem('token', JSON.stringify(data.token));
       const user = new JwtHelperService().decodeToken(data.token);
@@ -108,10 +98,8 @@ export class AuthenticationService {
 
   logout() {
     // Remove user from local storage to log user out
-    const params = new HttpParams();
-    params.set('clientId', environment.clientId);
-    params.set('secretKey', environment.clientSecret);
-    //this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers, params }).subscribe();
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers }).subscribe().unsubscribe();
     this.currentUserSubject.next(null);
     localStorage.removeItem('token');
   }

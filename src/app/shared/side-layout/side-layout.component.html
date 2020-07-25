@@ -1,9 +1,9 @@
 <div class="mat-body">
-  <div class="page-container" *ngIf="shouldRun">
+  <div class="page-container">
     <mat-sidenav-container class="sidenav-container">
-      <mat-sidenav #sideNav mode="over" class="sidenav">
+      <mat-sidenav #sideNav [mode]="mobileQuery.matches ? 'over' : 'side'" class="sidenav">
         <mat-toolbar class="sidenav-toolbar">
-          <button mat-icon-button (click)="sideNav.toggle()">
+          <button mat-icon-button (click)="closeSideNav()">
             <mat-icon>menu</mat-icon>
           </button>
           <a class="app-title" routerLink="/">
@@ -14,11 +14,11 @@
         <app-mat-sidenav></app-mat-sidenav>
       </mat-sidenav>
       <mat-sidenav-content>
-        <app-mat-header></app-mat-header>
+        <app-mat-header [allowMenu]="true"></app-mat-header>
         <div class="mat-page">
           <router-outlet></router-outlet>
+          <app-mat-footer></app-mat-footer>
         </div>
-        <app-mat-footer></app-mat-footer>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
