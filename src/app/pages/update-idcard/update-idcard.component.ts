@@ -107,6 +107,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
             break;
         }
       }));
+      // Subscribe to observables in order as previous completes
       concat(uploadImage, uploadImage2, updateIdNumber).subscribe(() => {}, error => {
         this.showError(error);
         this.afterRespone();

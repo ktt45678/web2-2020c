@@ -76,6 +76,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     HomeLayoutComponent,
     MatLayoutComponent,
     ExchangerateComponent,
-    SideLayoutComponent
+    SideLayoutComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,
