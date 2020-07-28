@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
+
+import { StatusModel } from '../models/status.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
   constructor(private http: HttpClient) {}
+
+  public get taskFinished(): Boolean {
+    return JSON.parse(localStorage.getItem('task_finished'));
+  }
   
   updateIdCard(updateData) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -29,8 +36,16 @@ export class UserService {
   }
 
   findManager() {
+    return this.http.get(`${environment.apiUrl}/api/requeststaff`);
+  }
+
+  findStatus() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.get(`${environment.apiUrl}/api/requeststaff`, { headers });
+    const params = { type: 'status' };
+    return this.http.get<StatusModel>(`${environment.apiUrl}/api/getinfo`, { headers, params }).pipe(map(status => {
+      localStorage.setItem('task_finished', JSON.stringify(status.approveStatus !== 0 && status.emailVerified !== 0));
+      return status;
+    }));
   }
   
 }

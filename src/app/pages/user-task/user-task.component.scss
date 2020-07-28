@@ -1,0 +1,9 @@
+.task-cards {
+  .task-card:not(:first-child) {
+      margin-top: 5px;
+  }
+  .task-icon {
+      font-size: 20px;
+      width: 14px;
+  }
+}

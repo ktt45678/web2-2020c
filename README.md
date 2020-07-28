@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bdd3a52e-cddd-4c47-9c1b-8665ca685d36/deploy-status)](https://app.netlify.com/sites/whitefoobank/deploys)
+
 # Whitefoobank
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.

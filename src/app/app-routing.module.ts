@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { AuthGuard } from './modules/auth-guard.module';
+import { AuthGuard } from './modules/guard/auth-guard.module';
 
 
 import { HomeComponent } from './pages/home/home.component';
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 
-const matModule = () => import('./modules/mat.module').then(x => x.PageModule);
-const sideModule = () => import('./modules/side.module').then(x => x.SideModule);
+const matModule = () => import('./modules/routing/mat.module').then(x => x.PageModule);
+const sideModule = () => import('./modules/routing/side.module').then(x => x.SideModule);
 
 
 const routes: Routes = [

@@ -32,8 +32,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AccountManagementComponent } from './pages/account-management/account-management.component';
 import { UpdateIdCardComponent } from './pages/update-idcard/update-idcard.component';
+import { UserInformationComponent } from './pages/user-information/user-information.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { UserModificationComponent } from './pages/user-modification/user-modification.component';
+import { UserTaskComponent } from './pages/user-task/user-task.component';
 import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
@@ -41,8 +45,8 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 
 // Services, modules
-import { JwtInterceptor } from './modules/jwt-interceptor.module';
-import { ErrorInterceptor } from './modules/error-interceptor.module';
+import { JwtInterceptor } from './modules/interceptor/jwt-interceptor.module';
+import { ErrorInterceptor } from './modules/interceptor/error-interceptor.module';
 
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';
@@ -71,6 +75,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -88,7 +93,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
     RegisterComponent,
     ActivationComponent,
     PasswordRecoveryComponent,
+    AccountManagementComponent,
     DashboardComponent,
+    UserInformationComponent,
+    UserManagementComponent,
+    UserModificationComponent,
+    UserTaskComponent,
     UpdateIdCardComponent,
     FAQComponent,
     AboutComponent,
@@ -97,8 +107,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HomeLayoutComponent,
     MatLayoutComponent,
     ExchangerateComponent,
-    SideLayoutComponent,
-    UserManagementComponent
+    SideLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -137,6 +146,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatGridListModule,
     MatStepperModule,
     MatTooltipModule,
+    MatTabsModule,
     LazyLoadImageModule,
     JwtModule.forRoot({
       config: {

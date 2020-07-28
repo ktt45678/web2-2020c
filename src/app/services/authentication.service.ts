@@ -15,7 +15,8 @@ export class AuthenticationService {
   public currentUser: Observable<UserModel>;
   
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<UserModel>(null);
+    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
+    this.currentUserSubject = new BehaviorSubject<UserModel>(user);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -29,7 +30,8 @@ export class AuthenticationService {
 
   getCurrentUser() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, {}, { headers }).pipe(map(user => {
+    const params = { type: 'basic' };
+    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, {}, { headers, params }).pipe(map(user => {
       return user;
     }));
   }
@@ -98,9 +100,9 @@ export class AuthenticationService {
 
   logout() {
     // Remove user from local storage to log user out
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers }).subscribe().unsubscribe();
+    this.http.get(`${environment.apiUrl}/api/auth/logout`).subscribe();
     this.currentUserSubject.next(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('task_finished');
   }
 }

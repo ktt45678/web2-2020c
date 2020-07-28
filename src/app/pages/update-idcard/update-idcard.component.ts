@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Subscription, concat } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { UserModel } from '../../models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -19,7 +19,6 @@ import { UserService } from '../../services/user.service';
 export class UpdateIdCardComponent implements OnInit, OnDestroy {
 
   currentUser: UserModel;
-  currentUserSubscription: Subscription;
   loading = false;
   updatetForm: FormGroup;
   uploadProgress = 0;
@@ -32,7 +31,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthenticationService, private upload: UploadService, private notification: NotificationService, private user: UserService) { }
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    this.currentUser = this.auth.currentUserValue;
     this.updatetForm = new FormGroup({
       cardType: new FormControl('', [Validators.required]),
       idNumber: new FormControl('', [Validators.required]),
@@ -82,6 +81,11 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
     }
     this.updatetForm.disable();
     this.loading = true;
+    // Update id number
+    const updateIdNumber = this.user.updateIdCard(updateData).pipe(tap(() => {
+      this.notification.showSuccess("Yêu cầu cập nhật thành công");
+      this.afterRespone();
+    }));
     // Upload id card photos for standard users
     if (this.currentUser.userType !== 0) {
       if (!this.selectedFile || !this.selectedFile2) {
@@ -89,38 +93,32 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
         this.afterRespone();
         return;
       }
-      this.upload.idcard(this.selectedFile).subscribe((event: HttpEvent<any>) => {
+      const uploadImage = this.upload.idcard(this.selectedFile).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             this.uploadProgress = Math.round(event.loaded / event.total * 50);
             break;
         }
-      }, error => {
-        this.showError(error);
-        this.afterRespone();
-        return;
-      });
-      this.upload.idcard(this.selectedFile).subscribe((event: HttpEvent<any>) => {
+      }));
+      const uploadImage2 = this.upload.idcard(this.selectedFile).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             this.uploadProgress = 50 + Math.round(event.loaded / event.total * 50);
             break;
         }
-      }, error => {
+      }));
+      concat(uploadImage, uploadImage2, updateIdNumber).subscribe(() => {}, error => {
+        this.showError(error);
+        this.afterRespone();
+        return;
+      });
+    } else {
+      updateIdNumber.subscribe(() => {}, error => {
         this.showError(error);
         this.afterRespone();
         return;
       });
     }
-    // Update id number
-    this.user.updateIdCard(updateData).pipe(first()).subscribe(
-    data => {
-      this.notification.showSuccess('Yêu cầu cập nhật thành công');
-      this.afterRespone();
-    }, error => {
-      this.showError(error);
-      this.afterRespone();
-    });
   }
 
   showError(error) {
@@ -134,7 +132,6 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.currentUserSubscription.unsubscribe()
   }
 
 }
