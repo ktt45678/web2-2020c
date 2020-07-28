@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -13,20 +13,14 @@ import { UserModel } from 'src/app/models/user.model';
   styleUrls: ['./mat-header.component.scss']
 })
 export class MatHeaderComponent implements OnInit, OnDestroy {
-  shouldRun = true;
-  isDashboard = false;
-  currentUser: Observable<UserModel>;
+  currentUser: UserModel;
+  currentUserSubscription: Subscription;
+  @Input() allowMenu: Boolean;
 
   constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService, private user: UserService) {}
 
   ngOnInit(): void {
-    this.currentUser = this.auth.currentUser;
-    if (this.router.url.startsWith('/dashboard')) {
-      this.isDashboard = true;
-    }
-  }
-
-  ngOnDestroy() {
+    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
   }
 
   openSideNav() {
@@ -36,6 +30,10 @@ export class MatHeaderComponent implements OnInit, OnDestroy {
   logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy(): void {
+    this.currentUserSubscription.unsubscribe();
   }
 
 }

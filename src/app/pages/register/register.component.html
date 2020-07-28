@@ -6,8 +6,8 @@
           <div class="signup-image mt-2r" [defaultImage]="defaultImage" [lazyLoad]="lazyloadedImage"></div>
         </div>
         <div class="col-lg-6 col-md-12">
-          <div class="signup-form mt-2r">
-            <div class="progress-bar" [class.visible]="loading">
+          <div class="signup-form mt-2r ml-auto mr-auto">
+            <div [ngClass]="loading ? 'visible' : 'invisible'">
               <mat-progress-bar mode="indeterminate"></mat-progress-bar>
             </div>
             <div class="signup-inner">

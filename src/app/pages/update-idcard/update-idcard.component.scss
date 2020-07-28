@@ -1,0 +1,22 @@
+.update-form {
+  max-width: 500px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  .update-inner {
+    padding: 32px;
+  }
+  .image-preview {
+    mat-grid-tile {
+      border-radius: 3px;
+    }
+    img {
+      width: 100%;
+    }
+    .clear {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}

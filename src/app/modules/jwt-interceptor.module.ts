@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     const accessToken = this.auth.accessTokenValue;
     request = request.clone({
-      headers: request.headers.set('Accept', 'application/json')
+      headers: request.headers.set('Accept', 'application/json').set('clientid', environment.clientId).set('secretkey', environment.clientSecret)
     });
     if (accessToken) {
       request = request.clone({

@@ -1,4 +1,4 @@
-<mat-nav-list *ngIf="(currentUser | async)">
+<mat-nav-list *ngIf="currentUser">
   <div class="user-nav">
     <a mat-list-item routerLink="/dashboard">
       <mat-icon mat-list-icon>home</mat-icon>
@@ -18,7 +18,7 @@
     </a>
   </div>
   <mat-divider></mat-divider>
-  <div *ngIf="(currentUser | async).userType === 0" class="manager-nav">
+  <div *ngIf="currentUser.userType === 0" class="manager-nav">
     <a mat-list-item routerLink="/">
       <mat-icon mat-list-icon>people</mat-icon>
       <div mat-line>Quản lý người dùng</div>

@@ -1,0 +1,74 @@
+<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+<div class="container">
+  <div *ngIf="currentUser" class="mt-2r">
+    <div class="update-form ml-auto mr-auto">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="update-inner">
+        <h2 class="mb-3 text-center">CẬP NHẬT GIẤY TỜ</h2>
+        <form [formGroup]="updatetForm" (ngSubmit)="onSubmit(updatetForm.value)">
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Loại giấy tờ</mat-label>
+              <mat-select formControlName="cardType">
+                <mat-option value="CMND">Chứng minh nhân dân</mat-option>
+                <mat-option value="CCCD">Căn cước công dân</mat-option>
+              </mat-select>
+              <mat-error *ngIf="cardType.errors?.required">
+                Loại giấy tờ là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Số CMND/CCCD</mat-label>
+              <input type="text" formControlName="idNumber" matInput>
+              <mat-error *ngIf="idNumber.errors?.required">
+                Số CMND/CCCD là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ngày cấp</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="issueDate">
+              <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="loading"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+              <mat-error *ngIf="issueDate.errors?.required">
+                Ngày cấp là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="currentUser.userType !== 0">
+            <div class="image-preview">
+              <input #inputIdCard hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange($event)" accept="image/*"/>
+              <input #inputIdCard2 hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange2($event)" accept="image/*"/>
+              <mat-grid-list cols="2" rowHeight="2:1">
+                <mat-grid-tile>
+                  <button type="button" *ngIf="!previewImage" class="w-100 h-100" mat-flat-button color="primary" (click)="inputIdCard.click()"><mat-icon>add_photo_alternate</mat-icon><br>Chọn hình ảnh</button>
+                  <img *ngIf="previewImage" [src]="previewImage">
+                  <button type="button" *ngIf="previewImage" class="clear" mat-icon-button (click)="clearFile()"><mat-icon>clear</mat-icon></button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <button type="button" *ngIf="!previewImage2" class="w-100 h-100" mat-flat-button color="primary" (click)="inputIdCard2.click()"><mat-icon>add_photo_alternate</mat-icon><br>Chọn hình ảnh</button>
+                  <img *ngIf="previewImage2" [src]="previewImage2">
+                  <button type="button" *ngIf="previewImage2" class="clear" mat-icon-button (click)="clearFile2()"><mat-icon>clear</mat-icon></button>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+            <div class="mt-2" >
+              <mat-progress-bar class="rounded" *ngIf="loading" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+            </div>
+            <p class="text-muted mt-2">Để xác thực tài khoản, bạn cần cung cấp 2 ảnh chụp bao gồm số CMND/CCCD và ngày cấp từ giấy tờ tùy thân mà bạn sở hữu. Những hình ảnh mà bạn tải lên sẽ được lưu trữ tạm thời trên hệ thống và các nhân viên sẽ tiến hành kiểm tra xác thực. Chúng tôi cam kết các hình ảnh này sẽ bị xóa vĩnh viễn ngay sau khi việc xác thực hoàn tất.</p>
+          </div>
+          <div class="d-flex">
+            <div class="ml-auto">
+              <button type="submit" mat-flat-button color="primary" [disabled]="loading">Cập nhật</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
