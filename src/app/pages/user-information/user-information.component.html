@@ -1,1 +1,61 @@
-<p>user-information works!</p>
+<div class="mt-2r">
+  <mat-spinner *ngIf="!selectedUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div class="container">
+    <div *ngIf="selectedUser" class="user-info">
+      <div class="info-head rounded shadow-sm p-3">
+        <div class="info-content row justify-content-center">
+          <div class="col-auto align-self-center">
+            <img class="avatar" src="../../../assets/img/whitefoologohead.png" alt="user avatar">
+          </div>
+          <div class="col-lg-8 align-self-center">
+            <h5>Họ Tên</h5>
+            <p>{{selectedUser.firstName}} {{selectedUser.lastName}}</p>
+            <h5>Email</h5>
+            <p>{{selectedUser.email}}</p>
+          </div>
+          <div class="col-auto">
+            <button mat-flat-button color="primary">Thay đổi</button>
+            <button (click)="return()" class="d-block mt-1" mat-flat-button color="primary">Quay lại</button>
+          </div>
+        </div>
+      </div>
+      <div class="info-detail mt-2r">
+        <h4 class="fw-600">Thông tin chi tiết</h4>
+        <div class="info-content row">
+          <div class="col-md-5">
+            <h5>Ngày sinh</h5>
+            <p>{{selectedUser.dateOfBirth}}</p>
+            <h5>CMND/CCCD</h5>
+            <p>{{selectedUser.citizenIdentificationId || 'Chưa cập nhật'}}</p>
+            <h5>Địa chỉ</h5>
+            <p>{{selectedUser.address}}</p>
+            <h5>Số điện thoại</h5>
+            <p>{{selectedUser.phoneNumber}}</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Loại người dùng</h5>
+            <p>{{selectedUser.userType === 0 ? 'Nhân viên' : 'Khách hàng'}}</p>
+            <h5>Ngày tham gia</h5>
+            <p>{{selectedUser.createdAt || 'Không rõ'}}</p>
+            <h5>Phê duyệt giấy tờ</h5>
+            <p>{{selectedUser.approveStatus === 2 ? 'Đang chờ' : selectedUser.approveStatus === 1 ? 'Đã phê duyệt' : 'Không được duyệt'}}</p>
+            <h5>Kích hoạt email</h5>
+            <p>{{selectedUser.emailVerified === 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt'}}</p>
+          </div>
+          <div class="col-md-3">
+            <h5>Tình trạng</h5>
+            <p>{{selectedUser.status === 1 ? 'Bình thường' : 'Bị khóa'}}</p>
+            <h5>Xác minh 2 bước</h5>
+            <p>{{selectedUser.enable2fa === 1 ? 'Đang bật' : 'Đang tắt'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="info-account mt-2r">
+        <h4 class="fw-600">Tài khoản ngân hàng</h4>
+        <div class="info-content">
+          <p>Hiện chưa có tài khoản nào</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

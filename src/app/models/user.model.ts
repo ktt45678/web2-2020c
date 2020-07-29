@@ -14,5 +14,6 @@ export class UserModel {
   need2fa?: number;
   approveStatus?: number;
   emailVerified?: number;
+  createdAt?: string;
   message?: string;
 }

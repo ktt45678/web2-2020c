@@ -7,8 +7,9 @@
     </mat-form-field>
     <mat-form-field class="ml-auto">
       <mat-label>Loại người dùng</mat-label>
-      <mat-select value="user">
-        <mat-option value="user">Tất cả người dùng</mat-option>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="user">Người dùng</mat-option>
         <mat-option value="approved">Đã kích hoạt</mat-option>
         <mat-option value="pending">Chờ phê duyệt</mat-option>
         <mat-option value="manager">Nhân viên</mat-option>
@@ -59,7 +60,7 @@
   <mat-paginator [length]="this.dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <mat-menu #actionMenu="matMenu" xPosition="before">
     <ng-template matMenuContent let-user="user">
-      <button mat-menu-item>Xem thông tin</button>
+      <button (click)="viewUser(user)" mat-menu-item>Xem thông tin</button>
       <button mat-menu-item>Chỉnh sửa</button>
       <button mat-menu-item>Chặn</button>
     </ng-template>

@@ -17,4 +17,9 @@ export class ManagementService {
     return this.http.get<any>(`${environment.apiUrl}/api/search`, { params });
   }
 
+  findUser(id: string) {
+    const params = { id };
+    return this.http.get<any>(`${environment.apiUrl}/api/getuserinfo`, { params });
+  }
+
 }
