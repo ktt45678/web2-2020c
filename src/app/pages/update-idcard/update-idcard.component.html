@@ -27,6 +27,9 @@
               <mat-error *ngIf="idNumber.errors?.required">
                 Số CMND/CCCD là <strong>bắt buộc</strong>
               </mat-error>
+              <mat-error *ngIf="idNumber.errors?.minlength">
+                Số CMND/CCCD phải có ít nhất <strong>5 kí tự</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div>

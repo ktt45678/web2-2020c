@@ -33,7 +33,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
     this.updatetForm = new FormGroup({
-      cardType: new FormControl('', [Validators.required]),
+      cardType: new FormControl('', [Validators.required, Validators.minLength(5)]),
       idNumber: new FormControl('', [Validators.required]),
       issueDate: new FormControl('', [Validators.required])
     });

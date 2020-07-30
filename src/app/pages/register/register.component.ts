@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ReCaptchaService } from '../../services/recaptcha.service';
 import { NotificationService } from '../../services/notification.service';
+import { regex } from '../../modules/template/regex-pattern.module';
 
 @Component({
   selector: 'app-register',
@@ -26,14 +26,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      firstname: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
+      firstname: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(regex.displayName)]),
+      lastname: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.pattern(regex.displayName)]),
       birth: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
-      tel: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(regex.username)]),
+      tel: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(regex.tel)]),
+      address: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]),
+      email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(128), Validators.pattern(regex.password)]),
       confirmpassword: new FormControl('', [Validators.required]),
       recaptcha: new FormControl('', [Validators.required])
     });
@@ -54,15 +54,15 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.reCaptcha.verify(captchaResponse).pipe(first()).subscribe(
-    data => {
-    }, error => {
+    this.registerForm.disable();
+    this.reCaptcha.verify(captchaResponse).pipe(first()).subscribe(() => {},
+    error => {
       this.notification.showError('Lỗi xác thực captcha');
       this.afterRespone();
       return;
     });
     this.auth.register(registerData).pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.showSuccess('Đăng kí thành công, vui lòng kiểm tra email của bạn');
       this.afterRespone();
     }, error => {
@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit {
 
   afterRespone() {
     this.loading = false;
+    this.registerForm.enable();
     this.captchaRef.reset();
   }
 

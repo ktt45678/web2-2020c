@@ -12,6 +12,9 @@
   overflow: hidden;
   .signup-inner {
     padding: 32px;
+    mat-error + mat-error {
+      display: none;
+    }
   }
   .recaptcha-policy {
     display: none;
