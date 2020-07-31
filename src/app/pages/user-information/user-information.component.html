@@ -14,8 +14,21 @@
             <p>{{selectedUser.email}}</p>
           </div>
           <div class="col-auto">
-            <button mat-flat-button color="primary">Thay đổi</button>
+            <button (click)="editUser()" mat-flat-button color="primary">Thay đổi</button>
             <button (click)="return()" class="d-block mt-1" mat-flat-button color="primary">Quay lại</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedUser.approveStatus === 2" class="info-approval mt-2r">
+        <h4 class="fw-600">Phê duyệt người dùng</h4>
+        <div class="info-content">
+          <h5>Người dùng đã yêu cầu kích hoạt tài khoản</h5>
+          <div *ngIf="submittedIdCards.length > 0" class="image-container rounded text-center">
+            <img *ngFor="let pic of submittedIdCards" (click)="openUri(pic.original)" class="rounded" [defaultImage]="pic.small" [lazyLoad]="pic.normal">
+          </div>
+          <div class="d-flex mt-2">
+            <button class="ml-auto" (click)="approveUser()" mat-flat-button color="primary">Chấp nhận</button>
+            <button class="ml-1" (click)="declineUser()" mat-flat-button color="primary">Từ chối</button>
           </div>
         </div>
       </div>
@@ -33,16 +46,20 @@
             <p>{{selectedUser.phoneNumber}}</p>
           </div>
           <div class="col-md-4">
+            <h5>Loại giấy tờ</h5>
+            <p>{{selectedUser.identificationType || 'Chưa cập nhật'}}</p>
+            <h5>Ngày cấp</h5>
+            <p>{{selectedUser.issueDate || 'Chưa cập nhật'}}</p>
             <h5>Loại người dùng</h5>
             <p>{{selectedUser.userType === 0 ? 'Nhân viên' : 'Khách hàng'}}</p>
             <h5>Ngày tham gia</h5>
-            <p>{{selectedUser.createdAt || 'Không rõ'}}</p>
+            <p>{{selectedUser.createdAt}}</p>
+          </div>
+          <div class="col-md-3">
             <h5>Phê duyệt giấy tờ</h5>
             <p>{{selectedUser.approveStatus === 2 ? 'Đang chờ' : selectedUser.approveStatus === 1 ? 'Đã phê duyệt' : 'Không được duyệt'}}</p>
             <h5>Kích hoạt email</h5>
             <p>{{selectedUser.emailVerified === 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt'}}</p>
-          </div>
-          <div class="col-md-3">
             <h5>Tình trạng</h5>
             <p>{{selectedUser.status === 1 ? 'Bình thường' : 'Bị khóa'}}</p>
             <h5>Xác minh 2 bước</h5>

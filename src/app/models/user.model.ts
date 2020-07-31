@@ -15,5 +15,7 @@ export class UserModel {
   approveStatus?: number;
   emailVerified?: number;
   createdAt?: string;
+  identificationType?: string;
+  issueDate?: string;
   message?: string;
 }

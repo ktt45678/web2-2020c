@@ -33,8 +33,8 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
     this.updatetForm = new FormGroup({
-      cardType: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      idNumber: new FormControl('', [Validators.required]),
+      cardType: new FormControl('', [Validators.required]),
+      idNumber: new FormControl('', [Validators.required, Validators.minLength(5)]),
       issueDate: new FormControl('', [Validators.required])
     });
   }
@@ -100,7 +100,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
             break;
         }
       }));
-      const uploadImage2 = this.upload.idcard(this.selectedFile).pipe(tap((event: HttpEvent<any>) => {
+      const uploadImage2 = this.upload.idcard(this.selectedFile2).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             this.uploadProgress = 50 + Math.round(event.loaded / event.total * 50);

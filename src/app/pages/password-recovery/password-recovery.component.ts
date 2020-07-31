@@ -21,7 +21,9 @@ export class PasswordRecoveryComponent implements OnInit {
   recoveryForm: FormGroup;
   resetPasswordForm: FormGroup;
   
-  constructor(private auth: AuthenticationService, private notification: NotificationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
+  constructor(private auth: AuthenticationService, private notification: NotificationService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
+
+  ngOnInit(): void {
     this.recoveryForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.email])
     });
@@ -29,13 +31,6 @@ export class PasswordRecoveryComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(128), Validators.pattern(regex.password)]),
       confirmpassword: new FormControl('', [Validators.required])
     });
-  }
-
-  get email() { return this.recoveryForm.get('email'); }
-  get password() { return this.resetPasswordForm.get('password'); }
-  get confirmpassword() { return this.resetPasswordForm.get('confirmpassword'); }
-
-  ngOnInit(): void {
     this.token = this.route.snapshot.queryParams['token'];
     if (this.token) {
       this.auth.validatePasswordRecovery(this.token).pipe(first()).subscribe(data => {
@@ -46,6 +41,10 @@ export class PasswordRecoveryComponent implements OnInit {
     }
   }
 
+  get email() { return this.recoveryForm.get('email'); }
+  get password() { return this.resetPasswordForm.get('password'); }
+  get confirmpassword() { return this.resetPasswordForm.get('confirmpassword'); }
+
   onRecovery(recoveryData) {
     if (this.recoveryForm.invalid) {
       return;
@@ -53,7 +52,7 @@ export class PasswordRecoveryComponent implements OnInit {
     this.loading = true;
     this.recoveryForm.disable();
     this.auth.passwordRecovery(recoveryData).pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.showSuccess('Liên kết khôi phục mật khẩu đang được gửi tới Email của bạn');
       this.afterRespone();
       this.recoveryForm.enable();
@@ -72,7 +71,7 @@ export class PasswordRecoveryComponent implements OnInit {
     this.loading = true;
     this.resetPasswordForm.disable();
     this.auth.resetPassword(resetPasswordData, this.token).pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.showSuccess('Mật khẩu đã được cập nhật thành công');
       this.afterRespone();
       this.resetPasswordForm.enable();

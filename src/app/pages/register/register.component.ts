@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { first } from 'rxjs/operators';
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   defaultImage ="../../../assets/img/placeholder.png";
   lazyloadedImage ="../../../assets/img/signup-image.jpg";
-  constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService, private formBuilder: FormBuilder) {}
+  constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({

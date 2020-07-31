@@ -1,0 +1,28 @@
+.user-editor {
+  max-width: 800px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  mat-error + mat-error {
+    display: none;
+  }
+}
+
+.p-32px {
+  padding: 32px;
+}
+
+.pt-32px {
+  padding-top: 32px;
+}
+
+.pl-32px {
+  padding-left: 32px;
+}
+
+.pr-32px {
+  padding-right: 32px;
+}
+
+.pb-32px {
+  padding-bottom: 32px;
+}

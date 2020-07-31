@@ -23,11 +23,9 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('search') searchInput: ElementRef;
   @ViewChild(MatSelect) select: MatSelect;
-  subscriptions: Subscription;
+  subscriptions = new Subscription();
 
-  constructor(private auth: AuthenticationService, private manage: ManagementService, private route: ActivatedRoute, private router: Router) {
-    this.subscriptions = new Subscription();
-  }
+  constructor(private auth: AuthenticationService, private manage: ManagementService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
@@ -54,6 +52,18 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
 
   viewUser(user) {
     this.router.navigate(['view', user.id], { relativeTo: this.route });
+  }
+
+  editUser(user) {
+    this.router.navigate(['edit', user.id], { relativeTo: this.route });
+  }
+
+  blockUser(user) {
+
+  }
+
+  unBlockUser(user) {
+
   }
 
   ngOnDestroy(): void {

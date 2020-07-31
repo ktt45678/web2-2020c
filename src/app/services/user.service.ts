@@ -23,6 +23,15 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/api/updateidcard`, body.toString(), { headers });
   }
 
+  updatePassword(updateData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('currentPassword', updateData.currentpassword);
+    body.set('newPassword', updateData.newpassword);
+    body.set('confirmPassword', updateData.confirmpassword);
+    return this.http.post(`${environment.apiUrl}/api/changepassword`, body.toString(), { headers });
+  }
+
   sendActivationEmail() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
@@ -43,7 +52,7 @@ export class UserService {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const params = { type: 'status' };
     return this.http.get<StatusModel>(`${environment.apiUrl}/api/getinfo`, { headers, params }).pipe(map(status => {
-      localStorage.setItem('task_finished', JSON.stringify(status.approveStatus !== 0 && status.emailVerified !== 0));
+      localStorage.setItem('task_finished', JSON.stringify(status.approveStatus === 1 && status.emailVerified !== 0));
       return status;
     }));
   }
