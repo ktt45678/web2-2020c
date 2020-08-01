@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { Subscription, concat } from 'rxjs';
+import { Location } from '@angular/common';
+import { concat } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { UserModel } from '../../models/user.model';
@@ -9,6 +10,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UploadService } from '../../services/upload.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-update-idcard',
@@ -17,7 +19,8 @@ import { UserService } from '../../services/user.service';
   providers: [UploadService]
 })
 export class UpdateIdCardComponent implements OnInit, OnDestroy {
-
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   currentUser: UserModel;
   loading = false;
   updatetForm: FormGroup;
@@ -28,7 +31,11 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   previewImage2: String;
   sizeLimit = 8388608;
 
-  constructor(private auth: AuthenticationService, private upload: UploadService, private notification: NotificationService, private user: UserService) { }
+  constructor(private auth: AuthenticationService, private upload: UploadService, private notification: NotificationService, private user: UserService, private location: Location, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 768px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
@@ -50,6 +57,9 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
         return;
       }
       this.selectedFile = fileInputEvent.target.files[0];
+      if (!this.upload.validateImage(this.selectedFile)) {
+        return;
+      }
       this.upload.preview(this.selectedFile).subscribe(data => this.previewImage = data);
     }
   }
@@ -61,6 +71,9 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
         return;
       }
       this.selectedFile2 = fileInputEvent.target.files[0];
+      if (!this.upload.validateImage(this.selectedFile2)) {
+        return;
+      }
       this.upload.preview(this.selectedFile2).subscribe(data => this.previewImage2 = data);
     }
   }
@@ -130,9 +143,15 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   afterRespone() {
     this.updatetForm.enable();
     this.loading = false;
+    this.uploadProgress = 0;
+  }
+
+  return() {
+    this.location.back();
   }
 
   ngOnDestroy() {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }

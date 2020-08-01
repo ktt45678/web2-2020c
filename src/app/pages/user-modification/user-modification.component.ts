@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { tap, first } from 'rxjs/operators';
 import * as _moment from 'moment';
 
@@ -17,7 +18,9 @@ import { regex } from '../../modules/template/regex-pattern.module';
   styleUrls: ['./user-modification.component.scss'],
   providers: [ManagementService]
 })
-export class UserModificationComponent implements OnInit {
+export class UserModificationComponent implements OnInit, OnDestroy {
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   userId: string;
   loading = false;
   editorForm: FormGroup;
@@ -25,7 +28,11 @@ export class UserModificationComponent implements OnInit {
   currentUser: UserModel;
   isSelfEdit = false;
 
-  constructor(private route: ActivatedRoute, private auth: AuthenticationService, private manage: ManagementService, private location: Location, private notification: NotificationService) { }
+  constructor(private route: ActivatedRoute, private auth: AuthenticationService, private manage: ManagementService, private location: Location, private notification: NotificationService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 768px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit(): void {
     const moment = _moment;
@@ -104,7 +111,14 @@ export class UserModificationComponent implements OnInit {
   }
 
   afterRespone() {
+    if (this.isSelfEdit) {
+      this.auth.renewToken().pipe(first()).subscribe();
+    }
     this.loading = false;
     this.editorForm.enable();
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }

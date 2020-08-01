@@ -32,6 +32,20 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/api/changepassword`, body.toString(), { headers });
   }
 
+  updateUser(userId, updateData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('userId', userId);
+    body.set('firstName', updateData.firstname);
+    body.set('lastName', updateData.lastname);
+    body.set('dateOfBirth', updateData.birth.format('DD/MM/YYYY'));
+    body.set('username', updateData.username);
+    body.set('phoneNumber', updateData.tel);
+    body.set('email', updateData.email);
+    body.set('address', updateData.address);
+    return this.http.post(`${environment.apiUrl}/api/updateuserinfo`, body.toString(), { headers });
+  }
+
   sendActivationEmail() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();

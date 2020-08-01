@@ -33,7 +33,11 @@ import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountManagementComponent } from './pages/account-management/account-management.component';
+import { PersonalInformationComponent } from './pages/personal-information/personal-information.component';
+import { PersonalModificationComponent } from './pages/personal-modification/personal-modification.component';
+import { UpdateAvatarComponent } from './pages/update-avatar/update-avatar.component';
 import { UpdateIdCardComponent } from './pages/update-idcard/update-idcard.component';
+import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
 import { UserInformationComponent } from './pages/user-information/user-information.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
 import { UserModificationComponent } from './pages/user-modification/user-modification.component';
@@ -76,7 +80,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
-import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -96,11 +99,15 @@ import { UpdatePasswordComponent } from './pages/update-password/update-password
     PasswordRecoveryComponent,
     AccountManagementComponent,
     DashboardComponent,
+    PersonalInformationComponent,
+    PersonalModificationComponent,
+    UpdatePasswordComponent,
+    UpdateAvatarComponent,
+    UpdateIdCardComponent,
     UserInformationComponent,
     UserManagementComponent,
     UserModificationComponent,
     UserTaskComponent,
-    UpdateIdCardComponent,
     FAQComponent,
     AboutComponent,
     ContactComponent,
@@ -108,8 +115,7 @@ import { UpdatePasswordComponent } from './pages/update-password/update-password
     HomeLayoutComponent,
     MatLayoutComponent,
     ExchangerateComponent,
-    SideLayoutComponent,
-    UpdatePasswordComponent
+    SideLayoutComponent
   ],
   imports: [
     BrowserModule,

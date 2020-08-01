@@ -46,7 +46,7 @@
               <mat-label>Ngày sinh</mat-label>
               <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="birth">
               <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="loading"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #picker></mat-datepicker>
+              <mat-datepicker [touchUi]="mobileQuery.matches" #picker></mat-datepicker>
               <mat-error *ngIf="birth.errors?.required">
                 Ngày sinh là <strong>bắt buộc</strong>
               </mat-error>
@@ -133,7 +133,7 @@
                 <mat-label>Ngày cấp</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="dd/mm/yyyy" formControlName="issueDate">
                 <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="loading"></mat-datepicker-toggle>
-                <mat-datepicker touchUi #picker2></mat-datepicker>
+                <mat-datepicker [touchUi]="mobileQuery.matches" #picker2></mat-datepicker>
               </mat-form-field>
             </div>
           </div>

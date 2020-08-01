@@ -14,13 +14,15 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class MatHeaderComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
-  currentUserSubscription: Subscription;
+  currentUserSubscription = new Subscription();
   @Input() allowMenu: Boolean;
 
   constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService, private user: UserService) {}
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    if (this.allowMenu) {
+      this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    }
   }
 
   openSideNav() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 
-import { UserService } from '../../services/user.service'
+import { UserService } from '../../services/user.service';
 import { NotificationService } from '../../services/notification.service';
 import { regex } from '../../modules/template/regex-pattern.module';
 import { first } from 'rxjs/operators';

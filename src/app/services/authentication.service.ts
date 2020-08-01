@@ -51,7 +51,7 @@ export class AuthenticationService {
     body.set('phoneNumber', registerData.tel);
     body.set('address', registerData.address);
     body.set('password', registerData.password);
-    body.set('confirmPassword', registerData.password);
+    body.set('confirmPassword', registerData.confirmpassword);
     return this.http.post(`${environment.apiUrl}/api/register`, body.toString(), { headers });
   }
 
@@ -83,6 +83,16 @@ export class AuthenticationService {
     body.set('confirmPassword', resetPasswordData.confirmpassword);
     body.set('forgotCode', token);
     return this.http.post(`${environment.apiUrl}/api/updatenewpassword`, body.toString(), { headers });
+  }
+
+  renewToken() {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post<TokenModel>(`${environment.apiUrl}/api/renew-token`, {}, { headers }).pipe(map(data => {
+      localStorage.setItem('token', JSON.stringify(data.token));
+      const user = new JwtHelperService().decodeToken(data.token);
+      this.currentUserSubject.next(user);
+      return data;
+    }));
   }
 
   login(loginData) {

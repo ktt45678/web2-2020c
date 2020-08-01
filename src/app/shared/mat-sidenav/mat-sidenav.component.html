@@ -19,7 +19,7 @@
   </div>
   <mat-divider></mat-divider>
   <div *ngIf="currentUser.userType === 0" class="manager-nav">
-    <a mat-list-item routerLink="/usermanagement">
+    <a mat-list-item routerLink="/user-management">
       <mat-icon mat-list-icon>people</mat-icon>
       <div mat-line>Quản lý người dùng</div>
     </a>
@@ -34,7 +34,7 @@
   </div>
   <mat-divider></mat-divider>
   <div class="other-nav">
-    <a mat-list-item routerLink="/">
+    <a mat-list-item routerLink="/personal-edit">
       <mat-icon mat-list-icon>settings</mat-icon>
       <div mat-line>Thiết lập</div>
     </a>

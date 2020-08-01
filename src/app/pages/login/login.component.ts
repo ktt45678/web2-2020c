@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.loginForm.disable();
     this.auth.login(loginData).pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.close();
       this.router.navigate([this.returnUrl]);
     }, error => {

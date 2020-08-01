@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { first } from 'rxjs/operators';
 
@@ -14,15 +15,21 @@ import { regex } from '../../modules/template/regex-pattern.module';
   styleUrls: ['./register.component.scss'],
   providers: [ReCaptchaService]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   loading = false;
   returnUrl: string;
   hidePassword = true;
   registerForm: FormGroup;
   defaultImage ="../../../assets/img/placeholder.png";
   lazyloadedImage ="../../../assets/img/signup-image.jpg";
-  constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService) {}
+  constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 768px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -80,6 +87,10 @@ export class RegisterComponent implements OnInit {
 
   resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }
