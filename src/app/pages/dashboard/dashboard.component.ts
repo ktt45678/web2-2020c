@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
-    this.showTask = !this.user.taskFinished;
+    this.showTask = !this.user.taskFinished && !this.user.jobClaimed;
   }
 
   showError(error) {

@@ -5,7 +5,7 @@
       <div class="info-head rounded shadow-sm p-3">
         <div class="info-content row justify-content-center">
           <div class="col-auto align-self-center">
-            <img class="avatar" src="../../../assets/img/whitefoologohead.png" alt="user avatar">
+            <img class="avatar" [defaultImage]="selectedUserAvatar?.small || '../../../assets/img/whitefoologohead.png'" [lazyLoad]="selectedUserAvatar?.thumbnail || '../../../assets/img/whitefoologohead.png'" alt="user avatar">
           </div>
           <div class="col-lg-8 align-self-center">
             <h5>Họ Tên</h5>

@@ -51,6 +51,11 @@ export class ManagementService {
     return this.http.post(`${environment.apiUrl}/api/verifyuser`, body.toString(), { headers });
   }
 
+  findAvatar(userId) {
+    const params = { userId };
+    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
+  }
+
   findSubmittedIdCards(userId) {
     const params = { userId };
     return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/idcards`, { params });

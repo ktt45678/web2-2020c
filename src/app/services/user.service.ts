@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 import { StatusModel } from '../models/status.model';
+import { UserImage } from '../models/user-image.model';
+import { UserStorage } from '../models/user-storage.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -12,6 +14,10 @@ export class UserService {
 
   public get taskFinished(): Boolean {
     return JSON.parse(localStorage.getItem('task_finished'));
+  }
+
+  public get jobClaimed(): Boolean {
+    return JSON.parse(localStorage.getItem('job_claimed'));
   }
   
   updateIdCard(updateData) {
@@ -58,8 +64,19 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/api/requeststaff`, body.toString(), { headers });
   }
 
+  findAvatar() {
+    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`);
+  }
+
+  findAudio() {
+    return this.http.get<UserStorage[]>(`${environment.apiUrl}/api/upload/audios`);
+  }
+
   findManager() {
-    return this.http.get(`${environment.apiUrl}/api/requeststaff`);
+    return this.http.get<any>(`${environment.apiUrl}/api/requeststaff`).pipe(map(data => {
+      localStorage.setItem('job_claimed', JSON.stringify(data.count > 0));
+      return data;
+    }));
   }
 
   findStatus() {

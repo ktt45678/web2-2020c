@@ -17,6 +17,7 @@ import { first } from 'rxjs/operators';
 export class UserInformationComponent implements OnInit {
   userId: string;
   selectedUser: UserModel;
+  selectedUserAvatar: UserImage;
   submittedIdCards: UserImage[];
 
   constructor(private route: ActivatedRoute, private router: Router, private manage: ManagementService, private notification: NotificationService, private location: Location) { }
@@ -26,6 +27,9 @@ export class UserInformationComponent implements OnInit {
     this.manage.findUser(this.userId).subscribe(data => this.selectedUser = data);
     this.manage.findSubmittedIdCards(this.userId).subscribe(data => {
       this.submittedIdCards = data;
+    });
+    this.manage.findAvatar(this.userId).subscribe(avatars => {
+      this.selectedUserAvatar = avatars[0];
     });
   }
 

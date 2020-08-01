@@ -85,10 +85,6 @@ export class UpdateAvatarComponent implements OnInit {
     if (this.updatetForm.invalid) {
       return;
     }
-    if (!this.selectedAvatar) {
-      this.notification.showError('Bạn chưa cung cấp ảnh đại diện');
-      this.return;
-    }
     this.updatetForm.disable();
     this.loading = true;
     //Upload avatar and track
@@ -103,7 +99,7 @@ export class UpdateAvatarComponent implements OnInit {
           break;
       }
     }));
-    if (this.selectedTrack) {
+    if (this.selectedTrack && this.selectedAvatar) {
       const uploadTrack = this.upload.audio(this.selectedTrack).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
@@ -113,6 +109,23 @@ export class UpdateAvatarComponent implements OnInit {
       }));
       // Turn multiple observables into a single observable
       concat(uploadTrack, uploadAvatar).subscribe(() => {}, error => {
+        this.showError(error);
+        this.afterRespone();
+        return;
+      });
+    } else if (this.selectedTrack) {
+      const uploadTrack = this.upload.audio(this.selectedTrack).pipe(tap((event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            this.uploadProgress = Math.round(event.loaded / event.total * 100);
+            break;
+          case HttpEventType.Response:
+            this.notification.showSuccess('Cập nhật thành công âm thanh');
+            this.afterRespone();
+            break;
+        }
+      }));
+      uploadTrack.subscribe(() => {}, error => {
         this.showError(error);
         this.afterRespone();
         return;
