@@ -11,6 +11,8 @@ import { AboutComponent } from '../pages/about/about.component';
 import { ContactComponent } from '../pages/contact/contact.component';
 import { PolicyComponent } from '../pages/policy/policy.component';
 import { ExchangerateComponent } from '../pages/exchangerate/exchangerate.component';
+import { SecurityPolicyComponent } from '../pages/security-policy/security-policy.component';
+import { ServicesComponent } from '../pages/services/services.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,8 @@ const routes: Routes = [
       { path: 'activate', component: ActivationComponent },
       { path: 'passwordrecovery', component: PasswordRecoveryComponent },
       { path: 'exchangerate', component: ExchangerateComponent },
+      { path: 'security-policy', component: SecurityPolicyComponent },
+      { path: 'services', component: ServicesComponent },
     ]
   }
 ];

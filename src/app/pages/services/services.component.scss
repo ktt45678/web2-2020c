@@ -1,0 +1,67 @@
+.container{
+    padding-bottom: 10px;
+    margin-top: 50px;
+    overflow-y: auto;
+    height: 500px;
+    height: max-content;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.spacer{
+    padding-top: 30px;
+}
+
+.feature-card{
+    border: none;
+    box-shadow: none;
+}
+
+.feature-card p{
+    font-size: 16px;
+}
+
+.feature-card fa-icon{
+    font-size: 75px;
+}
+
+
+
+mat-card-subtitle{
+    text-align: center;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+.feature-spacer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#f1{
+    color: #216C2A;
+}
+
+#f2{
+    color: #FB7DE5;
+}
+
+#f3{
+    color: #566573;
+}
+
+#f4{
+    color: #F4D03F;
+}
+
+#f5{
+    color: #FFA500;
+}
+
+#f6{
+    color: black;
+}
+

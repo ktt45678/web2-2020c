@@ -71,6 +71,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { SecurityPolicyComponent } from './pages/security-policy/security-policy.component';
+import { ServicesComponent } from './pages/services/services.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatLayoutComponent,
     ExchangerateComponent,
     SideLayoutComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    SecurityPolicyComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,
