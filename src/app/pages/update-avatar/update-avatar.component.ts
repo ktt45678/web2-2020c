@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { merge, concat } from 'rxjs';
+import { concat } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { UserModel } from '../../models/user.model';
@@ -19,7 +19,7 @@ import { UserService } from '../../services/user.service';
   providers: [UploadService]
 })
 export class UpdateAvatarComponent implements OnInit {
-  @Input() uploadTrack: Boolean;
+  @Input() uploadTrack: boolean;
   currentUser: UserModel;
   loading = false;
   updatetForm: FormGroup;
@@ -27,8 +27,8 @@ export class UpdateAvatarComponent implements OnInit {
   uploadProgressTrack = 0;
   selectedAvatar: File;
   selectedTrack: File;
-  previewAvatar: String;
-  previewTrack: String;
+  previewAvatar: string;
+  previewTrack: string;
   sizeLimitAvatar = 8388608;
   sizeLimitTrack = 52428800;
 

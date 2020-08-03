@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
 import { UserModel } from '../../models/user.model';
-import { UserDataSource } from '../../modules/template/user-datasource.module';
+import { UserDataSource } from '../../modules/template/user.datasource';
 
 @Component({
   selector: 'app-user-management',

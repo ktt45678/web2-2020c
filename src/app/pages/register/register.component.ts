@@ -7,7 +7,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ReCaptchaService } from '../../services/recaptcha.service';
 import { NotificationService } from '../../services/notification.service';
-import { regex } from '../../modules/template/regex-pattern.module';
+import { regex } from '../../modules/template/regex.pattern';
 
 @Component({
   selector: 'app-register',

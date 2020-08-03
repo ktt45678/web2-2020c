@@ -28,14 +28,6 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  getCurrentUser() {
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    const params = { type: 'basic' };
-    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, {}, { headers, params }).pipe(map(user => {
-      return user;
-    }));
-  }
-
   setCurrentUser(user: UserModel) {
     this.currentUserSubject.next(user);
   }

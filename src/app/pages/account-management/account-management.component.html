@@ -1,1 +1,54 @@
-<p>account-management works!</p>
+<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+<div class="container mt-2r">
+  <div *ngIf="true" class="account-table">
+    <div class="d-flex">
+      <mat-form-field>
+        <mat-label>Tìm kiếm</mat-label>
+        <input matInput #search>
+      </mat-form-field>
+      <mat-form-field class="ml-auto">
+        <mat-label>Loại tài khoản</mat-label>
+        <mat-select value="all">
+          <mat-option value="all">Tất cả</mat-option>
+          <mat-option value="0">Tài khoản thanh toán</mat-option>
+          <mat-option value="1">Tài khoản tiết kiệm</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="w-100 account-table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Số tài khoản</th>
+        <td mat-cell *matCellDef="let account">{{account.accountId}}</td>
+      </ng-container>
+      <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef>Số dư</th>
+        <td mat-cell *matCellDef="let account">{{account.balance | currency: account.currencyType}}</td>
+      </ng-container>
+      <ng-container matColumnDef="account_type">
+        <th mat-header-cell *matHeaderCellDef>Loại tài khoản</th>
+        <td mat-cell *matCellDef="let account">{{account.accountType === 0 ? 'Thanh toán' : 'Tiết kiệm'}}</td>
+      </ng-container>
+      <ng-container matColumnDef="term">
+        <th mat-header-cell *matHeaderCellDef>Kỳ hạn</th>
+        <td mat-cell *matCellDef="let account">{{account.accountType === 1 ? account.term + ' tháng' : null}}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Tình trạng</th>
+        <td mat-cell *matCellDef="let account">
+          <mat-icon matTooltip="Tài khoản ở trạng thái tốt" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="account.status === 1">check</mat-icon>
+          <mat-icon matTooltip="Tài khoản đã bị đóng" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="account.status === 0">close</mat-icon>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>Chi tiết</th>
+        <td mat-cell *matCellDef="let account">
+          <button (click)="viewAccount(account)" mat-icon-button><mat-icon>visibility</mat-icon></button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  <p *ngIf="false">Hiện chưa có tài khoản nào</p>
+</div>

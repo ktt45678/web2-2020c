@@ -1,0 +1,51 @@
+.fw-600 {
+  font-weight: 600;
+}
+
+.info-head {
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  .avatar {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border: 1px solid rgba($color: #000000, $alpha: 0.1);
+    border-radius: 50%;
+  }
+  .info-content {
+    h5 {
+      font-size: 14px;
+      font-weight: 600;
+      color: gray;
+    }
+    button {
+      width: 100px;
+    }
+  }
+}
+
+.info-detail {
+  margin-bottom: 6rem;
+  .info-content {
+    h5 {
+      font-size: 18px;
+      font-weight: 500;
+      color: gray;
+    }
+  }
+}
+
+@media only screen and (max-width:991px) {
+  .info-head {
+    border: none;
+    box-shadow: none !important;
+    .avatar {
+      margin-bottom: 2rem;
+    }
+    .info-content {
+      text-align: center;
+    }
+    button {
+      margin-top: 1rem;
+    }
+  }
+}

@@ -12,12 +12,13 @@
     </audio>
     <div *ngIf="allowMenu">
       <button mat-icon-button [matMenuTriggerFor]="menu">
-        <img class="mini-avatar" *ngIf="currentUserAvatar" [src]="currentUserAvatar.small" alt="mini avatar">
+        <img class="mini-avatar" *ngIf="currentUserAvatar" [defaultImage]="currentUserAvatar.small" [lazyLoad]="currentUserAvatar.mimeType === 'image/gif' ? currentUserAvatar.original : currentUserAvatar.thumbnail" alt="mini avatar">
         <mat-icon *ngIf="!currentUserAvatar">account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu" class="user-menu">
         <div class="user-info text-center pl-5 pr-5" *ngIf="currentUser">
-          <img class="avatar" [src]="currentUserAvatar?.thumbnail || '/assets/img/whitefoologohead.png'" alt="avatar">
+          <img *ngIf="currentUserAvatar" class="avatar" [defaultImage]="currentUserAvatar.small" [lazyLoad]="currentUserAvatar.mimeType === 'image/gif' ? currentUserAvatar.original : currentUserAvatar.thumbnail" alt="avatar">
+          <img *ngIf="!currentUserAvatar" class="avatar" src="/assets/img/whitefoologohead.png" alt="avatar">
           <p class="mt-3 mb-0">{{currentUser.firstName}} {{currentUser.lastName}}</p>
           <p class="text-muted">{{currentUser.email}}</p>
         </div>

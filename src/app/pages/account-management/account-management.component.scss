@@ -1,0 +1,33 @@
+:host ::ng-deep .mat-form-field-infix {
+  height: 40px !important;
+}
+
+.mat-table {
+  .mat-icon {
+    cursor: default;
+  }
+  .mat-cell:nth-child(1), .mat-header-cell:nth-child(1) {
+    width: auto;
+  }
+  .mat-cell:nth-child(2), .mat-header-cell:nth-child(2) {
+    width: auto;
+  }
+  .mat-cell:nth-child(3), .mat-header-cell:nth-child(3) {
+    width: auto;
+  }
+  .mat-cell:nth-child(4), .mat-header-cell:nth-child(4) {
+    width: auto;
+  }
+  .mat-cell:nth-child(5), .mat-header-cell:nth-child(5) {
+    width: auto;
+    text-align: center;
+  }
+  .mat-cell:nth-child(6), .mat-header-cell:nth-child(6) {
+    width: auto;
+    text-align: center;
+  }
+}
+
+.mat-menu-item {
+  outline: none;
+}

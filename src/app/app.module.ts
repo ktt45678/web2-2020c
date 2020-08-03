@@ -49,8 +49,8 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 
 // Services, modules
-import { JwtInterceptor } from './modules/interceptor/jwt-interceptor.module';
-import { ErrorInterceptor } from './modules/interceptor/error-interceptor.module';
+import { JwtInterceptor } from './modules/interceptor/jwt.interceptor';
+import { ErrorInterceptor } from './modules/interceptor/error.interceptor';
 
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';
@@ -80,6 +80,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AccountCreationComponent } from './pages/account-creation/account-creation.component';
+import { AccountInformationComponent } from './pages/account-information/account-information.component';
+import { AccountModificationComponent } from './pages/account-modification/account-modification.component';
+import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
+import { AuditLogComponent } from './pages/audit-log/audit-log.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +120,12 @@ import { MatTabsModule } from '@angular/material/tabs';
     HomeLayoutComponent,
     MatLayoutComponent,
     ExchangerateComponent,
-    SideLayoutComponent
+    SideLayoutComponent,
+    AccountCreationComponent,
+    AccountInformationComponent,
+    AccountModificationComponent,
+    TransactionHistoryComponent,
+    AuditLogComponent
   ],
   imports: [
     BrowserModule,

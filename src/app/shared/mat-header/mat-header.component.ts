@@ -31,7 +31,6 @@ export class MatHeaderComponent implements OnInit, OnDestroy {
       });
       this.user.findAudio().subscribe(audios => {
         this.currentUserAudio = audios[0];
-        console.log(this.currentUserAudio);
       });
     }
   }

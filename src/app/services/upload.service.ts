@@ -9,13 +9,13 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  preview(file: File): Observable<String> {
-    const sub = new Subject<String>();
+  preview(file: File): Observable<string> {
+    const sub = new Subject<string>();
     const reader = new FileReader();      
     reader.readAsDataURL(file);
     reader.onload = () =>
     {
-      const content: String = reader.result as String;
+      const content: string = reader.result as string;
       sub.next(content);
       sub.complete();
     }

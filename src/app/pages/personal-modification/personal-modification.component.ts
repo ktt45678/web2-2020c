@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service'
 import { NotificationService } from '../../services/notification.service';
 import { UserModel } from 'src/app/models/user.model';
-import { regex } from '../../modules/template/regex-pattern.module';
+import { regex } from '../../modules/template/regex.pattern';
 import { first } from 'rxjs/operators';
 
 @Component({

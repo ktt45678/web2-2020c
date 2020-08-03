@@ -2,12 +2,49 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+import { AccountModel } from '../models/account.model';
 import { UserImage } from '../models/user-image.model';
 
 @Injectable()
 export class ManagementService {
 
   constructor(private http: HttpClient) { }
+
+  createAccount(userId: string, type: string, currency: string, balance: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('userId', userId);
+    body.set('type', type);
+    body.set('currency', currency);
+    body.set('balance', balance);
+    return this.http.post(`${environment.apiUrl}/api/createaccount`, body.toString(), { headers });
+  }
+
+  findAccounts(userId: string, start = 0, limit = 10, type = '', keyword = '') {
+    const params = {
+      userId: userId,
+      start: start.toString(),
+      limit: limit.toString(),
+      type: type,
+      keyword: keyword
+    }
+    return this.http.get<any>(`${environment.apiUrl}/api/getuseraccount`, { params });
+  }
+
+  findAccount(id: string) {
+    const params = { id };
+    return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
+  }
+
+  findAvatar(userId: string) {
+    const params = { userId };
+    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
+  }
+
+  findSubmittedIdCards(userId: string) {
+    const params = { userId };
+    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/idcards`, { params });
+  }
 
   findUsers(start = 0, limit = 10, type = 'user', keyword = '') {
     const params = {
@@ -49,16 +86,6 @@ export class ManagementService {
     body.set('userId', userId);
     body.set('approveStatus', approvalStatus);
     return this.http.post(`${environment.apiUrl}/api/verifyuser`, body.toString(), { headers });
-  }
-
-  findAvatar(userId) {
-    const params = { userId };
-    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
-  }
-
-  findSubmittedIdCards(userId) {
-    const params = { userId };
-    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/idcards`, { params });
   }
 
   removeSubmittedIdCards(userId) {

@@ -5,7 +5,8 @@
       <div class="info-head rounded shadow-sm p-3">
         <div class="info-content row justify-content-center">
           <div class="col-auto align-self-center">
-            <img class="avatar" [defaultImage]="selectedUserAvatar?.small || '../../../assets/img/whitefoologohead.png'" [lazyLoad]="selectedUserAvatar?.thumbnail || '../../../assets/img/whitefoologohead.png'" alt="user avatar">
+            <img *ngIf="!selectedUserAvatar" class="avatar" src="../../../assets/img/whitefoologohead.png" alt="user avatar">
+            <img *ngIf="selectedUserAvatar" (click)="openUri(selectedUserAvatar.original)" class="avatar" [defaultImage]="selectedUserAvatar.small" [lazyLoad]="selectedUserAvatar.mimeType === 'image/gif' ? selectedUserAvatar.original : selectedUserAvatar.thumbnail" alt="user avatar">
           </div>
           <div class="col-lg-8 align-self-center">
             <h5>Họ Tên</h5>
@@ -24,7 +25,7 @@
         <div class="info-content">
           <h5>Người dùng đã yêu cầu kích hoạt tài khoản</h5>
           <div *ngIf="submittedIdCards.length > 0" class="image-container rounded text-center">
-            <img *ngFor="let pic of submittedIdCards" (click)="openUri(pic.original)" class="rounded" [defaultImage]="pic.small" [lazyLoad]="pic.normal">
+            <img *ngFor="let pic of submittedIdCards" (click)="openUri(pic.original)" class="rounded" [defaultImage]="pic.small" [lazyLoad]="pic.normal" [alt]="pic.file">
           </div>
           <div class="d-flex mt-2">
             <button class="ml-auto" (click)="approveUser()" mat-flat-button color="primary">Chấp nhận</button>
@@ -70,7 +71,7 @@
       <div class="info-account mt-2r">
         <h4 class="fw-600">Tài khoản ngân hàng</h4>
         <div class="info-content">
-          <p>Hiện chưa có tài khoản nào</p>
+          <app-account-management [userId]="selectedUser.id"></app-account-management>
         </div>
       </div>
     </div>

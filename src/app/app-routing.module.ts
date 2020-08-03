@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { AuthGuard } from './modules/guard/auth-guard.module';
+import { AuthGuard } from './modules/guard/auth.guard';
 
 
 import { HomeComponent } from './pages/home/home.component';

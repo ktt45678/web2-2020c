@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service'
 import { NotificationService } from '../../services/notification.service';
 import { UserModel } from '../../models/user.model';
-import { regex } from '../../modules/template/regex-pattern.module';
+import { regex } from '../../modules/template/regex.pattern';
 
 @Component({
   selector: 'app-user-modification',

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
+import { UserModel } from '../models/user.model';
 import { StatusModel } from '../models/status.model';
 import { UserImage } from '../models/user-image.model';
 import { UserStorage } from '../models/user-storage.model';
@@ -64,12 +65,27 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/api/requeststaff`, body.toString(), { headers });
   }
 
+  findAccounts(start = 0, limit = 10, type = '', keyword = '') {
+    const params = {
+      start: start.toString(),
+      limit: limit.toString(),
+      type: type,
+      keyword: keyword
+    }
+    return this.http.get<any>(`${environment.apiUrl}/api/getaccount`, { params });
+  }
+
   findAvatar() {
     return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`);
   }
 
   findAudio() {
     return this.http.get<UserStorage[]>(`${environment.apiUrl}/api/upload/audios`);
+  }
+
+  findInfo(type = 'full') {
+    const params = { type };
+    return this.http.get<UserModel>(`${environment.apiUrl}/api/getinfo`, { params });
   }
 
   findManager() {

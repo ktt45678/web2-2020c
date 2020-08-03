@@ -27,8 +27,8 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   uploadProgress = 0;
   selectedFile: File;
   selectedFile2: File;
-  previewImage: String;
-  previewImage2: String;
+  previewImage: string;
+  previewImage2: string;
   sizeLimit = 8388608;
 
   constructor(private auth: AuthenticationService, private upload: UploadService, private notification: NotificationService, private user: UserService, private location: Location, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
