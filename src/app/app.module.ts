@@ -55,6 +55,7 @@ import { ErrorInterceptor } from './modules/interceptor/error.interceptor';
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -140,6 +141,7 @@ import { AuditLogComponent } from './pages/audit-log/audit-log.component';
     RecaptchaFormsModule,
     MatMenuModule,
     MatToolbarModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,

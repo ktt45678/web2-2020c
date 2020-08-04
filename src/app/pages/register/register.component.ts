@@ -58,6 +58,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   onSubmit(captchaResponse: string, registerData) {
     if (this.registerForm.invalid) {
+      this.captchaRef.reset();
+      return;
+    }
+    if (registerData.password !== registerData.confirmpassword) {
+      this.notification.showError('Xác nhận mật khẩu không chính xác');
+      this.captchaRef.reset();
       return;
     }
     this.loading = true;

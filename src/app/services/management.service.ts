@@ -2,22 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+
 import { AccountModel } from '../models/account.model';
 import { UserImage } from '../models/user-image.model';
+import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class ManagementService {
 
   constructor(private http: HttpClient) { }
 
-  createAccount(userId: string, type: string, currency: string, balance: string) {
+  createAccount(userId, type, currency, balance, term?) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('userId', userId);
     body.set('type', type);
     body.set('currency', currency);
     body.set('balance', balance);
-    return this.http.post(`${environment.apiUrl}/api/createaccount`, body.toString(), { headers });
+    body.set('term', term || null);
+    return this.http.post<AccountModel>(`${environment.apiUrl}/api/createaccount`, body.toString(), { headers });
+  }
+
+  findAccount(id: string) {
+    const params = { id };
+    return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
   }
 
   findAccounts(userId: string, start = 0, limit = 10, type = '', keyword = '') {
@@ -31,11 +39,6 @@ export class ManagementService {
     return this.http.get<any>(`${environment.apiUrl}/api/getuseraccount`, { params });
   }
 
-  findAccount(id: string) {
-    const params = { id };
-    return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
-  }
-
   findAvatar(userId: string) {
     const params = { userId };
     return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
@@ -46,6 +49,11 @@ export class ManagementService {
     return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/idcards`, { params });
   }
 
+  findUser(id: string) {
+    const params = { id };
+    return this.http.get<UserModel>(`${environment.apiUrl}/api/getuserinfo`, { params });
+  }
+
   findUsers(start = 0, limit = 10, type = 'user', keyword = '') {
     const params = {
       start: start.toString(),
@@ -54,11 +62,6 @@ export class ManagementService {
       keyword: keyword
     };
     return this.http.get<any>(`${environment.apiUrl}/api/search`, { params });
-  }
-
-  findUser(id: string) {
-    const params = { id };
-    return this.http.get<any>(`${environment.apiUrl}/api/getuserinfo`, { params });
   }
 
   updateUser(userId, editData) {

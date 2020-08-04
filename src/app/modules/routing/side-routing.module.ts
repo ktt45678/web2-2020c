@@ -11,7 +11,10 @@ import { PersonalModificationComponent } from '../../pages/personal-modification
 import { UserManagementComponent } from '../../pages/user-management/user-management.component';
 import { UserInformationComponent } from '../../pages/user-information/user-information.component';
 import { UserModificationComponent } from '../../pages/user-modification/user-modification.component';
+import { AccountCreationComponent } from '../../pages/account-creation/account-creation.component';
 import { AccountManagementComponent } from '../../pages/account-management/account-management.component';
+import { AccountInformationComponent } from '../../pages/account-information/account-information.component';
+import { AccountModificationComponent } from '../../pages/account-modification/account-modification.component';
 
 const routes: Routes = [
   {
@@ -23,11 +26,14 @@ const routes: Routes = [
       { path: 'update-idcard', component: UpdateIdCardComponent },
       { path: 'update-password', component: UpdatePasswordComponent },
       { path: 'personal', component: PersonalInformationComponent },
-      { path: 'personal-edit', component: PersonalModificationComponent },
-      { path: 'user-management', component: UserManagementComponent },
-      { path: 'user-management/view/:userid', component: UserInformationComponent },
-      { path: 'user-management/edit/:userid', component: UserModificationComponent },
-      { path: 'account-management', component: AccountManagementComponent }
+      { path: 'personal/edit', component: PersonalModificationComponent },
+      { path: 'users', component: UserManagementComponent },
+      { path: 'users/view/:userid', component: UserInformationComponent },
+      { path: 'users/edit/:userid', component: UserModificationComponent },
+      { path: 'accounts', component: AccountManagementComponent },
+      { path: 'accounts/create/:userid', component: AccountCreationComponent },
+      { path: 'accounts/view/:accountid', component: AccountInformationComponent },
+      { path: 'accounts/edit/:accountid', component: AccountModificationComponent }
     ]
   }
 ];

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
+import { AccountModel } from '../models/account.model';
 import { UserModel } from '../models/user.model';
 import { StatusModel } from '../models/status.model';
 import { UserImage } from '../models/user-image.model';
@@ -63,6 +64,11 @@ export class UserService {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     return this.http.post(`${environment.apiUrl}/api/requeststaff`, body.toString(), { headers });
+  }
+
+  findAccount(id: string) {
+    const params = { id };
+    return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
   }
 
   findAccounts(start = 0, limit = 10, type = '', keyword = '') {

@@ -31,6 +31,10 @@ $default-radius: 5px;
 }
 */
 
+.user-scroll {
+  overflow-x: auto;
+}
+
 :host ::ng-deep .mat-form-field-infix {
   height: 40px !important;
 }

@@ -15,7 +15,8 @@
             <p>{{selectedUser.email}}</p>
           </div>
           <div class="col-auto">
-            <button (click)="editUser()" mat-flat-button color="primary">Thay đổi</button>
+            <button [routerLink]="['/user-management', 'edit', userId]" mat-flat-button color="primary">Thay đổi</button>
+            <button [routerLink]="['/accounts', 'create', userId]" class="d-block mt-1" mat-flat-button color="primary">Tạo tài khoản</button>
             <button (click)="return()" class="d-block mt-1" mat-flat-button color="primary">Quay lại</button>
           </div>
         </div>

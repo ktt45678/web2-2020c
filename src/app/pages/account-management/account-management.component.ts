@@ -56,10 +56,6 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
     this.dataSource.loadAccounts(this.paginator.pageIndex, this.paginator.pageSize, this.select.value, this.searchInput.nativeElement.value);
   }
 
-  viewAccount(account) {
-    this.router.navigate(['view', account.accountId], { relativeTo: this.route });
-  }
-
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

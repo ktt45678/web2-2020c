@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { ManagementService } from '../../services/management.service'
@@ -20,7 +20,7 @@ export class UserInformationComponent implements OnInit {
   selectedUserAvatar: UserImage;
   submittedIdCards: UserImage[];
 
-  constructor(private route: ActivatedRoute, private router: Router, private manage: ManagementService, private notification: NotificationService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private manage: ManagementService, private notification: NotificationService, private location: Location) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('userid');
@@ -31,10 +31,6 @@ export class UserInformationComponent implements OnInit {
     this.manage.findAvatar(this.userId).subscribe(avatars => {
       this.selectedUserAvatar = avatars[0];
     });
-  }
-
-  editUser() {
-    this.router.navigate(['../..', 'edit', this.userId], { relativeTo: this.route });
   }
 
   approveUser() {

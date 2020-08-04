@@ -1,6 +1,7 @@
 <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
-<div class="container mt-2r">
-  <div *ngIf="true" class="account-table">
+<div class="container mt-2r account-table">
+  <p *ngIf="(dataSource.length$ | async) <= 0">Hiện chưa có tài khoản nào.</p>
+  <div class="account-scroll">
     <div class="d-flex">
       <mat-form-field>
         <mat-label>Tìm kiếm</mat-label>
@@ -15,7 +16,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <table mat-table [dataSource]="dataSource" class="w-100 account-table">
+    <table mat-table [dataSource]="dataSource" class="w-100">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Số tài khoản</th>
         <td mat-cell *matCellDef="let account">{{account.accountId}}</td>
@@ -35,20 +36,29 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Tình trạng</th>
         <td mat-cell *matCellDef="let account">
-          <mat-icon matTooltip="Tài khoản ở trạng thái tốt" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="account.status === 1">check</mat-icon>
-          <mat-icon matTooltip="Tài khoản đã bị đóng" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="account.status === 0">close</mat-icon>
+          <mat-icon [routerLink]="['/accounts', 'view', account.accountId]" matTooltip="Tài khoản ở trạng thái tốt" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="account.status === 1">check</mat-icon>
+          <mat-icon [routerLink]="['/accounts', 'view', account.accountId]" matTooltip="Tài khoản đã bị đóng" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="account.status === 0">close</mat-icon>
         </td>
       </ng-container>
       <ng-container matColumnDef="view">
         <th mat-header-cell *matHeaderCellDef>Chi tiết</th>
         <td mat-cell *matCellDef="let account">
-          <button (click)="viewAccount(account)" mat-icon-button><mat-icon>visibility</mat-icon></button>
+          <button *ngIf="currentUser.userType === 0" mat-icon-button [matMenuTriggerFor]="actionMenu" [matMenuTriggerData]="{account: account}"><mat-icon>more_horiz</mat-icon></button>
+          <button *ngIf="currentUser.userType !== 0" [routerLink]="['/accounts', 'view', account.accountId]" mat-icon-button><mat-icon>history</mat-icon></button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [length]="dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
-  <p *ngIf="false">Hiện chưa có tài khoản nào</p>
+  <mat-paginator [length]="dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-menu #actionMenu="matMenu" xPosition="before">
+    <ng-template matMenuContent let-account="account">
+      <button [routerLink]="['/accounts', 'view', account.accountId]" mat-menu-item>Xem thông tin</button>
+      <button mat-menu-item>Lịch sử giao dịch</button>
+      <button mat-menu-item>Thay đổi</button>
+      <button *ngIf="account.status === 1" mat-menu-item>Đóng tài khoản</button>
+      <button *ngIf="account.status === 0" mat-menu-item>Mở tài khoản</button>
+    </ng-template>
+  </mat-menu>
 </div>
