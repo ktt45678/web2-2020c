@@ -73,10 +73,9 @@ export class AccountCreationComponent implements OnInit {
     this.accountCurrency = accountData.currency;
     if (accountData.type === '0') {
       this.createCheckingAccountForm();
+      return;
     }
-    else {
-      this.createSavingAccountForm();
-    }
+    this.createSavingAccountForm();
   }
 
   onCheckingAccount(accountData) {

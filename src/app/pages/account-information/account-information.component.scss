@@ -2,13 +2,16 @@
   font-weight: 600;
 }
 
-.info-detail {
+.account-info {
   margin-bottom: 6rem;
   .info-content {
     h5 {
       font-size: 18px;
       font-weight: 500;
       color: gray;
+    }
+    p {
+      color: #17A2B8;
     }
   }
 }

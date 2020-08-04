@@ -23,8 +23,17 @@ export class ManagementService {
     return this.http.post<AccountModel>(`${environment.apiUrl}/api/createaccount`, body.toString(), { headers });
   }
 
-  findAccount(id: string) {
-    const params = { id };
+  updateAccount(accountId, currency, status) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('accountId', accountId);
+    body.set('currency', currency);
+    body.set('status', status);
+    return this.http.post(`${environment.apiUrl}/api/updateaccount`, body.toString(), { headers });
+  }
+
+  findAccount(accountId: string) {
+    const params = { accountId };
     return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
   }
 
