@@ -16,26 +16,39 @@
 
 .fe-container {
     display: flex;
+    width: 100%;
+    margin: none;
 }
+
+.fe-row{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.fe-item{
+    margin-top: 15px;
+}
+
 .be-container { 
     display: flex;
+    width: 100%;
+    margin: none;
+    
 }
 
-#fe02 {
-    left: 170px;
+.be-row{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
-#be02 {
-    left: 170px;
+.be-item{
+    margin-top: 15px;
 }
 
-#fe01 {
-    right: -130px;
-}
-
-#be01 {
-    right: -130px;
-}
 
 #facebook-button {
     font-size: 30px;
@@ -45,6 +58,10 @@
     a{
         color: black;
     }
+}
+
+#nextButton, #backButton, #restartButton{
+    margin-top: 20px;
 }
 
 .project-container {
