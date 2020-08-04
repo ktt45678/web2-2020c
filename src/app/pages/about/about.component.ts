@@ -12,9 +12,9 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 export class AboutComponent implements OnInit {
   FacebookIcon = faFacebook;
   GithubIcon = faGithub;
-  defaultImage ="../../../assets/img/placeholder.png";
+  defaultImage ="../../../assets/img/center-placeholder.png";
   lazyloadedImage ="../../../assets/img/center.png";
-  profileDefaultImage ="../../../assets/img/placeholder.png";
+  profileDefaultImage ="../../../assets/img/upper-placeholder.png";
   profileLazyloadedImage ="../../../assets/img/upper.png";
   constructor() {}
 

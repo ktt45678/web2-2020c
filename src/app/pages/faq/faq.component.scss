@@ -1,5 +1,9 @@
-.mat-divider {
+mat-divider {
     padding-bottom: 18px;
+}
+
+mat-expansion-panel-header{
+    height: 75px;
 }
 
 .faq-list{
@@ -13,6 +17,7 @@
 .faq-title{
     text-align: center;
 }
+
 
 .container{
     box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
