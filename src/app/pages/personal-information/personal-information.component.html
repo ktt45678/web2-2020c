@@ -5,7 +5,7 @@
       <div class="info-head rounded shadow-sm p-3">
         <div class="info-content row justify-content-center">
           <div class="col-auto align-self-center">
-            <img *ngIf="!currentUserAvatar" class="avatar" src="../../../assets/img/whitefoologohead.png" alt="user avatar">
+            <img *ngIf="!currentUserAvatar" class="avatar" src="../../../assets/img/defaultavataruser.svg" alt="user avatar">
             <img *ngIf="currentUserAvatar" (click)="openUri(currentUserAvatar.original)" class="avatar" [defaultImage]="currentUserAvatar.small" [lazyLoad]="currentUserAvatar.mimeType === 'image/gif' ? currentUserAvatar.original : currentUserAvatar.thumbnail" alt="user avatar">
           </div>
           <div class="col-lg-8 align-self-center">
@@ -15,7 +15,7 @@
             <p>{{currentUser.email}}</p>
           </div>
           <div class="col-auto">
-            <button (click)="editInfo()" mat-flat-button color="primary">Thay đổi</button>
+            <button routerLink="/personal/edit" mat-flat-button color="primary">Thay đổi</button>
             <button (click)="return()" class="d-block mt-1" mat-flat-button color="primary">Quay lại</button>
           </div>
         </div>

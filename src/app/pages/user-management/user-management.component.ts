@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
+import { NotificationService } from '../../services/notification.service';
 import { UserModel } from '../../models/user.model';
 import { UserDataSource } from '../../modules/template/user.datasource';
 
@@ -25,7 +26,7 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChild(MatSelect) select: MatSelect;
   subscriptions = new Subscription();
 
-  constructor(private auth: AuthenticationService, private manage: ManagementService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
@@ -59,11 +60,23 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   blockUser(user) {
-
+    this.manage.updateUserStatus(user.id, 0).subscribe(
+    () => {
+      user.status = 0;
+      this.notification.showSuccess(`Đã chặn ${user.firstName} ${user.lastName}`);
+    }, () => {
+      this.notification.showError('Đã có lỗi xảy ra');
+    });
   }
 
-  unBlockUser(user) {
-
+  unblockUser(user) {
+    this.manage.updateUserStatus(user.id, 1).subscribe(
+    () => {
+      user.status = 1;
+      this.notification.showSuccess(`Đã bỏ chặn ${user.firstName} ${user.lastName}`);
+    }, () => {
+      this.notification.showError('Đã có lỗi xảy ra');
+    });
   }
 
   ngOnDestroy(): void {

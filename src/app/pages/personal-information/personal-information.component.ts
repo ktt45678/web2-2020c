@@ -25,10 +25,6 @@ export class PersonalInformationComponent implements OnInit {
     });
   }
 
-  editInfo() {
-    this.router.navigate(['personal-edit'], { relativeTo: this.route });
-  }
-
   openUri(uri) {
     window.open(uri, '_blank');
   }

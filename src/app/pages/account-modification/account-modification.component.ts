@@ -21,11 +21,16 @@ export class AccountModificationComponent implements OnInit {
   currentUser: UserModel;
   accountId: string;
   selectedAccount: AccountModel;
+  payInForm: FormGroup;
   updateAccountForm: FormGroup;
   
   constructor(private route: ActivatedRoute, private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService, private location: Location) { }
 
   ngOnInit(): void {
+    this.payInForm = new FormGroup({
+      amount: new FormControl('', [Validators.required]),
+      type: new FormControl('', [Validators.required])
+    });
     this.updateAccountForm = new FormGroup({
       currency: new FormControl('', [Validators.required]),
       status: new FormControl('', [Validators.required])
@@ -40,8 +45,30 @@ export class AccountModificationComponent implements OnInit {
     })).subscribe(account => this.selectedAccount = account);
   }
 
+  get amount() { return this.payInForm.get('amount'); }
+  get type() { return this.payInForm.get('type'); }
+
   get currency() { return this.updateAccountForm.get('currency'); }
   get status() { return this.updateAccountForm.get('status'); }
+
+  onPayIn(payInData) {
+    if (this.payInForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.payInForm.disable();
+    this.manage.payIn(this.accountId, payInData).pipe(first()).subscribe(
+    () => {
+      this.notification.showSuccess(`Đã nạp thành công ${payInData.amount} ${payInData.type} vào tài khoản ${this.accountId}`);
+      this.payInForm.enable();
+      this.afterRespone();
+    }, error => {
+      const message = JSON.parse(JSON.stringify(error));
+      this.notification.showError(message[0]?.code || message?.code);
+      this.payInForm.enable();
+      this.afterRespone();
+    });
+  }
 
   onUpdateAccount(accountData) {
     if (this.updateAccountForm.invalid) {
@@ -52,17 +79,18 @@ export class AccountModificationComponent implements OnInit {
     this.manage.updateAccount(this.accountId, accountData.currency, accountData.status).pipe(first()).subscribe(
     () => {
       this.notification.showSuccess('Thay đổi thông tin thành công');
+      this.updateAccountForm.enable();
       this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
+      this.updateAccountForm.enable();
       this.afterRespone();
     });
   }
 
   afterRespone() {
     this.loading = false;
-    this.updateAccountForm.enable();
   }
 
   return() {

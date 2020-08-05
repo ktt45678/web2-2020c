@@ -13,10 +13,22 @@ export class NotificationService {
 
   showError(message: string): void {
     // In the third, we send in the css class for the snack bar.
-    this.snackBar.open(message, 'Đóng', { panelClass: ['error'] });
+    const errorMessage = this.parseError(message);
+    this.snackBar.open(errorMessage, 'Đóng', { panelClass: ['error'] });
   }
 
   close() {
     this.snackBar.dismiss();
+  }
+
+  parseError(code: string) {
+    switch (code) {
+      case 'LOGIN_INVALID':
+        return 'Tên đăng nhập hoặc mật khẩu không chính xác';
+      case 'EXAMPLE':
+        return 'Example error';
+      default:
+        return 'Đã có lỗi xảy ra';
+    }
   }
 }

@@ -33,8 +33,8 @@ const routes: Routes = [
       { path: 'exchangerate', component: ExchangerateComponent },
       { path: 'security-policy', component: SecurityPolicyComponent },
       { path: 'services', component: ServicesComponent },
-      { path: '403', component:Error403Component },
-      { path: '404', component:Error404Component },
+      { path: '403', component: Error403Component },
+      { path: '404', component: Error404Component }
     ]
   }
 ];

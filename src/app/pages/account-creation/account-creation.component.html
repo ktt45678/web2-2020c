@@ -1,6 +1,6 @@
 <div class="mt-2r">
   <mat-spinner *ngIf="!selectedUser" mode="indeterminate" class="body-spinner"></mat-spinner>
-  <div class="container">
+  <div *ngIf="selectedUser" class="container">
     <div class="account-form ml-auto mr-auto br-10px">
       <div [ngClass]="loading ? 'visible' : 'invisible'">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -58,7 +58,7 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Số dư ban đầu</mat-label>
                 <input type="number" formControlName="balance" matInput>
-                <mat-icon matSuffix>account_balance</mat-icon>
+                <mat-icon matSuffix>attach_money</mat-icon>
                 <mat-error *ngIf="checkingBalance.errors?.required">
                   Số dư ban đầu là <strong>bắt buộc</strong>
                 </mat-error>

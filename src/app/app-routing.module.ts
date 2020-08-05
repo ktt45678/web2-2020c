@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { AuthGuard } from './modules/guard/auth.guard';
 
-
 import { HomeComponent } from './pages/home/home.component';
 import { HomeLayoutComponent } from './shared/home-layout/home-layout.component';
 
@@ -26,7 +25,7 @@ const routes: Routes = [
   // Dashboard routes
   { path: '', loadChildren: sideModule, canActivate: [AuthGuard] },
   // No layout
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({

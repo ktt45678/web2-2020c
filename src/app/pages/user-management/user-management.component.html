@@ -65,7 +65,7 @@
       <button (click)="viewUser(user)" mat-menu-item>Xem thông tin</button>
       <button (click)="editUser(user)" mat-menu-item>Chỉnh sửa</button>
       <button (click)="blockUser(user)" [disabled]="currentUser.id === user.id" *ngIf="user.status === 1" mat-menu-item>Chặn</button>
-      <button (click)="unBlockUser(user)" *ngIf="user.status === 0" mat-menu-item>Bỏ chặn</button>
+      <button (click)="unblockUser(user)" *ngIf="user.status === 0" mat-menu-item>Bỏ chặn</button>
     </ng-template>
   </mat-menu>
 </div>

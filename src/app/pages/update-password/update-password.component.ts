@@ -43,7 +43,7 @@ export class UpdatePasswordComponent implements OnInit {
       this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
       this.afterRespone();
     });
   }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { RoleGuard } from '../guard/role.guard';
+
 import { SideLayoutComponent } from '../../shared/side-layout/side-layout.component';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UpdateAvatarComponent } from '../../pages/update-avatar/update-avatar.component';
@@ -27,13 +29,13 @@ const routes: Routes = [
       { path: 'update-password', component: UpdatePasswordComponent },
       { path: 'personal', component: PersonalInformationComponent },
       { path: 'personal/edit', component: PersonalModificationComponent },
-      { path: 'users', component: UserManagementComponent },
-      { path: 'users/view/:userid', component: UserInformationComponent },
-      { path: 'users/edit/:userid', component: UserModificationComponent },
+      { path: 'users', component: UserManagementComponent, canActivate: [RoleGuard] },
+      { path: 'users/view/:userid', component: UserInformationComponent, canActivate: [RoleGuard] },
+      { path: 'users/edit/:userid', component: UserModificationComponent, canActivate: [RoleGuard] },
       { path: 'accounts', component: AccountManagementComponent },
-      { path: 'accounts/create/:userid', component: AccountCreationComponent },
-      { path: 'accounts/view/:accountid', component: AccountInformationComponent },
-      { path: 'accounts/edit/:accountid', component: AccountModificationComponent }
+      { path: 'accounts/create/:userid', component: AccountCreationComponent, canActivate: [RoleGuard] },
+      { path: 'accounts/view/:accountid', component: AccountInformationComponent, canActivate: [RoleGuard] },
+      { path: 'accounts/edit/:accountid', component: AccountModificationComponent, canActivate: [RoleGuard] }
     ]
   }
 ];

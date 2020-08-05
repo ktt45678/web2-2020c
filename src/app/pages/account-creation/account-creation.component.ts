@@ -92,7 +92,7 @@ export class AccountCreationComponent implements OnInit {
       this.accountType = 'done';
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
       this.checkingAccountForm.enable();
       this.afterRespone();
     });
@@ -112,7 +112,7 @@ export class AccountCreationComponent implements OnInit {
       this.accountType = 'done';
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
       this.savingAccountForm.enable();
       this.afterRespone();
     });

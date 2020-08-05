@@ -58,7 +58,7 @@ export class PasswordRecoveryComponent implements OnInit {
       this.recoveryForm.enable();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
       this.afterRespone();
       this.recoveryForm.enable();
     });
@@ -77,7 +77,7 @@ export class PasswordRecoveryComponent implements OnInit {
       this.resetPasswordForm.enable();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
       this.afterRespone();
       this.resetPasswordForm.enable();
     });

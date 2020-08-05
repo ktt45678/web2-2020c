@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.afterRespone();
     }, error => {
       const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.message || message?.message);
+      this.notification.showError(message[0]?.code || message?.code);
       this.afterRespone();
     });
   }

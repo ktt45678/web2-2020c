@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
+import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from '../../models/user.model';
 import { AccountDataSource } from '../../modules/template/account.datasource';
@@ -27,7 +28,7 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild(MatSelect) select: MatSelect;
   subscriptions = new Subscription();
 
-  constructor(private auth: AuthenticationService, private manage: ManagementService, private user: UserService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService, private user: UserService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
@@ -54,6 +55,26 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
       return;
     }
     this.dataSource.loadAccounts(this.paginator.pageIndex, this.paginator.pageSize, this.select.value, this.searchInput.nativeElement.value);
+  }
+
+  closeAccount(account) {
+    this.manage.updateAccountStatus(account.accountId, 0).subscribe(
+    () => {
+      account.status = 0;
+      this.notification.showSuccess(`Đã đóng tài khoản ${account.accountId}`);
+    }, () => {
+      this.notification.showError('Đã có lỗi xảy ra');
+    });
+  }
+
+  openAccount(account) {
+    this.manage.updateAccountStatus(account.accountId, 1).subscribe(
+    () => {
+      account.status = 1;
+      this.notification.showSuccess(`Đã mở lại tài khoản ${account.accountId}`);
+    }, () => {
+      this.notification.showError('Đã có lỗi xảy ra');
+    });
   }
 
   ngOnDestroy(): void {

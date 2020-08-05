@@ -32,6 +32,14 @@ export class ManagementService {
     return this.http.post(`${environment.apiUrl}/api/updateaccount`, body.toString(), { headers });
   }
 
+  updateAccountStatus(accountId, status) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('accountId', accountId);
+    body.set('status', status);
+    return this.http.post(`${environment.apiUrl}/api/updateaccount`, body.toString(), { headers });
+  }
+
   findAccount(accountId: string) {
     const params = { accountId };
     return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
@@ -73,6 +81,15 @@ export class ManagementService {
     return this.http.get<any>(`${environment.apiUrl}/api/search`, { params });
   }
 
+  payIn(accountId, payIdData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('accountId', accountId);
+    body.set('balance', payIdData.amount);
+    body.set('currencyType', payIdData.type);
+    return this.http.post(`${environment.apiUrl}/api/addbalance`, body.toString(), { headers });
+  }
+
   updateUser(userId, editData) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
@@ -89,6 +106,14 @@ export class ManagementService {
     body.set('userType', editData.userType);
     body.set('approveStatus', editData.approvalStatus);
     body.set('status', editData.userStatus);
+    return this.http.post(`${environment.apiUrl}/api/updateuserinfo`, body.toString(), { headers });
+  }
+
+  updateUserStatus(userId, userStatus) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('userId', userId);
+    body.set('status', userStatus);
     return this.http.post(`${environment.apiUrl}/api/updateuserinfo`, body.toString(), { headers });
   }
 

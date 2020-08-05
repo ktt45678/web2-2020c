@@ -1,6 +1,6 @@
 <div class="mt-2r">
   <mat-spinner *ngIf="!selectedAccount" mode="indeterminate" class="body-spinner"></mat-spinner>
-  <div class="container">
+  <div *ngIf="selectedAccount" class="container">
     <div class="account-info">
       <div class="info-content row">
         <div class="col-md-5">
