@@ -1,0 +1,28 @@
+mat-error + mat-error {
+  display: none;
+}
+
+.update-form {
+  max-width: 500px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  .update-inner {
+    padding: 32px;
+  }
+  .image-preview {
+    mat-grid-tile, .rounded-btn, img {
+      border-radius: 50%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .clear {
+      color: white;
+      background-color: transparent;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+<div class="container">
+  <div *ngIf="currentUser" class="mt-2r">
+    <div class="update-form ml-auto mr-auto br-10px">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="update-inner">
+        <h2 class="mb-3 text-center">CẬP NHẬT ẢNH ĐẠI DIỆN</h2>
+        <form [formGroup]="updatetForm" (ngSubmit)="onSubmit()">
+          <div class="image-preview">
+            <input #inputAvatar hidden="true" type="file" formControlName="avatar" onclick="this.value=null" (change)="avatarChange($event)" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
+            <input #inputTrack hidden="true" type="file" formControlName="track" onclick="this.value=null" (change)="trackChange($event)" accept=".mp3, .wav, .ogg, .webm, .mka, .flac, .acc|audio/*"/>
+            <mat-grid-list [cols]="uploadTrack ? '2' : '1'" rowHeight="1:1">
+              <mat-grid-tile>
+                <button type="button" *ngIf="!previewAvatar" class="rounded-btn w-100 h-100" mat-flat-button color="primary" (click)="inputAvatar.click()"><mat-icon>add_photo_alternate</mat-icon><br>Chọn hình ảnh</button>
+                <img *ngIf="previewAvatar" [src]="previewAvatar">
+                <button type="button" *ngIf="previewAvatar" class="clear" mat-icon-button (click)="clearAvatar()"><mat-icon>clear</mat-icon></button>
+              </mat-grid-tile>
+              <mat-grid-tile *ngIf="uploadTrack">
+                <button type="button" class="rounded w-100 h-100" mat-flat-button color="primary" (click)="inputTrack.click()">
+                  <div *ngIf="!selectedTrack">
+                    <mat-icon>audiotrack</mat-icon><br>Chọn âm thanh
+                  </div>
+                  <div *ngIf="selectedTrack">
+                    <mat-icon>check</mat-icon><br>Đã chọn âm thanh
+                  </div>
+                </button>
+                <button type="button" *ngIf="selectedTrack" class="clear" mat-icon-button (click)="clearTrack()"><mat-icon>clear</mat-icon></button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+          <div class="mt-2" >
+            <mat-progress-bar class="rounded upload-progress" *ngIf="loading" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+          </div>
+          <div class="mt-2 d-flex">
+            <div>
+              <button type="button" (click)="return()" color="primary" mat-button [disabled]="loading">Quay lại</button>
+            </div>
+            <div class="ml-auto">
+              <button type="submit" mat-flat-button color="primary" [disabled]="loading">Cập nhật</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,214 @@
+<div class="mt-2r">
+  <mat-spinner *ngIf="!selectedUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div class="container">
+    <div *ngIf="selectedUser" class="user-editor ml-auto mr-auto br-10px">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <h2 class="text-center mb-3 pt-32px">THAY ĐỔI THÔNG TIN</h2>
+      <form [formGroup]="editorForm" (ngSubmit)="onSubmit(editorForm.value)">
+        <div class="editor-basic p-32px">
+          <h6>Cơ bản</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Họ</mat-label>
+                <input type="text" formControlName="firstname" matInput>
+                <mat-error *ngIf="firstname.errors?.required">
+                  Họ là thông tin <strong>bắt buộc</strong>
+                </mat-error>
+                <mat-error *ngIf="firstname.errors?.maxlength">
+                  Họ không được vượt quá <strong>20 kí tự</strong>
+                </mat-error>
+                <mat-error *ngIf="firstname.errors?.pattern">
+                  Họ vừa nhập không hợp lệ
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Tên</mat-label>
+                <input type="text" formControlName="lastname" matInput>
+                <mat-error *ngIf="lastname.errors?.required">
+                  Tên là thông tin <strong>bắt buộc</strong>
+                </mat-error>
+                <mat-error *ngIf="lastname.errors?.maxlength">
+                  Tên không được vượt quá <strong>20 kí tự</strong>
+                </mat-error>
+                <mat-error *ngIf="lastname.errors?.pattern">
+                  Tên đã nhập không hợp lệ
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Ngày sinh</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="birth">
+              <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="loading"></mat-datepicker-toggle>
+              <mat-datepicker [touchUi]="mobileQuery.matches" #picker></mat-datepicker>
+              <mat-error *ngIf="birth.errors?.required">
+                Ngày sinh là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Địa chỉ</mat-label>
+              <input type="text" formControlName="address" matInput>
+              <mat-error *ngIf="address.errors?.required">
+                Địa chỉ là <strong>bắt buộc</strong>
+              </mat-error>
+              <mat-error *ngIf="address.errors?.minlength">
+                Địa chỉ phải có ít nhất <strong>6 kí tự</strong>
+              </mat-error>
+              <mat-error *ngIf="address.errors?.maxlength">
+                Địa chỉ không được vượt quá <strong>100 kí tự</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="editor-privacy p-32px">
+          <h6>Riêng tư</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Tên người dùng</mat-label>
+                <mat-hint>Chỉ thay đổi thông tin này khi được yêu cầu</mat-hint>
+                <input type="text" formControlName="username" matInput>
+                <mat-error *ngIf="username.errors?.required">
+                  Tên người dùng là <strong>bắt buộc</strong>
+                </mat-error>
+                <mat-error *ngIf="username.errors?.minlength">
+                  Tên người dùng phải có ít nhất <strong>3 kí tự</strong>
+                </mat-error>
+                <mat-error *ngIf="username.errors?.maxlength">
+                  Tên người dùng không được vượt quá <strong>20 kí tự</strong>
+                </mat-error>
+                <mat-error *ngIf="username.errors?.pattern">
+                  Tên người dùng đã nhập không hợp lệ
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số điện thoại</mat-label>
+                <mat-hint>Chỉ thay đổi thông tin này khi có xác nhận từ người dùng</mat-hint>
+                <input type="text" formControlName="tel" matInput>
+                <mat-error *ngIf="tel.errors?.required">
+                  Số điện thoại là <strong>bắt buộc</strong>
+                </mat-error>
+                <mat-error *ngIf="tel.errors?.minlength">
+                  Số điện thoại phải có ít nhất <strong>3 kí tự</strong>
+                </mat-error>
+                <mat-error *ngIf="tel.errors?.maxlength">
+                  Số điện thoại không được vượt quá <strong>20 kí tự</strong>
+                </mat-error>
+                <mat-error *ngIf="tel.errors?.pattern">
+                  Số điện thoại đã nhập không hợp lệ
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số CMND/CCCD</mat-label>
+                <input type="text" formControlName="idNumber" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Loại giấy tờ</mat-label>
+                <mat-select formControlName="cardType">
+                  <mat-option>Không</mat-option>
+                  <mat-option value="CMND">Chứng minh nhân dân</mat-option>
+                  <mat-option value="CCCD">Căn cước công dân</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Ngày cấp</mat-label>
+                <input matInput [matDatepicker]="picker2" placeholder="dd/mm/yyyy" formControlName="issueDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="loading"></mat-datepicker-toggle>
+                <mat-datepicker [touchUi]="mobileQuery.matches" #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="editor-restricted p-32px">
+          <h6>Hạn chế</h6>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Địa chỉ email</mat-label>
+              <input type="email" formControlName="email" matInput>
+              <mat-hint>Chỉ thay đổi thông tin này khi thật sự cần thiết</mat-hint>
+              <mat-error *ngIf="email.invalid">
+                Vui lòng nhập một địa chỉ email hợp lệ
+              </mat-error>
+              <mat-error *ngIf="email.errors?.minlength">
+                Email phải có ít nhất <strong>5 kí tự</strong>
+              </mat-error>
+              <mat-error *ngIf="email.errors?.required">
+                Email là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Loại người dùng</mat-label>
+                <mat-select formControlName="userType">
+                  <mat-option value="1">Khách hàng</mat-option>
+                  <mat-option value="0">Nhân viên</mat-option>
+                </mat-select>
+                <mat-error *ngIf="approvalStatus.errors?.required">
+                  Tình trạng duyệt giấy tờ là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Phê duyệt giấy tờ</mat-label>
+                <mat-select formControlName="approvalStatus">
+                  <mat-option value="2">Chờ phê duyệt</mat-option>
+                  <mat-option value="1">Phê duyệt</mat-option>
+                  <mat-option value="0">Từ chối</mat-option>
+                </mat-select>
+                <mat-error *ngIf="approvalStatus.errors?.required">
+                  Tình trạng duyệt giấy tờ là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Tình trạng</mat-label>
+                <mat-select formControlName="userStatus">
+                  <mat-option value="1">Mở</mat-option>
+                  <mat-option [disabled]="isSelfEdit" value="0">Khóa</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userStatus.errors?.required">
+                  Tình trạng người dùng là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="pl-32px pr-32px pb-32px">
+          <p *ngIf="isSelfEdit" class="text-danger">Cảnh báo: Bạn đang thay đổi thông tin của chính bạn, chức năng khóa tài khoản sẽ không được phép lựa chọn nhưng chức vụ vẫn có thể được chỉnh sửa. Hãy cân nhắc trước khi quyết định thay đổi.</p>
+          <div class="d-flex">
+            <div>
+              <button type="button" (click)="return()" class="bg-transparent" mat-flat-button [disabled]="loading">Quay lại</button>
+            </div>
+            <div class="ml-auto">
+              <button mat-flat-button color="primary"[disabled]="loading">Thay đổi</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

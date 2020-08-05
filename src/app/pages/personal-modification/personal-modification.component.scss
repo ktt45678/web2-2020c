@@ -1,0 +1,19 @@
+.user-updateinfo {
+  max-width: 700px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  mat-error + mat-error {
+    display: none;
+  }
+}
+
+:host ::ng-deep .update-form {
+  h2 {
+    display: none;
+  }
+  .mat-progress-bar:not(.upload-progress) {
+    display: none;
+  }
+  margin-top: -2rem !important;
+  box-shadow: none !important;
+}

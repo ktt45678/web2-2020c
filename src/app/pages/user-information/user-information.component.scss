@@ -1,0 +1,126 @@
+.fw-600 {
+  font-weight: 600;
+}
+
+.info-head {
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+  .avatar {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border: 1px solid rgba($color: #000000, $alpha: 0.1);
+    border-radius: 50%;
+  }
+  .info-content {
+    h5 {
+      font-size: 14px;
+      font-weight: 600;
+      color: gray;
+    }
+    button {
+      width: 120px;
+    }
+    p {
+      color: #17A2B8;
+    }
+  }
+}
+
+.info-detail, .info-account, .info-approval {
+  .info-content {
+    h5 {
+      font-size: 18px;
+      font-weight: 500;
+      color: gray;
+    }
+    p {
+      color: #17A2B8;
+    }
+  }
+}
+
+.info-approval {
+  .info-content {
+    .image-container {
+      border: 1px solid rgba($color: #000000, $alpha: 0.1);
+      img {
+        margin: 10px;
+        width: 420px;
+        height: 240px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+    }
+    button {
+      width: 100px;
+    }
+  }
+}
+
+@media only screen and (max-width:991px) {
+  .info-head {
+    border: none;
+    box-shadow: none !important;
+    .avatar {
+      margin-bottom: 2rem;
+    }
+    .info-content {
+      text-align: center;
+    }
+    button {
+      margin-top: 1rem;
+    }
+  }
+  .info-approval {
+    .info-content {
+      .image-container {
+        border: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:499px) {
+  .info-approval {
+    .info-content {
+      .image-container {
+        border: none;
+        img {
+          width: 350px;
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:449px) {
+  .info-approval {
+    .info-content {
+      .image-container {
+        border: none;
+        img {
+          width: 262.5px;
+          height: 150px;
+        }
+      }
+      button {
+        margin-right: auto;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:280px) {
+  .info-approval {
+    .info-content {
+      .image-container {
+        border: none;
+        img {
+          width: 210px;
+          height: 120px;
+        }
+      }
+    }
+  }
+}

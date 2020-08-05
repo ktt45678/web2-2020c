@@ -23,9 +23,7 @@ export class SideLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   ngOnInit(): void {
-    this.auth.getCurrentUser().pipe(first()).subscribe(user => {
-      this.auth.setCurrentUser(user);
-    });
+    //this.auth.getCurrentUser().pipe(first()).subscribe(user => {});
   }
 
   ngAfterViewInit(): void {

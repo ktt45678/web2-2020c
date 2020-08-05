@@ -1,0 +1,150 @@
+<div class="mt-2r">
+  <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div class="container">
+    <div *ngIf="currentUser" class="user-updateinfo ml-auto mr-auto br-10px">
+      <div class="updateinfo-inner">
+        <h2 class="text-center mb-3 pt-32px">THIẾT LẬP TÀI KHOẢN</h2>
+        <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+          <mat-tab label="Thông tin cá nhân">
+            <form [formGroup]="updateInfoForm" (ngSubmit)="onSubmit(updateInfoForm.value)">
+              <div class="p-32px">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Họ</mat-label>
+                      <input type="text" formControlName="firstname" matInput>
+                      <mat-error *ngIf="firstname.errors?.required">
+                        Họ là thông tin <strong>bắt buộc</strong>
+                      </mat-error>
+                      <mat-error *ngIf="firstname.errors?.maxlength">
+                        Họ không được vượt quá <strong>20 kí tự</strong>
+                      </mat-error>
+                      <mat-error *ngIf="firstname.errors?.pattern">
+                        Họ vừa nhập không hợp lệ
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Tên</mat-label>
+                      <input type="text" formControlName="lastname" matInput>
+                      <mat-error *ngIf="lastname.errors?.required">
+                        Tên là thông tin <strong>bắt buộc</strong>
+                      </mat-error>
+                      <mat-error *ngIf="lastname.errors?.maxlength">
+                        Tên không được vượt quá <strong>20 kí tự</strong>
+                      </mat-error>
+                      <mat-error *ngIf="lastname.errors?.pattern">
+                        Tên đã nhập không hợp lệ
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="birth">
+                    <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="loading"></mat-datepicker-toggle>
+                    <mat-datepicker [touchUi]="mobileQuery.matches" #picker></mat-datepicker>
+                    <mat-error *ngIf="birth.errors?.required">
+                      Ngày sinh là <strong>bắt buộc</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Tên người dùng</mat-label>
+                      <input type="text" formControlName="username" matInput>
+                      <mat-error *ngIf="username.errors?.required">
+                        Tên người dùng là <strong>bắt buộc</strong>
+                      </mat-error>
+                      <mat-error *ngIf="username.errors?.minlength">
+                        Tên người dùng phải có ít nhất <strong>3 kí tự</strong>
+                      </mat-error>
+                      <mat-error *ngIf="username.errors?.maxlength">
+                        Tên người dùng không được vượt quá <strong>20 kí tự</strong>
+                      </mat-error>
+                      <mat-error *ngIf="username.errors?.pattern">
+                        Tên người dùng đã nhập không hợp lệ
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Số điện thoại</mat-label>
+                      <input type="text" formControlName="tel" matInput>
+                      <mat-error *ngIf="tel.errors?.required">
+                        Số điện thoại là <strong>bắt buộc</strong>
+                      </mat-error>
+                      <mat-error *ngIf="tel.errors?.minlength">
+                        Số điện thoại phải có ít nhất <strong>3 kí tự</strong>
+                      </mat-error>
+                      <mat-error *ngIf="tel.errors?.maxlength">
+                        Số điện thoại không được vượt quá <strong>20 kí tự</strong>
+                      </mat-error>
+                      <mat-error *ngIf="tel.errors?.pattern">
+                        Số điện thoại đã nhập không hợp lệ
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Địa chỉ</mat-label>
+                    <input type="text" formControlName="address" matInput>
+                    <mat-hint>Sử dụng chính xác địa chỉ của bạn</mat-hint>
+                    <mat-error *ngIf="address.errors?.required">
+                      Địa chỉ là <strong>bắt buộc</strong>
+                    </mat-error>
+                    <mat-error *ngIf="address.errors?.minlength">
+                      Địa chỉ phải có ít nhất <strong>6 kí tự</strong>
+                    </mat-error>
+                    <mat-error *ngIf="address.errors?.maxlength">
+                      Địa chỉ không được vượt quá <strong>100 kí tự</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Địa chỉ email</mat-label>
+                    <input type="email" formControlName="email" matInput>
+                    <mat-hint>Email mới sẽ được yêu cầu xác nhận</mat-hint>
+                    <mat-error *ngIf="email.invalid">
+                      Vui lòng nhập một địa chỉ email hợp lệ
+                    </mat-error>
+                    <mat-error *ngIf="email.errors?.minlength">
+                      Email phải có ít nhất <strong>5 kí tự</strong>
+                    </mat-error>
+                    <mat-error *ngIf="email.errors?.required">
+                      Email là <strong>bắt buộc</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="pl-32px pr-32px pb-32px">
+                <div class="d-flex">
+                  <div>
+                    <button type="button" (click)="return()" color="primary" mat-button [disabled]="loading">Quay lại</button>
+                  </div>
+                  <div class="ml-auto">
+                    <button mat-flat-button color="primary"[disabled]="loading">Thay đổi</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </mat-tab>
+          <mat-tab label="Ảnh đại diện">
+            <app-update-avatar></app-update-avatar>
+          </mat-tab>
+          <mat-tab label="Giấy tờ tùy thân">
+            <app-update-idcard></app-update-idcard>
+          </mat-tab>
+          <mat-tab label="Mật khẩu">
+            <app-update-password></app-update-password>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>

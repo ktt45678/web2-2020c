@@ -1,19 +1,20 @@
 .signup-image {
-  height: 95.4%;
+  height: 100%;
   width: 100%;
   //background-image: url(/assets/img/signup-image.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 10px;
 }
 
 .signup-form {
   max-width: 500px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   overflow: hidden;
   .signup-inner {
     padding: 32px;
+    mat-error + mat-error {
+      display: none;
+    }
   }
   .recaptcha-policy {
     display: none;
@@ -32,6 +33,13 @@
 }
 
 @media only screen and (max-width: 991px) {
+  .signup-form {
+    .signup-inner {
+      h2 {
+        text-align: center;
+      }
+    }
+  }
   .signup-image {
     display: none;
   }

@@ -1,0 +1,47 @@
+<div class="task-cards" *ngIf="userStatus">
+  <mat-card class="task-card" *ngIf="userStatus.emailVerified !== 1">
+    <mat-card-header>
+      <mat-icon class="task-icon" mat-card-avatar>mail</mat-icon>
+      <mat-card-title>Xác thực email</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Bạn chưa xác thực email, vui lòng truy cập liên kiết kích hoạt trong email của bạn để hoàn tất quá trình đăng ký tài khoản.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="sendActivationEmail()">Gửi lại email</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="task-card" *ngIf="userStatus.approveStatus === 0">
+    <mat-card-header>
+      <mat-icon class="task-icon" mat-card-avatar>lock</mat-icon>
+      <mat-card-title>Kích hoạt tài khoản</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>Kích hoạt</strong> để bắt đầu quá trình kích hoạt.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="/updateidcard">Kích hoạt</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="task-card" *ngIf="userStatus.approveStatus === 2">
+    <mat-card-header>
+      <mat-icon class="task-icon" mat-card-avatar>info</mat-icon>
+      <mat-card-title>Đã nhận thông tin kích hoạt</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Bạn đã yêu cầu kích hoạt thành công và các nhân viên sẽ sớm kiểm tra thông tin mà bạn cung cấp, thông báo này sẽ biến mất và thư xác nhận sẽ được gửi tới email của bạn khi tài khoản được phê duyệt, nếu không bạn sẽ phải gửi lại một yêu cầu kích hoạt tài khoản khác.</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="task-card" *ngIf="canRequestManager">
+    <mat-card-header>
+      <mat-icon class="task-icon" mat-card-avatar>work</mat-icon>
+      <mat-card-title>Đăng ký làm nhân viên</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Hiện chưa có nhân viên trong hệ thống ngân hàng, ấn <strong>Đăng ký</strong> để yêu cầu trở thành nhân viên ngân hàng.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="isekai()">Đăng ký</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

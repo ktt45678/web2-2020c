@@ -4,8 +4,10 @@ import { Subscription } from 'rxjs';
 
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { UserService } from 'src/app/services/user.service';
-import { UserModel } from 'src/app/models/user.model';
+import { UserService } from '../../services/user.service';
+import { UserModel } from '../../models/user.model';
+import { UserImage } from '../../models/user-image.model';
+import { UserStorage } from '../../models/user-storage.model';
 
 @Component({
   selector: 'app-mat-header',
@@ -14,13 +16,23 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class MatHeaderComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
-  currentUserSubscription: Subscription;
+  currentUserAvatar: UserImage;
+  currentUserAudio: UserStorage;
+  currentUserSubscription = new Subscription();
   @Input() allowMenu: Boolean;
 
   constructor(private router: Router, private sideNavService: SidenavService, private auth: AuthenticationService, private user: UserService) {}
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    if (this.allowMenu) {
+      this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+      this.user.findAvatar().subscribe(avatars => {
+        this.currentUserAvatar = avatars[0];
+      });
+      this.user.findAudio().subscribe(audios => {
+        this.currentUserAudio = audios[0];
+      });
+    }
   }
 
   openSideNav() {

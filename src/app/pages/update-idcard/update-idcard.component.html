@@ -1,7 +1,7 @@
 <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container">
   <div *ngIf="currentUser" class="mt-2r">
-    <div class="update-form ml-auto mr-auto">
+    <div class="update-form ml-auto mr-auto br-10px">
       <div [ngClass]="loading ? 'visible' : 'invisible'">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       </div>
@@ -27,6 +27,9 @@
               <mat-error *ngIf="idNumber.errors?.required">
                 Số CMND/CCCD là <strong>bắt buộc</strong>
               </mat-error>
+              <mat-error *ngIf="idNumber.errors?.minlength">
+                Số CMND/CCCD phải có ít nhất <strong>5 kí tự</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div>
@@ -34,7 +37,7 @@
               <mat-label>Ngày cấp</mat-label>
               <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="issueDate">
               <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="loading"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #picker></mat-datepicker>
+              <mat-datepicker [touchUi]="mobileQuery.matches" #picker></mat-datepicker>
               <mat-error *ngIf="issueDate.errors?.required">
                 Ngày cấp là <strong>bắt buộc</strong>
               </mat-error>
@@ -42,8 +45,8 @@
           </div>
           <div *ngIf="currentUser.userType !== 0">
             <div class="image-preview">
-              <input #inputIdCard hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange($event)" accept="image/*"/>
-              <input #inputIdCard2 hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange2($event)" accept="image/*"/>
+              <input #inputIdCard hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange($event)" accept=".jpg, .png, .jpeg, .gif, .bmp|image/*"/>
+              <input #inputIdCard2 hidden="true" type="file" onclick="this.value=null" (change)="fileInputChange2($event)" accept=".jpg, .png, .jpeg, .gif, .bmp|image/*"/>
               <mat-grid-list cols="2" rowHeight="2:1">
                 <mat-grid-tile>
                   <button type="button" *ngIf="!previewImage" class="w-100 h-100" mat-flat-button color="primary" (click)="inputIdCard.click()"><mat-icon>add_photo_alternate</mat-icon><br>Chọn hình ảnh</button>
@@ -63,6 +66,9 @@
             <p class="text-muted mt-2">Để xác thực tài khoản, bạn cần cung cấp 2 ảnh chụp bao gồm số CMND/CCCD và ngày cấp từ giấy tờ tùy thân mà bạn sở hữu. Những hình ảnh mà bạn tải lên sẽ được lưu trữ tạm thời trên hệ thống và các nhân viên sẽ tiến hành kiểm tra xác thực. Chúng tôi cam kết các hình ảnh này sẽ bị xóa vĩnh viễn ngay sau khi việc xác thực hoàn tất.</p>
           </div>
           <div class="d-flex">
+            <div>
+              <button type="button" (click)="return()" color="primary" mat-button [disabled]="loading">Quay lại</button>
+            </div>
             <div class="ml-auto">
               <button type="submit" mat-flat-button color="primary" [disabled]="loading">Cập nhật</button>
             </div>

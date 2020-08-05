@@ -1,0 +1,60 @@
+<div class="mt-2r">
+  <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div class="container">
+    <div *ngIf="currentUser" class="user-info">
+      <div class="info-head rounded shadow-sm p-3">
+        <div class="info-content row justify-content-center">
+          <div class="col-auto align-self-center">
+            <img *ngIf="!currentUserAvatar" class="avatar" src="../../../assets/img/whitefoologohead.png" alt="user avatar">
+            <img *ngIf="currentUserAvatar" (click)="openUri(currentUserAvatar.original)" class="avatar" [defaultImage]="currentUserAvatar.small" [lazyLoad]="currentUserAvatar.mimeType === 'image/gif' ? currentUserAvatar.original : currentUserAvatar.thumbnail" alt="user avatar">
+          </div>
+          <div class="col-lg-8 align-self-center">
+            <h5>Họ Tên</h5>
+            <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+            <h5>Email</h5>
+            <p>{{currentUser.email}}</p>
+          </div>
+          <div class="col-auto">
+            <button (click)="editInfo()" mat-flat-button color="primary">Thay đổi</button>
+            <button (click)="return()" class="d-block mt-1" mat-flat-button color="primary">Quay lại</button>
+          </div>
+        </div>
+      </div>
+      <div class="info-detail mt-2r">
+        <h4 class="fw-600">Thông tin chi tiết</h4>
+        <div class="info-content row">
+          <div class="col-md-5">
+            <h5>Ngày sinh</h5>
+            <p>{{currentUser.dateOfBirth}}</p>
+            <h5>CMND/CCCD</h5>
+            <p>{{currentUser.citizenIdentificationId || 'Chưa cập nhật'}}</p>
+            <h5>Địa chỉ</h5>
+            <p>{{currentUser.address}}</p>
+            <h5>Số điện thoại</h5>
+            <p>{{currentUser.phoneNumber}}</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Loại giấy tờ</h5>
+            <p>{{currentUser.identificationType || 'Chưa cập nhật'}}</p>
+            <h5>Ngày cấp</h5>
+            <p>{{currentUser.issueDate || 'Chưa cập nhật'}}</p>
+            <h5>Loại người dùng</h5>
+            <p>{{currentUser.userType === 0 ? 'Nhân viên' : 'Khách hàng'}}</p>
+            <h5>Ngày tham gia</h5>
+            <p>{{currentUser.createdAt}}</p>
+          </div>
+          <div class="col-md-3">
+            <h5>Phê duyệt giấy tờ</h5>
+            <p>{{currentUser.approveStatus === 2 ? 'Đang chờ' : currentUser.approveStatus === 1 ? 'Đã phê duyệt' : 'Không được duyệt'}}</p>
+            <h5>Kích hoạt email</h5>
+            <p>{{currentUser.emailVerified === 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt'}}</p>
+            <h5>Tình trạng</h5>
+            <p>{{currentUser.status === 1 ? 'Bình thường' : 'Bị khóa'}}</p>
+            <h5>Xác minh 2 bước</h5>
+            <p>{{currentUser.enable2fa === 1 ? 'Đang bật' : 'Đang tắt'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

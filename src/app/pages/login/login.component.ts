@@ -40,8 +40,9 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
+    this.loginForm.disable();
     this.auth.login(loginData).pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.close();
       this.router.navigate([this.returnUrl]);
     }, error => {
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
 
   afterRespone() {
     this.loading = false;
+    this.loginForm.enable();
   }
 
 }

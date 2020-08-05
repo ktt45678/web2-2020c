@@ -32,21 +32,39 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AccountManagementComponent } from './pages/account-management/account-management.component';
+import { PersonalInformationComponent } from './pages/personal-information/personal-information.component';
+import { PersonalModificationComponent } from './pages/personal-modification/personal-modification.component';
+import { UpdateAvatarComponent } from './pages/update-avatar/update-avatar.component';
 import { UpdateIdCardComponent } from './pages/update-idcard/update-idcard.component';
+import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
+import { UserInformationComponent } from './pages/user-information/user-information.component';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { UserModificationComponent } from './pages/user-modification/user-modification.component';
+import { UserTaskComponent } from './pages/user-task/user-task.component';
 import { FAQComponent } from './pages/faq/faq.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ExchangerateComponent } from './pages/exchangerate/exchangerate.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PolicyComponent } from './pages/policy/policy.component';
+import { SecurityPolicyComponent } from './pages/security-policy/security-policy.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { Error403Component } from './pages/error403/error403.component';
+import { Error404Component } from './pages/error404/error404.component';
+import { AccountCreationComponent } from './pages/account-creation/account-creation.component';
+import { AccountInformationComponent } from './pages/account-information/account-information.component';
+import { AccountModificationComponent } from './pages/account-modification/account-modification.component';
+import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
+import { AuditLogComponent } from './pages/audit-log/audit-log.component';
 
 // Services, modules
-import { JwtInterceptor } from './modules/jwt-interceptor.module';
-import { ErrorInterceptor } from './modules/error-interceptor.module';
+import { JwtInterceptor } from './modules/interceptor/jwt.interceptor';
+import { ErrorInterceptor } from './modules/interceptor/error.interceptor';
 
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -71,10 +89,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { SecurityPolicyComponent } from './pages/security-policy/security-policy.component';
-import { ServicesComponent } from './pages/services/services.component';
-import { Error403Component } from './pages/error403/error403.component';
-import { Error404Component } from './pages/error404/error404.component';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
@@ -92,8 +108,17 @@ import { Error404Component } from './pages/error404/error404.component';
     RegisterComponent,
     ActivationComponent,
     PasswordRecoveryComponent,
+    AccountManagementComponent,
     DashboardComponent,
+    PersonalInformationComponent,
+    PersonalModificationComponent,
+    UpdatePasswordComponent,
+    UpdateAvatarComponent,
     UpdateIdCardComponent,
+    UserInformationComponent,
+    UserManagementComponent,
+    UserModificationComponent,
+    UserTaskComponent,
     FAQComponent,
     AboutComponent,
     ContactComponent,
@@ -106,7 +131,12 @@ import { Error404Component } from './pages/error404/error404.component';
     SecurityPolicyComponent,
     ServicesComponent,
     Error403Component,
-    Error404Component
+    Error404Component,
+    AccountCreationComponent,
+    AccountInformationComponent,
+    AccountModificationComponent,
+    TransactionHistoryComponent,
+    AuditLogComponent,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +151,7 @@ import { Error404Component } from './pages/error404/error404.component';
     RecaptchaFormsModule,
     MatMenuModule,
     MatToolbarModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -145,6 +176,7 @@ import { Error404Component } from './pages/error404/error404.component';
     MatGridListModule,
     MatStepperModule,
     MatTooltipModule,
+    MatTabsModule,
     LazyLoadImageModule,
     JwtModule.forRoot({
       config: {

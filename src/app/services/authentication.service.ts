@@ -15,7 +15,8 @@ export class AuthenticationService {
   public currentUser: Observable<UserModel>;
   
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<UserModel>(null);
+    const user = new JwtHelperService().decodeToken(this.accessTokenValue);
+    this.currentUserSubject = new BehaviorSubject<UserModel>(user);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -25,13 +26,6 @@ export class AuthenticationService {
 
   public get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
-  }
-
-  getCurrentUser() {
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post<UserModel>(`${environment.apiUrl}/api/getinfo`, {}, { headers }).pipe(map(user => {
-      return user;
-    }));
   }
 
   setCurrentUser(user: UserModel) {
@@ -49,7 +43,7 @@ export class AuthenticationService {
     body.set('phoneNumber', registerData.tel);
     body.set('address', registerData.address);
     body.set('password', registerData.password);
-    body.set('confirmPassword', registerData.password);
+    body.set('confirmPassword', registerData.confirmpassword);
     return this.http.post(`${environment.apiUrl}/api/register`, body.toString(), { headers });
   }
 
@@ -83,6 +77,16 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/api/updatenewpassword`, body.toString(), { headers });
   }
 
+  renewToken() {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post<TokenModel>(`${environment.apiUrl}/api/renew-token`, {}, { headers }).pipe(map(data => {
+      localStorage.setItem('token', JSON.stringify(data.token));
+      const user = new JwtHelperService().decodeToken(data.token);
+      this.currentUserSubject.next(user);
+      return data;
+    }));
+  }
+
   login(loginData) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
@@ -98,9 +102,10 @@ export class AuthenticationService {
 
   logout() {
     // Remove user from local storage to log user out
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    this.http.get(`${environment.apiUrl}/api/auth/logout`, { headers }).subscribe().unsubscribe();
+    this.http.get(`${environment.apiUrl}/api/auth/logout`).subscribe();
     this.currentUserSubject.next(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('task_finished');
+    localStorage.removeItem('job_claimed');
   }
 }

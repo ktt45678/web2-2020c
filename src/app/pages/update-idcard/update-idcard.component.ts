@@ -1,14 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { concat } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { UserModel } from '../../models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UploadService } from '../../services/upload.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-update-idcard',
@@ -17,25 +19,29 @@ import { UserService } from '../../services/user.service';
   providers: [UploadService]
 })
 export class UpdateIdCardComponent implements OnInit, OnDestroy {
-
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   currentUser: UserModel;
-  currentUserSubscription: Subscription;
   loading = false;
   updatetForm: FormGroup;
   uploadProgress = 0;
   selectedFile: File;
   selectedFile2: File;
-  previewImage: String;
-  previewImage2: String;
+  previewImage: string;
+  previewImage2: string;
   sizeLimit = 8388608;
 
-  constructor(private auth: AuthenticationService, private upload: UploadService, private notification: NotificationService, private user: UserService) { }
+  constructor(private auth: AuthenticationService, private upload: UploadService, private notification: NotificationService, private user: UserService, private location: Location, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 768px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   ngOnInit(): void {
-    this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
+    this.currentUser = this.auth.currentUserValue;
     this.updatetForm = new FormGroup({
       cardType: new FormControl('', [Validators.required]),
-      idNumber: new FormControl('', [Validators.required]),
+      idNumber: new FormControl('', [Validators.required, Validators.minLength(5)]),
       issueDate: new FormControl('', [Validators.required])
     });
   }
@@ -51,6 +57,9 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
         return;
       }
       this.selectedFile = fileInputEvent.target.files[0];
+      if (!this.upload.validateImage(this.selectedFile)) {
+        return;
+      }
       this.upload.preview(this.selectedFile).subscribe(data => this.previewImage = data);
     }
   }
@@ -62,6 +71,9 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
         return;
       }
       this.selectedFile2 = fileInputEvent.target.files[0];
+      if (!this.upload.validateImage(this.selectedFile2)) {
+        return;
+      }
       this.upload.preview(this.selectedFile2).subscribe(data => this.previewImage2 = data);
     }
   }
@@ -82,6 +94,11 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
     }
     this.updatetForm.disable();
     this.loading = true;
+    // Update id number
+    const updateIdNumber = this.user.updateIdCard(updateData).pipe(tap(() => {
+      this.notification.showSuccess("Yêu cầu cập nhật thành công");
+      this.afterRespone();
+    }));
     // Upload id card photos for standard users
     if (this.currentUser.userType !== 0) {
       if (!this.selectedFile || !this.selectedFile2) {
@@ -89,38 +106,33 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
         this.afterRespone();
         return;
       }
-      this.upload.idcard(this.selectedFile).subscribe((event: HttpEvent<any>) => {
+      const uploadImage = this.upload.idcard(this.selectedFile).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             this.uploadProgress = Math.round(event.loaded / event.total * 50);
             break;
         }
-      }, error => {
-        this.showError(error);
-        this.afterRespone();
-        return;
-      });
-      this.upload.idcard(this.selectedFile).subscribe((event: HttpEvent<any>) => {
+      }));
+      const uploadImage2 = this.upload.idcard(this.selectedFile2).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             this.uploadProgress = 50 + Math.round(event.loaded / event.total * 50);
             break;
         }
-      }, error => {
+      }));
+      // Subscribe to observables in order as previous completes
+      concat(uploadImage, uploadImage2, updateIdNumber).subscribe(() => {}, error => {
+        this.showError(error);
+        this.afterRespone();
+        return;
+      });
+    } else {
+      updateIdNumber.subscribe(() => {}, error => {
         this.showError(error);
         this.afterRespone();
         return;
       });
     }
-    // Update id number
-    this.user.updateIdCard(updateData).pipe(first()).subscribe(
-    data => {
-      this.notification.showSuccess('Yêu cầu cập nhật thành công');
-      this.afterRespone();
-    }, error => {
-      this.showError(error);
-      this.afterRespone();
-    });
   }
 
   showError(error) {
@@ -131,10 +143,15 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   afterRespone() {
     this.updatetForm.enable();
     this.loading = false;
+    this.uploadProgress = 0;
+  }
+
+  return() {
+    this.location.back();
   }
 
   ngOnDestroy() {
-    this.currentUserSubscription.unsubscribe()
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
 }

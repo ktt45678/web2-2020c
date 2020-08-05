@@ -1,48 +1,46 @@
-<div class="mat-body">
-  <div class="mat-page mt-2r">
-    <div class="container">
-      <div class="login-form ml-auto mr-auto">
-        <div [ngClass]="loading ? 'visible' : 'invisible'">
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        </div>
-        <div class="login-inner">
-          <h2 class="mb-3 text-center">ĐĂNG NHẬP</h2>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+<div class="mt-2r">
+  <div class="container">
+    <div class="login-form ml-auto mr-auto br-10px">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="login-inner">
+        <h2 class="mb-3 text-center">ĐĂNG NHẬP</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email hoặc tên người dùng</mat-label>
+              <input type="text" formControlName="username" matInput>
+              <mat-error *ngIf="username.errors?.required">
+                Email hoặc tên người dùng là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Mật khẩu</mat-label>
+              <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput>
+              <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [disabled]="loading"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="password.errors?.required">
+                Mật khẩu là <strong>bắt buộc</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="mt-2">
+            <a routerLink="/passwordrecovery" mat-button color="primary" [disabled]="loading">Bạn quên mật khẩu?</a>
+          </div>
+          <div class="d-flex">
             <div>
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Email hoặc tên người dùng</mat-label>
-                <input type="text" formControlName="username" matInput [attr.disabled]="loading ? '' : null">
-                <mat-error *ngIf="username.errors?.required">
-                  Email hoặc tên người dùng là <strong>bắt buộc</strong>
-                </mat-error>
-              </mat-form-field>
+              <a routerLink="/register" mat-button color="primary" [disabled]="loading">Tạo tài khoản</a>
             </div>
-            <div>
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Mật khẩu</mat-label>
-                <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput [attr.disabled]="loading ? '' : null">
-                <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [disabled]="loading"
-                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-                  <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-                <mat-error *ngIf="password.errors?.required">
-                  Mật khẩu là <strong>bắt buộc</strong>
-                </mat-error>
-              </mat-form-field>
+            <div class="ml-auto">
+              <button type="submit" mat-flat-button color="primary" [disabled]="loading">Đăng nhập</button>
             </div>
-            <div class="mt-2">
-              <a routerLink="/passwordrecovery" mat-button color="primary" [disabled]="loading">Bạn quên mật khẩu?</a>
-            </div>
-            <div class="d-flex">
-              <div>
-                <a routerLink="/register" mat-button color="primary" [disabled]="loading">Tạo tài khoản</a>
-              </div>
-              <div class="ml-auto">
-                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Đăng nhập</button>
-              </div>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

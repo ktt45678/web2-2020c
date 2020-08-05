@@ -1,0 +1,148 @@
+<div class="mt-2r">
+  <mat-spinner *ngIf="!selectedUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div class="container">
+    <div class="account-form ml-auto mr-auto br-10px">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="account-inner">
+        <h2 class="mb-3 text-center">TẠO TÀI KHOẢN</h2>
+        <div *ngIf="!accountType" class="account-selector">
+          <form [formGroup]="selectAccountForm" (ngSubmit)="onSelectAccount(selectAccountForm.value)">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Loại tài khoản</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option value="0">Tài khoản thanh toán</mat-option>
+                  <mat-option value="1">Tài khoản tiết kiệm</mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectCurrency.errors?.required">
+                  Loại tài khoản là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Đơn vị tiền</mat-label>
+                <mat-select formControlName="currency">
+                  <mat-option value="VND">VND</mat-option>
+                  <mat-option value="USD">USD</mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectCurrency.errors?.required">
+                  Đơn vị tiền là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Tiếp tục</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="accountType === '0'" class="checking-account">
+          <form [formGroup]="checkingAccountForm" (ngSubmit)="onCheckingAccount(checkingAccountForm.value)">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Người dùng</mat-label>
+                <input type="text" formControlName="owner" matInput readonly>
+                <mat-error *ngIf="checkingOwner.errors?.required">
+                  Người dùng là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số dư ban đầu</mat-label>
+                <input type="number" formControlName="balance" matInput>
+                <mat-icon matSuffix>account_balance</mat-icon>
+                <mat-error *ngIf="checkingBalance.errors?.required">
+                  Số dư ban đầu là <strong>bắt buộc</strong>
+                </mat-error>
+                <mat-error *ngIf="checkingBalance.errors?.min">
+                  Số dư ban đầu tối thiểu là <strong>500,000đ</strong> hoặc <strong>$23</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="cancel()" mat-button color="primary" [disabled]="loading">Hủy</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="accountType === '1'" class="saving-account">
+          <form [formGroup]="savingAccountForm" (ngSubmit)="onSavingAccount(savingAccountForm.value)">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Người dùng</mat-label>
+                <input type="text" formControlName="owner" matInput readonly>
+                <mat-error *ngIf="savingOwner.errors?.required">
+                  Người dùng là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Kỳ hạn</mat-label>
+                <mat-select #currencyPicker formControlName="term">
+                  <mat-option value="3">3 tháng</mat-option>
+                  <mat-option value="6">6 tháng</mat-option>
+                  <mat-option value="12">12 tháng</mat-option>
+                  <mat-option value="18">18 tháng</mat-option>
+                  <mat-option value="24">24 tháng</mat-option>
+                  <mat-option value="30">30 tháng</mat-option>
+                  <mat-option value="36">36 tháng</mat-option>
+                </mat-select>
+                <mat-error *ngIf="savingTerm.errors?.required">
+                  Kỳ hạn là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số dư ban đầu</mat-label>
+                <input type="number" formControlName="balance" matInput>
+                <mat-icon matSuffix>account_balance</mat-icon>
+                <mat-error *ngIf="savingBalance.errors?.required">
+                  Số dư ban đầu là <strong>bắt buộc</strong>
+                </mat-error>
+                <mat-error *ngIf="savingBalance.errors?.min">
+                  Số dư ban đầu tối thiểu là <strong>500,000đ</strong> hoặc <strong>$23</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="cancel()" mat-button color="primary" [disabled]="loading">Hủy</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="accountType === 'done' && accountId" class="account-done">
+          <div class="text-center">
+            <mat-icon class="text-75px">done</mat-icon>
+            <p class="text-20px">Tài khoản đã được tạo thành công: {{accountId}}</p>
+          </div>
+          <div class="d-flex mt-2">
+            <div>
+              <button (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+            </div>
+            <div class="ml-auto">
+              <button (click)="cancel()" mat-flat-button color="primary" [disabled]="loading">Tạo thêm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
