@@ -1,0 +1,32 @@
+.container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    //box-shadow: 0 0 0 2px rgba(0, 0, 0, .1);
+    img{
+        max-width: 800px;
+        max-height: 475px;
+        display: block;
+        margin: none;
+    }
+    #errorCard{
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0px 0px 0px 0px;
+    }
+    h3{
+        font-family: 'Nunito Sans', sans-serif;
+        text-align: center;
+        font-style: italic;
+        font-weight: 800;
+    }
+
+    mat-card-actions{
+        text-align: center;
+    }
+    mat-card-actions a{
+        color: white;
+    }
+
+}

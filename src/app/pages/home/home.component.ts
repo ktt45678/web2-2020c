@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-  defaultImage ="../../../assets/img/header-banner-placeholder.jpg";
-  lazyloadedImage ="../../../assets/img/header-banner.jpg";
+  //defaultImage ="../../../assets/img/header-banner-placeholder.jpg";
+  //lazyloadedImage ="../../../assets/img/header-banner.jpg";
   constructor() { }
 
   ngOnInit(): void {

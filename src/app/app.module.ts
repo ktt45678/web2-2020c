@@ -73,6 +73,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SecurityPolicyComponent } from './pages/security-policy/security-policy.component';
 import { ServicesComponent } from './pages/services/services.component';
+import { Error403Component } from './pages/error403/error403.component';
+import { Error404Component } from './pages/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,9 @@ import { ServicesComponent } from './pages/services/services.component';
     SideLayoutComponent,
     UserManagementComponent,
     SecurityPolicyComponent,
-    ServicesComponent
+    ServicesComponent,
+    Error403Component,
+    Error404Component
   ],
   imports: [
     BrowserModule,

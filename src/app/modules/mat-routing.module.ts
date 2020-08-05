@@ -13,6 +13,8 @@ import { PolicyComponent } from '../pages/policy/policy.component';
 import { ExchangerateComponent } from '../pages/exchangerate/exchangerate.component';
 import { SecurityPolicyComponent } from '../pages/security-policy/security-policy.component';
 import { ServicesComponent } from '../pages/services/services.component';
+import { Error403Component } from '../pages/error403/error403.component';
+import { Error404Component } from '../pages/error404/error404.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,8 @@ const routes: Routes = [
       { path: 'exchangerate', component: ExchangerateComponent },
       { path: 'security-policy', component: SecurityPolicyComponent },
       { path: 'services', component: ServicesComponent },
+      { path: '403', component:Error403Component },
+      { path: '404', component:Error404Component },
     ]
   }
 ];
