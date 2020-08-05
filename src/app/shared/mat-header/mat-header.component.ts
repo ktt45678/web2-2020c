@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from '../../models/user.model';
-import { UserImage } from '../../models/user-image.model';
-import { UserStorage } from '../../models/user-storage.model';
+import { UserImageModel } from '../../models/user-image.model';
+import { UserStorageModel } from '../../models/user-storage.model';
 
 @Component({
   selector: 'app-mat-header',
@@ -16,8 +16,8 @@ import { UserStorage } from '../../models/user-storage.model';
 })
 export class MatHeaderComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
-  currentUserAvatar: UserImage;
-  currentUserAudio: UserStorage;
+  currentUserAvatar: Observable<UserImageModel>;
+  currentUserAudio: Observable<UserStorageModel>;
   currentUserSubscription = new Subscription();
   @Input() allowMenu: Boolean;
 
@@ -25,13 +25,11 @@ export class MatHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.allowMenu) {
+      this.currentUserAvatar = this.user.userAvatar;
+      this.currentUserAudio = this.user.userAudio;
       this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);
-      this.user.findAvatar().subscribe(avatars => {
-        this.currentUserAvatar = avatars[0];
-      });
-      this.user.findAudio().subscribe(audios => {
-        this.currentUserAudio = audios[0];
-      });
+      this.user.findAvatar().subscribe();
+      this.user.findAudio().subscribe();
     }
   }
 

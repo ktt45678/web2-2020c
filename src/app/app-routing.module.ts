@@ -10,7 +10,6 @@ import { HomeLayoutComponent } from './shared/home-layout/home-layout.component'
 const matModule = () => import('./modules/routing/mat.module').then(x => x.PageModule);
 const sideModule = () => import('./modules/routing/side.module').then(x => x.SideModule);
 
-
 const routes: Routes = [
   // Home routes
   {

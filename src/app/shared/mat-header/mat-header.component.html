@@ -7,18 +7,18 @@
       <img src="/assets/img/whitefoologohead.png" alt="logo">
       <img src="/assets/img/whitefoologocap.png" alt="logo">
     </a>
-    <audio *ngIf="currentUserAudio" class="w-25 h-40px" controls loop>
-      <source [src]="currentUserAudio.uri" [type]="currentUserAudio.mimeType">
+    <audio *ngIf="(currentUserAudio | async)" class="w-25 h-40px" controls loop>
+      <source [src]="(currentUserAudio | async).uri" [type]="(currentUserAudio | async).mimeType">
     </audio>
     <div *ngIf="allowMenu">
       <button mat-icon-button [matMenuTriggerFor]="menu">
-        <img class="mini-avatar" *ngIf="currentUserAvatar" [defaultImage]="currentUserAvatar.small" [lazyLoad]="currentUserAvatar.mimeType === 'image/gif' ? currentUserAvatar.original : currentUserAvatar.thumbnail" alt="mini avatar">
-        <mat-icon *ngIf="!currentUserAvatar">account_circle</mat-icon>
+        <img class="mini-avatar" *ngIf="(currentUserAvatar | async)" [defaultImage]="(currentUserAvatar | async).small" [lazyLoad]="(currentUserAvatar | async).mimeType === 'image/gif' ? (currentUserAvatar | async).original : (currentUserAvatar | async).thumbnail" alt="mini avatar">
+        <mat-icon *ngIf="!(currentUserAvatar | async)">account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu" class="user-menu">
         <div class="user-info text-center pl-5 pr-5" *ngIf="currentUser">
-          <img *ngIf="currentUserAvatar" class="avatar" [defaultImage]="currentUserAvatar.small" [lazyLoad]="currentUserAvatar.mimeType === 'image/gif' ? currentUserAvatar.original : currentUserAvatar.thumbnail" alt="avatar">
-          <img *ngIf="!currentUserAvatar" class="avatar" src="/assets/img/defaultavataruser.svg" alt="avatar">
+          <img *ngIf="(currentUserAvatar | async)" class="avatar" [defaultImage]="(currentUserAvatar | async).small" [lazyLoad]="(currentUserAvatar | async).mimeType === 'image/gif' ? (currentUserAvatar | async).original : (currentUserAvatar | async).thumbnail" alt="avatar">
+          <img *ngIf="!(currentUserAvatar | async)" class="avatar" src="/assets/img/defaultavataruser.svg" alt="avatar">
           <p class="mt-3 mb-0">{{currentUser.firstName}} {{currentUser.lastName}}</p>
           <p class="text-muted">{{currentUser.email}}</p>
         </div>

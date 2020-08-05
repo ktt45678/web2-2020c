@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { AccountModel } from '../models/account.model';
 import { UserModel } from '../models/user.model';
 import { StatusModel } from '../models/status.model';
-import { UserImage } from '../models/user-image.model';
-import { UserStorage } from '../models/user-storage.model';
+import { UserImageModel } from '../models/user-image.model';
+import { UserStorageModel } from '../models/user-storage.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+  private userAvatarSubject: BehaviorSubject<UserImageModel>;
+  public userAvatar: Observable<UserImageModel>;
+  private userAudioSubject: BehaviorSubject<UserStorageModel>;
+  public userAudio: Observable<UserStorageModel>;
+
+  constructor(private http: HttpClient) {
+    this.userAvatarSubject = new BehaviorSubject<UserImageModel>(null);
+    this.userAvatar = this.userAvatarSubject.asObservable();
+    this.userAudioSubject = new BehaviorSubject<UserStorageModel>(null);
+    this.userAudio = this.userAudioSubject.asObservable();
+  }
 
   public get taskFinished(): Boolean {
     return JSON.parse(localStorage.getItem('task_finished'));
   }
 
-  public get jobClaimed(): Boolean {
-    return JSON.parse(localStorage.getItem('job_claimed'));
+  public get workClaimed(): Boolean {
+    return JSON.parse(localStorage.getItem('work_claimed'));
   }
   
   updateIdCard(updateData) {
@@ -82,11 +93,15 @@ export class UserService {
   }
 
   findAvatar() {
-    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`);
+    return this.http.get<UserImageModel[]>(`${environment.apiUrl}/api/upload/avatars`).pipe(tap(avatars => {
+      this.userAvatarSubject.next(avatars[0]);
+    }));
   }
 
   findAudio() {
-    return this.http.get<UserStorage[]>(`${environment.apiUrl}/api/upload/audios`);
+    return this.http.get<UserStorageModel[]>(`${environment.apiUrl}/api/upload/audios`).pipe(tap(audios => {
+      this.userAudioSubject.next(audios[0]);
+    }));
   }
 
   findInfo(type = 'full') {
@@ -96,15 +111,14 @@ export class UserService {
 
   findManager() {
     return this.http.get<any>(`${environment.apiUrl}/api/requeststaff`).pipe(map(data => {
-      localStorage.setItem('job_claimed', JSON.stringify(data.count > 0));
+      localStorage.setItem('work_claimed', JSON.stringify(data.count > 0));
       return data;
     }));
   }
 
   findStatus() {
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const params = { type: 'status' };
-    return this.http.get<StatusModel>(`${environment.apiUrl}/api/getinfo`, { headers, params }).pipe(map(status => {
+    return this.http.get<StatusModel>(`${environment.apiUrl}/api/getinfo`, { params }).pipe(map(status => {
       localStorage.setItem('task_finished', JSON.stringify(status.approveStatus === 1 && status.emailVerified !== 0));
       return status;
     }));

@@ -1,4 +1,4 @@
-export class UserStorage {
+export class UserStorageModel {
   file: string;
   quality: string;
   mimeType: string;

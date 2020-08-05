@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { ManagementService } from '../../services/management.service'
 import { NotificationService } from '../../services/notification.service'
 import { UserModel } from '../../models/user.model';
-import { UserImage } from '../../models/user-image.model';
+import { UserImageModel } from '../../models/user-image.model';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -17,8 +17,8 @@ import { first } from 'rxjs/operators';
 export class UserInformationComponent implements OnInit {
   userId: string;
   selectedUser: UserModel;
-  selectedUserAvatar: UserImage;
-  submittedIdCards: UserImage[];
+  selectedUserAvatar: UserImageModel;
+  submittedIdCards: UserImageModel[];
 
   constructor(private route: ActivatedRoute, private manage: ManagementService, private notification: NotificationService, private location: Location) { }
 
@@ -37,8 +37,9 @@ export class UserInformationComponent implements OnInit {
     this.manage.verifyUser(this.userId, 1).pipe(first()).subscribe(
     () => {
       this.notification.showSuccess('Đã phê duyệt thành công');
+      this.selectedUser.approveStatus = 1;
       this.afterRespone();
-    }, error => {
+    }, () => {
       this.notification.showError('Đã có lỗi xảy ra');
     });
   }
@@ -47,14 +48,14 @@ export class UserInformationComponent implements OnInit {
     this.manage.verifyUser(this.userId, 0).pipe(first()).subscribe(
     () => {
       this.notification.showSuccess('Đã từ chối phê duyệt');
+      this.selectedUser.approveStatus = 0;
       this.afterRespone();
-    }, error => {
+    }, () => {
       this.notification.showError('Đã có lỗi xảy ra');
     });
   }
 
   afterRespone() {
-    this.selectedUser.approveStatus = 1;
     this.manage.removeSubmittedIdCards(this.userId).subscribe();
   }
 

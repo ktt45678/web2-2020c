@@ -32,7 +32,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ActivationComponent } from './pages/activation/activation.component';
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AccountCreationComponent } from './pages/account-creation/account-creation.component';
 import { AccountManagementComponent } from './pages/account-management/account-management.component';
+import { AccountInformationComponent } from './pages/account-information/account-information.component';
+import { AccountModificationComponent } from './pages/account-modification/account-modification.component';
+import { AccountTransferComponent } from './pages/account-transfer/account-transfer.component';
+import { AccountWithdrawalComponent } from './pages/account-withdrawal/account-withdrawal.component';
 import { PersonalInformationComponent } from './pages/personal-information/personal-information.component';
 import { PersonalModificationComponent } from './pages/personal-modification/personal-modification.component';
 import { UpdateAvatarComponent } from './pages/update-avatar/update-avatar.component';
@@ -51,9 +56,6 @@ import { SecurityPolicyComponent } from './pages/security-policy/security-policy
 import { ServicesComponent } from './pages/services/services.component';
 import { Error403Component } from './pages/error403/error403.component';
 import { Error404Component } from './pages/error404/error404.component';
-import { AccountCreationComponent } from './pages/account-creation/account-creation.component';
-import { AccountInformationComponent } from './pages/account-information/account-information.component';
-import { AccountModificationComponent } from './pages/account-modification/account-modification.component';
 import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
 import { AuditLogComponent } from './pages/audit-log/audit-log.component';
 
@@ -108,7 +110,12 @@ import { MatTabsModule } from '@angular/material/tabs';
     RegisterComponent,
     ActivationComponent,
     PasswordRecoveryComponent,
+    AccountCreationComponent,
     AccountManagementComponent,
+    AccountInformationComponent,
+    AccountModificationComponent,
+    AccountTransferComponent,
+    AccountWithdrawalComponent,
     DashboardComponent,
     PersonalInformationComponent,
     PersonalModificationComponent,
@@ -132,11 +139,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     ServicesComponent,
     Error403Component,
     Error404Component,
-    AccountCreationComponent,
-    AccountInformationComponent,
-    AccountModificationComponent,
     TransactionHistoryComponent,
-    AuditLogComponent,
+    AuditLogComponent
   ],
   imports: [
     BrowserModule,

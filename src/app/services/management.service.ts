@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 
 
 import { AccountModel } from '../models/account.model';
-import { UserImage } from '../models/user-image.model';
+import { UserImageModel } from '../models/user-image.model';
 import { UserModel } from '../models/user.model';
 
 @Injectable()
@@ -56,14 +56,24 @@ export class ManagementService {
     return this.http.get<any>(`${environment.apiUrl}/api/getuseraccount`, { params });
   }
 
+  findAuditLog(start: string, limit: string, userId: string, type: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('start', start);
+    body.set('limit', limit);
+    body.set('userId', userId);
+    body.set('type', type);
+    return this.http.post(`${environment.apiUrl}/api/getaudit`, body.toString(), { headers });
+  }
+
   findAvatar(userId: string) {
     const params = { userId };
-    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
+    return this.http.get<UserImageModel[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
   }
 
   findSubmittedIdCards(userId: string) {
     const params = { userId };
-    return this.http.get<UserImage[]>(`${environment.apiUrl}/api/upload/idcards`, { params });
+    return this.http.get<UserImageModel[]>(`${environment.apiUrl}/api/upload/idcards`, { params });
   }
 
   findUser(id: string) {

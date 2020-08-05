@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { UserService } from '../../services/user.service'
 import { NotificationService } from '../../services/notification.service'
 import { UserModel } from '../../models/user.model';
-import { UserImage } from '../../models/user-image.model';
+import { UserImageModel } from '../../models/user-image.model';
 
 @Component({
   selector: 'app-personal-information',
@@ -14,7 +14,7 @@ import { UserImage } from '../../models/user-image.model';
 })
 export class PersonalInformationComponent implements OnInit {
   currentUser: UserModel;
-  currentUserAvatar: UserImage;
+  currentUserAvatar: UserImageModel;
 
   constructor(private route: ActivatedRoute, private router: Router, private user: UserService, private notification: NotificationService, private location: Location) { }
 

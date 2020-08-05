@@ -1,4 +1,4 @@
-export class UserImage {
+export class UserImageModel {
   file: string;
   mimeType: string;
   original: string;

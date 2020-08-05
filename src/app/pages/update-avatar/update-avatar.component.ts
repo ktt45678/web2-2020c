@@ -87,27 +87,32 @@ export class UpdateAvatarComponent implements OnInit {
     }
     this.updatetForm.disable();
     this.loading = true;
-    //Upload avatar and track
+    // Upload avatar and track
     const uploadAvatar = this.upload.avatar(this.selectedAvatar).pipe(tap((event: HttpEvent<any>) => {
       switch (event.type) {
         case HttpEventType.UploadProgress:
           this.uploadProgress = Math.round(event.loaded / event.total * 100);
           break;
         case HttpEventType.Response:
+          this.user.findAvatar().subscribe();
           this.notification.showSuccess('Cập nhật thành công');
           this.afterRespone();
           break;
       }
     }));
+    // Upload both avatar and track
     if (this.selectedTrack && this.selectedAvatar) {
       const uploadTrack = this.upload.audio(this.selectedTrack).pipe(tap((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             this.uploadProgress = Math.round(event.loaded / event.total * 100);
             break;
+          case HttpEventType.Response:
+            this.user.findAudio().subscribe();
+            break;
         }
       }));
-      // Turn multiple observables into a single observable
+      // Subscribe to observables in order as previous completes
       concat(uploadTrack, uploadAvatar).subscribe(() => {}, error => {
         this.showError(error);
         this.afterRespone();
@@ -120,6 +125,7 @@ export class UpdateAvatarComponent implements OnInit {
             this.uploadProgress = Math.round(event.loaded / event.total * 100);
             break;
           case HttpEventType.Response:
+            this.user.findAudio().subscribe();
             this.notification.showSuccess('Cập nhật thành công âm thanh');
             this.afterRespone();
             break;

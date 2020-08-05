@@ -106,6 +106,6 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
     localStorage.removeItem('token');
     localStorage.removeItem('task_finished');
-    localStorage.removeItem('job_claimed');
+    localStorage.removeItem('work_claimed');
   }
 }

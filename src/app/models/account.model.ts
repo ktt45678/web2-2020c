@@ -9,4 +9,5 @@ export class AccountModel {
   closedDate?: string;
   term?: number;
   startTermDate?: string;
+  createdAt: string;
 }

@@ -16,10 +16,12 @@
           <p>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</p>
           <h5>Đơn vị tiền</h5>
           <p>{{selectedAccount.currencyType}}</p>
-        </div>
-        <div class="col-md-3">
           <h5>Tình trạng</h5>
           <p>{{selectedAccount.status === 1 ? 'Mở' : 'Đóng'}}</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Ngày tạo</h5>
+          <p>{{selectedAccount.createdAt}}</p>
           <h5>Ngày mở</h5>
           <p>{{selectedAccount.openedDate}}</p>
           <h5>Ngày đóng</h5>
