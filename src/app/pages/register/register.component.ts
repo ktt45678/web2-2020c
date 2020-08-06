@@ -23,8 +23,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   returnUrl: string;
   hidePassword = true;
   registerForm: FormGroup;
-  defaultImage ="../../../assets/img/placeholder.png";
-  lazyloadedImage ="../../../assets/img/signup-image.jpg";
+  defaultImage ="/assets/img/placeholder.png";
+  lazyloadedImage ="/assets/img/signup-image.jpg";
   constructor(private auth: AuthenticationService, private reCaptcha: ReCaptchaService, private notification: NotificationService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

@@ -5,7 +5,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { ManagementService } from '../../services/management.service';
 import { NotificationService } from '../../services/notification.service';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../../modules/models/user.model';
 import { first } from 'rxjs/operators';
 
 @Component({

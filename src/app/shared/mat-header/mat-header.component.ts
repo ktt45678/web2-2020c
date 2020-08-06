@@ -5,9 +5,9 @@ import { Subscription, Observable } from 'rxjs';
 import { SidenavService } from '../../services/component.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
-import { UserModel } from '../../models/user.model';
-import { UserImageModel } from '../../models/user-image.model';
-import { UserStorageModel } from '../../models/user-storage.model';
+import { UserModel } from '../../modules/models/user.model';
+import { UserImageModel } from '../../modules/models/user-image.model';
+import { UserStorageModel } from '../../modules/models/user-storage.model';
 
 @Component({
   selector: 'app-mat-header',

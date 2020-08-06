@@ -130,10 +130,10 @@
         </div>
         <div *ngIf="accountType === 'done' && accountId" class="account-done">
           <div class="text-center">
-            <mat-icon class="text-75px">done</mat-icon>
+            <mat-icon class="text-75px w-100">done</mat-icon>
             <p class="text-20px">Tài khoản đã được tạo thành công: {{accountId}}</p>
           </div>
-          <div class="d-flex mt-2">
+          <div class="d-flex mt-2r">
             <div>
               <button (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
             </div>

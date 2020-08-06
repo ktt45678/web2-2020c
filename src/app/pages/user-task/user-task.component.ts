@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '../../services/authentication.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
-import { StatusModel } from '../../models/status.model';
+import { StatusModel } from '../../modules/models/status.model';
 
 @Component({
   selector: 'app-user-task',
@@ -15,7 +14,7 @@ export class UserTaskComponent implements OnInit, OnDestroy {
   userStatus: StatusModel;
   canRequestManager = false;
 
-  constructor(private auth: AuthenticationService, private user: UserService, private notification: NotificationService) { }
+  constructor(private user: UserService, private notification: NotificationService) { }
 
   ngOnInit(): void {
     this.user.findStatus().pipe(first()).subscribe(data => {
@@ -31,7 +30,7 @@ export class UserTaskComponent implements OnInit, OnDestroy {
 
   sendActivationEmail() {
     this.user.sendActivationEmail().pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.showSuccess("Đã gửi email kích hoạt, vui lòng kiểm tra hộp thư của bạn");
     }, error => {
       this.showError(error);
@@ -40,7 +39,7 @@ export class UserTaskComponent implements OnInit, OnDestroy {
 
   isekai() {
     this.user.requestManager().pipe(first()).subscribe(
-    data => {
+    () => {
       this.notification.showSuccess("Đăng ký trở thành nhân viên thành công");
     }, error => {
       this.showError(error);

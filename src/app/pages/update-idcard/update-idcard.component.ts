@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { concat } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../../modules/models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UploadService } from '../../services/upload.service';
 import { NotificationService } from '../../services/notification.service';

@@ -9,7 +9,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../../modules/models/user.model';
 import { AccountDataSource } from '../../modules/template/account.datasource';
 
 @Component({

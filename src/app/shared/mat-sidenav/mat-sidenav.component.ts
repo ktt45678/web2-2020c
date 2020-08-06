@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
-import { UserModel } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/modules/models/user.model';
 
 @Component({
   selector: 'app-mat-sidenav',

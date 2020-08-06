@@ -9,7 +9,7 @@ import * as _moment from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service'
 import { NotificationService } from '../../services/notification.service';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../../modules/models/user.model';
 import { regex } from '../../modules/template/regex.pattern';
 
 @Component({
@@ -100,14 +100,18 @@ export class UserModificationComponent implements OnInit, OnDestroy {
       this.notification.showSuccess('Thay đổi thông tin thành công');
       this.afterRespone();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.afterRespone();
     });
   }
 
   return() {
     this.location.back();
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   afterRespone() {

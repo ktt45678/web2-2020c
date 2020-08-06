@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
-import { UserModel } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/modules/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
-    this.showTask = !this.user.taskFinished && !this.user.workClaimed;
+    this.showTask = !this.user.taskFinished || !this.user.workClaimed;
   }
 
   showError(error) {

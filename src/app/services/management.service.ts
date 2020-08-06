@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 
-import { AccountModel } from '../models/account.model';
-import { UserImageModel } from '../models/user-image.model';
-import { UserModel } from '../models/user.model';
+import { AccountModel } from '../modules/models/account.model';
+import { UserImageModel } from '../modules/models/user-image.model';
+import { UserModel } from '../modules/models/user.model';
 
 @Injectable()
 export class ManagementService {

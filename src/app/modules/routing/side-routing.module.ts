@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { RoleGuard } from '../guard/role.guard';
+import { ActivateGuard } from '../guard/activate.guard';
 
 import { SideLayoutComponent } from '../../shared/side-layout/side-layout.component';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
@@ -17,6 +18,8 @@ import { AccountCreationComponent } from '../../pages/account-creation/account-c
 import { AccountManagementComponent } from '../../pages/account-management/account-management.component';
 import { AccountInformationComponent } from '../../pages/account-information/account-information.component';
 import { AccountModificationComponent } from '../../pages/account-modification/account-modification.component';
+import { AuditLogComponent } from '../../pages/audit-log/audit-log.component';
+import { TransactionHistoryComponent } from '../../pages/transaction-history/transaction-history.component';
 
 const routes: Routes = [
   {
@@ -32,10 +35,12 @@ const routes: Routes = [
       { path: 'users', component: UserManagementComponent, canActivate: [RoleGuard] },
       { path: 'users/view/:userid', component: UserInformationComponent, canActivate: [RoleGuard] },
       { path: 'users/edit/:userid', component: UserModificationComponent, canActivate: [RoleGuard] },
-      { path: 'accounts', component: AccountManagementComponent },
+      { path: 'accounts', component: AccountManagementComponent, canActivate: [ActivateGuard] },
       { path: 'accounts/create/:userid', component: AccountCreationComponent, canActivate: [RoleGuard] },
       { path: 'accounts/view/:accountid', component: AccountInformationComponent, canActivate: [RoleGuard] },
-      { path: 'accounts/edit/:accountid', component: AccountModificationComponent, canActivate: [RoleGuard] }
+      { path: 'accounts/edit/:accountid', component: AccountModificationComponent, canActivate: [RoleGuard] },
+      { path: 'log', component: AuditLogComponent, canActivate: [RoleGuard] },
+      { path: 'history', component: TransactionHistoryComponent, canActivate: [ActivateGuard] }
     ]
   }
 ];

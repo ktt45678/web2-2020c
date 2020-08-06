@@ -11,6 +11,11 @@ export class NotificationService {
     this.snackBar.open(message, 'Đóng');
   }
 
+  showInfo(message: string): void {
+    // Error without error code
+    this.snackBar.open(message, 'Đóng', { panelClass: ['info'] });
+  }
+
   showError(message: string): void {
     // In the third, we send in the css class for the snack bar.
     const errorMessage = this.parseError(message);

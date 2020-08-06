@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 
 import { ManagementService } from '../../services/management.service';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../models/user.model';
 
 export class UserDataSource implements DataSource<UserModel>{
 

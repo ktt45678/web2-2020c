@@ -8,7 +8,7 @@ import * as _moment from 'moment';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service'
 import { NotificationService } from '../../services/notification.service';
-import { UserModel } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/modules/models/user.model';
 import { regex } from '../../modules/template/regex.pattern';
 import { first } from 'rxjs/operators';
 

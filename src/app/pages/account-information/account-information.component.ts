@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
-import { UserModel } from '../../models/user.model';
-import { AccountModel } from '../../models/account.model';
+import { UserModel } from '../../modules/models/user.model';
+import { AccountModel } from '../../modules/models/account.model';
 
 @Component({
   selector: 'app-account-information',

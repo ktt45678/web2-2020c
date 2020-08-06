@@ -4,11 +4,11 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { AccountModel } from '../models/account.model';
-import { UserModel } from '../models/user.model';
-import { StatusModel } from '../models/status.model';
-import { UserImageModel } from '../models/user-image.model';
-import { UserStorageModel } from '../models/user-storage.model';
+import { AccountModel } from '../modules/models/account.model';
+import { UserModel } from '../modules/models/user.model';
+import { StatusModel } from '../modules/models/status.model';
+import { UserImageModel } from '../modules/models/user-image.model';
+import { UserStorageModel } from '../modules/models/user-storage.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

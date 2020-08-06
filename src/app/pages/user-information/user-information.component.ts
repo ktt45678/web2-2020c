@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 
 import { ManagementService } from '../../services/management.service'
 import { NotificationService } from '../../services/notification.service'
-import { UserModel } from '../../models/user.model';
-import { UserImageModel } from '../../models/user-image.model';
+import { UserModel } from '../../modules/models/user.model';
+import { UserImageModel } from '../../modules/models/user-image.model';
 import { first } from 'rxjs/operators';
 
 @Component({

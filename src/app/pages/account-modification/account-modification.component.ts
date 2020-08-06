@@ -7,8 +7,8 @@ import { tap, first } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
 import { NotificationService } from '../../services/notification.service';
-import { UserModel } from '../../models/user.model';
-import { AccountModel } from '../../models/account.model';
+import { UserModel } from '../../modules/models/user.model';
+import { AccountModel } from '../../modules/models/account.model';
 
 @Component({
   selector: 'app-account-modification',
@@ -63,8 +63,7 @@ export class AccountModificationComponent implements OnInit {
       this.payInForm.enable();
       this.afterRespone();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.payInForm.enable();
       this.afterRespone();
     });
@@ -82,11 +81,15 @@ export class AccountModificationComponent implements OnInit {
       this.updateAccountForm.enable();
       this.afterRespone();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.updateAccountForm.enable();
       this.afterRespone();
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   afterRespone() {

@@ -4,7 +4,7 @@ import { catchError, finalize } from "rxjs/operators";
 
 import { ManagementService } from '../../services/management.service';
 import { UserService } from '../../services/user.service';
-import { AccountModel } from '../../models/account.model';
+import { AccountModel } from '../models/account.model';
 
 export class AccountDataSource implements DataSource<AccountModel>{
 
