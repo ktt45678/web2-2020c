@@ -1,6 +1,6 @@
 // Core modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -60,8 +60,10 @@ import { TransactionHistoryComponent } from './pages/transaction-history/transac
 import { AuditLogComponent } from './pages/audit-log/audit-log.component';
 
 // Services, modules
+import { appInitializer } from './modules/initializer/app.initializer';
 import { JwtInterceptor } from './modules/interceptor/jwt.interceptor';
 import { ErrorInterceptor } from './modules/interceptor/error.interceptor';
+import { AuthenticationService } from './services/authentication.service';
 
 // Angular material
 import { MatMenuModule } from '@angular/material/menu';
@@ -192,6 +194,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     })
   ],
   providers: [
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
     { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

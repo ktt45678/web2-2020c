@@ -11,6 +11,7 @@ import { UserModel } from '../models/user.model';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
+  private refreshTokenTimeout;
   private currentUserSubject: BehaviorSubject<UserModel>;
   public currentUser: Observable<UserModel>;
   
@@ -77,14 +78,28 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/api/updatenewpassword`, body.toString(), { headers });
   }
 
-  renewToken() {
+  refreshToken() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post<TokenModel>(`${environment.apiUrl}/api/renew-token`, {}, { headers }).pipe(map(data => {
       localStorage.setItem('token', JSON.stringify(data.token));
       const user = new JwtHelperService().decodeToken(data.token);
       this.currentUserSubject.next(user);
+      this.startRefreshTokenTimer();
       return data;
     }));
+  }
+
+  private startRefreshTokenTimer() {
+    // Parse json object from base64 encoded jwt token
+    const jwtToken = new JwtHelperService().decodeToken(this.accessTokenValue);
+    // Set a timeout to refresh the token a minute before it expires
+    const expires = new Date(jwtToken.exp * 1000);
+    const timeout = expires.getTime() - Date.now() - (60 * 1000);
+    this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+  }
+
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
   }
 
   login(loginData) {
@@ -104,6 +119,7 @@ export class AuthenticationService {
     // Remove user from local storage to log user out
     this.http.get(`${environment.apiUrl}/api/auth/logout`).subscribe();
     this.currentUserSubject.next(null);
+    this.stopRefreshTokenTimer();
     localStorage.removeItem('token');
     localStorage.removeItem('task_finished');
     localStorage.removeItem('work_claimed');

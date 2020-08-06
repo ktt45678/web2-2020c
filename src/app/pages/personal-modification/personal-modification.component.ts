@@ -76,7 +76,7 @@ export class PersonalModificationComponent implements OnInit, OnDestroy {
   }
 
   afterRespone() {
-    this.auth.renewToken().pipe(first()).subscribe();
+    this.auth.refreshToken().pipe(first()).subscribe();
     this.loading = false;
     this.updateInfoForm.enable();
   }

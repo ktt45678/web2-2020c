@@ -112,7 +112,7 @@ export class UserModificationComponent implements OnInit, OnDestroy {
 
   afterRespone() {
     if (this.isSelfEdit) {
-      this.auth.renewToken().pipe(first()).subscribe();
+      this.auth.refreshToken().pipe(first()).subscribe();
     }
     this.loading = false;
     this.editorForm.enable();
