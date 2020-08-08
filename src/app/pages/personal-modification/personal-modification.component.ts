@@ -65,14 +65,18 @@ export class PersonalModificationComponent implements OnInit, OnDestroy {
       this.notification.showSuccess('Thay đổi thông tin thành công');
       this.afterRespone();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.afterRespone();
     });
   }
 
   return() {
     this.location.back();
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   afterRespone() {

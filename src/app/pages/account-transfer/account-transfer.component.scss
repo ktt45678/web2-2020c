@@ -4,9 +4,6 @@
   overflow: hidden;
   .transfer-inner {
     padding: 32px;
-    mat-error + mat-error {
-      display: none;
-    }
   }
 }
 
@@ -18,7 +15,6 @@
   font-size: 20px;
 }
 
-// Hide number step
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

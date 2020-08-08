@@ -1,1 +1,74 @@
-<p>account-withdrawal works!</p>
+<div class="mt-2r">
+  <mat-spinner *ngIf="!selectedAccount" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="selectedAccount" class="container">
+    <div class="withdrawal-form ml-auto mr-auto br-10px">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="withdrawal-inner">
+        <h2 class="mb-3 text-center">RÚT TIỀN</h2>
+        <div *ngIf="stage === 'checking'" class="withdrawal-ca">
+          <form [formGroup]="caWithdrawalForm" (ngSubmit)="onCAWithdrawal(caWithdrawalForm.value)">
+            <div class="withdrawal-info mt-2r">
+              <p>Tài khoản trích tiền: <strong>{{selectedAccount.accountId}}</strong></p>
+              <p>Số dư hiện tại: <strong>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</strong></p>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số tiền rút</mat-label>
+                <input type="number" formControlName="amount" matInput>
+                <mat-error *ngIf="caAmount.errors?.required">
+                  Số tiền rút là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nội dung giao dịch</mat-label>
+                <textarea rows="5" formControlName="description" matInput></textarea>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="stage === 'savings'" class="withdrawal-sa">
+          <form [formGroup]="saWithdrawalForm" (ngSubmit)="onSAWithdrawal(saWithdrawalForm.value)">
+            <div class="withdrawal-info mt-2r">
+              <p>Tài khoản trích tiền: <strong>{{selectedAccount.accountId}}</strong></p>
+              <p>Số dư hiện tại: <strong>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</strong></p>
+              <p>Kỳ hạn: <strong>{{selectedAccount.term}} tháng</strong></p>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nội dung giao dịch</mat-label>
+                <textarea rows="5" formControlName="description" matInput></textarea>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="stage === 'done'" class="withdrawal-done">
+          <div class="text-center">
+            <mat-icon class="text-75px w-100">done</mat-icon>
+            <p class="text-20px">Giao dịch rút tiền đã hoàn tất</p>
+            <button type="button" (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

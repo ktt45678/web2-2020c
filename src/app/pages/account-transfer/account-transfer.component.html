@@ -141,7 +141,7 @@
         </div>
         <div *ngIf="stage === 'confirm'" class="transfer-confirmation">
           <form [formGroup]="confirmationForm" (ngSubmit)="onConfirmation(confirmationForm.value)">
-            <div class="transfer-info">
+            <div class="transfer-info mt-2r">
               <p>Tài khoản trích tiền: <strong>{{transferData.from}}</strong></p>
               <p>Tài khoản thụ hưởng: <strong>{{transferData.to}}</strong></p>
               <p>Hình thức: {{transferData.bank ? 'Chuyển khoản đến ngân hàng ' + transferData.bank : 'Chuyển khoản nội bộ'}}</p>
@@ -162,7 +162,7 @@
             </div>
             <div class="d-flex mt-2">
               <div>
-                <button type="button" (click)="edit()" mat-button color="primary" [disabled]="loading">Thay đổi</button>
+                <button type="button" (click)="edit()" mat-button color="primary" [disabled]="loading">Chỉnh sửa</button>
               </div>
               <div class="ml-auto">
                 <button type="submit" mat-flat-button color="primary" [disabled]="loading">Xác nhận</button>

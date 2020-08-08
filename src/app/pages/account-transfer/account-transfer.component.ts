@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 
@@ -30,7 +29,7 @@ export class AccountTransferComponent implements OnInit {
   interBankTransferForm: FormGroup;
   confirmationForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private router: Router, private auth: AuthenticationService, private user: UserService, private transaction: TransactionService, private notification: NotificationService, private location: Location) { }
+  constructor(private auth: AuthenticationService, private user: UserService, private transaction: TransactionService, private notification: NotificationService, private location: Location) { }
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
@@ -143,24 +142,22 @@ export class AccountTransferComponent implements OnInit {
     this.loading = true;
     if (this.transferData.method === '1') {
       this.transaction.intraBankTransfer(this.transferData, transferData.otp).subscribe(
-        () => {
-          this.stage = 'done';
-          this.afterRespone();
-        }, error => {
-          this.showError(error);
-          this.afterRespone();
-        }
-      );
+      () => {
+        this.stage = 'done';
+        this.afterRespone();
+      }, error => {
+        this.showError(error);
+        this.afterRespone();
+      });
     } else {
       this.transaction.interBankTransfer(this.transferData, transferData.otp).subscribe(
-        () => {
-          this.stage = 'done';
-          this.afterRespone();
-        }, error => {
-          this.showError(error);
-          this.afterRespone();
-        }
-      );
+      () => {
+        this.stage = 'done';
+        this.afterRespone();
+      }, error => {
+        this.showError(error);
+        this.afterRespone();
+      });
     }
   }
 

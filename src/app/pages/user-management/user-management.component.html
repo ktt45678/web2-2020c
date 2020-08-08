@@ -62,8 +62,9 @@
   <mat-paginator [length]="this.dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <mat-menu #actionMenu="matMenu" xPosition="before">
     <ng-template matMenuContent let-user="user">
-      <button (click)="viewUser(user)" mat-menu-item>Xem thông tin</button>
-      <button (click)="editUser(user)" mat-menu-item>Chỉnh sửa</button>
+      <button [routerLink]="['view', user.id]" mat-menu-item>Xem thông tin</button>
+      <button [routerLink]="['edit', user.id]" mat-menu-item>Chỉnh sửa</button>
+      <button [routerLink]="['/accounts/create', user.id]" mat-menu-item>Tạo tài khoản</button>
       <button (click)="blockUser(user)" [disabled]="currentUser.id === user.id" *ngIf="user.status === 1" mat-menu-item>Chặn</button>
       <button (click)="unblockUser(user)" *ngIf="user.status === 0" mat-menu-item>Bỏ chặn</button>
     </ng-template>

@@ -24,13 +24,9 @@ export class UserInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('userid');
-    this.manage.findUser(this.userId).subscribe(data => this.selectedUser = data);
-    this.manage.findSubmittedIdCards(this.userId).subscribe(data => {
-      this.submittedIdCards = data;
-    });
-    this.manage.findAvatar(this.userId).subscribe(avatars => {
-      this.selectedUserAvatar = avatars[0];
-    });
+    this.manage.findUser(this.userId).subscribe(data => this.selectedUser = data, error => this.showError(error));
+    this.manage.findSubmittedIdCards(this.userId).subscribe(data => this.submittedIdCards = data);
+    this.manage.findAvatar(this.userId).subscribe(avatars => this.selectedUserAvatar = avatars[0]);
   }
 
   approveUser() {

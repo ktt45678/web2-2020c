@@ -8,7 +8,7 @@
       <div class="account-inner">
         <h2 class="mb-3 text-center">CHỈNH SỬA TÀI KHOẢN</h2>
         <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
-          <mat-tab label="Nạp tiền" *ngIf="selectedAccount.accountType === 0">
+          <mat-tab label="Nạp tiền" *ngIf="selectedAccount.accountType === 0 || (selectedAccount.accountType === 1 && selectedAccount.status === 0)">
             <form class="mt-2r" [formGroup]="payInForm" (ngSubmit)="onPayIn(payInForm.value)">
               <div>
                 <mat-form-field appearance="outline" class="w-100">

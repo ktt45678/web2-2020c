@@ -57,7 +57,7 @@
       <button [routerLink]="['/accounts', 'view', account.accountId]" mat-menu-item>Xem thông tin</button>
       <button [routerLink]="['/accounts', 'view', account.accountId]" mat-menu-item>Lịch sử giao dịch</button>
       <button [routerLink]="['/accounts', 'edit', account.accountId]" mat-menu-item>Thay đổi</button>
-      <button [routerLink]="['/accounts', 'edit', account.accountId]" mat-menu-item>Rút tiền</button>
+      <button [disabled]="account.status === 0" [routerLink]="['/accounts', 'withdraw', account.accountId]" mat-menu-item>Rút tiền</button>
       <button *ngIf="account.status === 1" (click)="closeAccount(account)" mat-menu-item>Đóng tài khoản</button>
       <button *ngIf="account.status === 0" (click)="openAccount(account)" mat-menu-item>Mở tài khoản</button>
     </ng-template>

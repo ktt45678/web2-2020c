@@ -1,0 +1,26 @@
+.withdrawal-form {
+  max-width: 500px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  .withdrawal-inner {
+    padding: 32px;
+  }
+}
+
+.text-75px {
+  font-size: 75px;
+}
+
+.text-20px {
+  font-size: 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

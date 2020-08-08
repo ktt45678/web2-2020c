@@ -58,12 +58,12 @@ export class AccountCreationComponent implements OnInit {
   get selectCurrency() { return this.accountSelectionForm.get('currency'); }
   get selectType() { return this.accountSelectionForm.get('type'); }
 
-  get checkingOwner() { return this.checkingAccountForm.get('owner'); }
-  get checkingBalance() { return this.checkingAccountForm.get('balance'); }
+  get caOwner() { return this.checkingAccountForm.get('owner'); }
+  get caBalance() { return this.checkingAccountForm.get('balance'); }
 
-  get savingOwner() { return this.savingsAccountForm.get('owner'); }
-  get savingBalance() { return this.savingsAccountForm.get('balance'); }
-  get savingTerm() { return this.savingsAccountForm.get('term'); }
+  get saOwner() { return this.savingsAccountForm.get('owner'); }
+  get saBalance() { return this.savingsAccountForm.get('balance'); }
+  get saTerm() { return this.savingsAccountForm.get('term'); }
 
   onSelectAccount(accountData) {
     if (this.accountSelectionForm.invalid) {

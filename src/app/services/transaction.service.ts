@@ -55,5 +55,14 @@ export class TransactionService {
     body.set('verifyCode', otp);
     return this.http.post(`${environment.apiUrl}/api/transferexternal`, body.toString(), { headers });
   }
+
+  withdraw(accountId: string, description: string, amount?: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('accountId', accountId);
+    body.set('value', amount);
+    body.set('message', description);
+    return this.http.post(`${environment.apiUrl}/api/withdraw`, body.toString(), { headers });
+  }
   
 }

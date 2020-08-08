@@ -51,14 +51,6 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
     this.dataSource.loadUsers(this.paginator.pageIndex, this.paginator.pageSize, this.select.value, this.searchInput.nativeElement.value);
   }
 
-  viewUser(user) {
-    this.router.navigate(['view', user.id], { relativeTo: this.route });
-  }
-
-  editUser(user) {
-    this.router.navigate(['edit', user.id], { relativeTo: this.route });
-  }
-
   blockUser(user) {
     this.manage.updateUserStatus(user.id, 0).subscribe(
     () => {
