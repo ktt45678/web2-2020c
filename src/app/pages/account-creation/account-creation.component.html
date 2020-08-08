@@ -8,7 +8,7 @@
       <div class="account-inner">
         <h2 class="mb-3 text-center">TẠO TÀI KHOẢN</h2>
         <div *ngIf="!accountType" class="account-selector">
-          <form [formGroup]="selectAccountForm" (ngSubmit)="onSelectAccount(selectAccountForm.value)">
+          <form [formGroup]="accountSelectionForm" (ngSubmit)="onSelectAccount(accountSelectionForm.value)">
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Loại tài khoản</mat-label>
@@ -77,8 +77,8 @@
             </div>
           </form>
         </div>
-        <div *ngIf="accountType === '1'" class="saving-account">
-          <form [formGroup]="savingAccountForm" (ngSubmit)="onSavingAccount(savingAccountForm.value)">
+        <div *ngIf="accountType === '1'" class="savings-account">
+          <form [formGroup]="savingsAccountForm" (ngSubmit)="onSavingAccount(savingsAccountForm.value)">
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Người dùng</mat-label>

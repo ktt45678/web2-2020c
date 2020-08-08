@@ -49,7 +49,7 @@ export class UpdateAvatarComponent implements OnInit {
   avatarChange(fileInputEvent: any) {
     if (fileInputEvent.target.files.length > 0) {
       if (fileInputEvent.target.files[0].size > this.sizeLimitAvatar) {
-        this.notification.showError('Giới hạn ảnh đại diện là 8MB');
+        this.notification.showInfo('Giới hạn ảnh đại diện là 8MB');
         return;
       }
       this.selectedAvatar = fileInputEvent.target.files[0];
@@ -63,7 +63,7 @@ export class UpdateAvatarComponent implements OnInit {
   trackChange(fileInputEvent: any) {
     if (fileInputEvent.target.files.length > 0) {
       if (fileInputEvent.target.files[0].size > this.sizeLimitTrack) {
-        this.notification.showError('Giới hạn âm thanh là 50MB');
+        this.notification.showInfo('Giới hạn âm thanh là 50MB');
         return;
       }
       this.selectedTrack = fileInputEvent.target.files[0];

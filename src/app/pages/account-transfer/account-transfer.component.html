@@ -1,1 +1,190 @@
-<p>account-transfer works!</p>
+<div class="mt-2r">
+  <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="currentUser" class="container">
+    <div class="transfer-form ml-auto mr-auto br-10px">
+      <div [ngClass]="loading ? 'visible' : 'invisible'">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="transfer-inner">
+        <h2 class="mb-3 text-center">CHUYỂN KHOẢN</h2>
+        <div *ngIf="!stage" class="method-selector">
+          <form [formGroup]="methodSelectionForm" (ngSubmit)="onSelectMethod(methodSelectionForm.value)">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Hình thức chuyển khoản</mat-label>
+                <mat-select formControlName="method">
+                  <mat-option value="intra">Chuyển khoản cùng ngân hàng</mat-option>
+                  <mat-option value="inter">Chuyển khoản liên ngân hàng</mat-option>
+                </mat-select>
+                <mat-error *ngIf="method.errors?.required">
+                  Hình thức chuyển khoản là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Tiếp tục</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="stage === 'intra'" class="intrabank-transfer">
+          <form [formGroup]="intraBankTransferForm" (ngSubmit)="onIntraBankTransfer(intraBankTransferForm.value)">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ currentUserAccounts ? 'Tài khoản trích tiền' : 'Đang tải...'}}</mat-label>
+                <mat-select formControlName="from">
+                  <mat-option *ngFor="let account of currentUserAccounts" [value]="account.accountId">{{account.accountId}} - {{account.balance | currency: account.currencyType}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="intraFrom.errors?.required">
+                  Tài khoản trích tiền là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Tài khoản thụ hưởng</mat-label>
+                <input type="text" formControlName="to" matInput>
+                <mat-hint>Nhập chính xác số tài khoản của người nhận</mat-hint>
+                <mat-error *ngIf="intraTo.errors?.required">
+                  Tài khoản thụ hưởng là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số tiền</mat-label>
+                <input type="number" formControlName="amount" matInput>
+                <mat-error *ngIf="intraTo.errors?.required">
+                  Số tiền gửi là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nội dung giao dịch</mat-label>
+                <textarea rows="5" formControlName="description" matInput></textarea>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="cancel()" mat-button color="primary" [disabled]="loading">Hủy</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Tiếp tục</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="stage === 'inter'" class="interbank-transfer">
+          <form [formGroup]="interBankTransferForm" (ngSubmit)="onInterBankTransfer(interBankTransferForm.value)">
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ currentUserAccounts ? 'Tài khoản trích tiền' : 'Đang tải...'}}</mat-label>
+                <mat-select formControlName="from">
+                  <mat-option *ngFor="let account of currentUserAccounts" [value]="account.accountId">{{account.accountId}} - {{account.balance | currency: account.currencyType}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="interFrom.errors?.required">
+                  Tài khoản trích tiền là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Tài khoản thụ hưởng</mat-label>
+                <input type="text" formControlName="to" matInput>
+                <mat-hint>Nhập chính xác số tài khoản của người nhận</mat-hint>
+                <mat-error *ngIf="interTo.errors?.required">
+                  Tài khoản thụ hưởng là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ availableBanks ? 'Ngân hàng thụ hưởng' : 'Đang tải...'}}</mat-label>
+                <mat-select formControlName="bank">
+                  <mat-option *ngFor="let bank of availableBanks" [value]="bank.bankId">{{bank.bankFullName}} - {{bank.bankId}}</mat-option>
+                </mat-select>
+                <mat-hint>Ngân hàng của người nhận</mat-hint>
+                <mat-error *ngIf="interTo.errors?.required">
+                  Ngân hàng thụ hưởng là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Số tiền</mat-label>
+                <input type="number" formControlName="amount" matInput>
+                <mat-error *ngIf="interAmount.errors?.required">
+                  Số tiền gửi là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nội dung giao dịch</mat-label>
+                <textarea rows="5" formControlName="description" matInput></textarea>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="cancel()" mat-button color="primary" [disabled]="loading">Hủy</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Tiếp tục</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="stage === 'confirm'" class="transfer-confirmation">
+          <form [formGroup]="confirmationForm" (ngSubmit)="onConfirmation(confirmationForm.value)">
+            <div class="transfer-info">
+              <p>Tài khoản trích tiền: <strong>{{transferData.from}}</strong></p>
+              <p>Tài khoản thụ hưởng: <strong>{{transferData.to}}</strong></p>
+              <p>Hình thức: {{transferData.bank ? 'Chuyển khoản đến ngân hàng ' + transferData.bank : 'Chuyển khoản nội bộ'}}</p>
+              <p>Nội dung giao dịch: {{transferData.description || 'Không có'}}</p>
+              <p>Số tiền: <strong>{{transferData.amount | currency: transferData.currency}}</strong></p>
+              <p>Chi phí giao dịch: <strong>{{transferData.fee | currency: transferData.currency}}</strong></p>
+              <p>Tổng cộng: <strong>{{(transferData.amount + transferData.fee) | currency: transferData.currency}}</strong></p>
+              <p>Để hoàn tất giao dịch, hãy nhập mã xác minh hai bước được gửi tới email của bạn.</p>
+            </div>
+            <div>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Mã xác minh hai bước</mat-label>
+                <input type="number" formControlName="otp" matInput>
+                <mat-error *ngIf="otp.errors?.required">
+                  Mã xác minh hai bước là <strong>bắt buộc</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="d-flex mt-2">
+              <div>
+                <button type="button" (click)="edit()" mat-button color="primary" [disabled]="loading">Thay đổi</button>
+              </div>
+              <div class="ml-auto">
+                <button type="submit" mat-flat-button color="primary" [disabled]="loading">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="stage === 'done'" class="transfer-done">
+          <div class="text-center">
+            <mat-icon class="text-75px w-100">done</mat-icon>
+            <p class="text-20px">Giao dịch của bạn đã hoàn tất</p>
+          </div>
+          <div class="d-flex mt-2">
+            <div>
+              <button type="button" (click)="return()" mat-button color="primary" [disabled]="loading">Quay lại</button>
+            </div>
+            <div class="ml-auto">
+              <button type="submit" (click)="cancel()" mat-flat-button color="primary" [disabled]="loading">Chuyển tiếp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

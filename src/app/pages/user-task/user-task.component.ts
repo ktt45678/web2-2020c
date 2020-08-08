@@ -41,6 +41,7 @@ export class UserTaskComponent implements OnInit, OnDestroy {
     this.user.requestManager().pipe(first()).subscribe(
     () => {
       this.notification.showSuccess("Đăng ký trở thành nhân viên thành công");
+      this.canRequestManager = false;
     }, error => {
       this.showError(error);
     });

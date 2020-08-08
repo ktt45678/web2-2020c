@@ -67,14 +67,12 @@ export class UserService {
 
   sendActivationEmail() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    return this.http.post(`${environment.apiUrl}/api/resend`, body.toString(), { headers });
+    return this.http.post(`${environment.apiUrl}/api/resend`, {}, { headers });
   }
 
   requestManager() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    return this.http.post(`${environment.apiUrl}/api/requeststaff`, body.toString(), { headers });
+    return this.http.post(`${environment.apiUrl}/api/requeststaff`, {}, { headers });
   }
 
   findAccount(id: string) {
@@ -102,6 +100,10 @@ export class UserService {
     return this.http.get<UserStorageModel[]>(`${environment.apiUrl}/api/upload/audios`).pipe(tap(audios => {
       this.userAudioSubject.next(audios[0]);
     }));
+  }
+
+  findBank() {
+    return this.http.get<any>(`${environment.apiUrl}/api/getbanklist`);
   }
 
   findInfo(type = 'full') {

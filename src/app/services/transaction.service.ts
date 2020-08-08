@@ -1,0 +1,59 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
+import { AccountModel } from '../modules/models/account.model';
+import { TransferModel } from '../modules/models/transfer.model';
+
+@Injectable()
+export class TransactionService {
+
+  constructor(private http: HttpClient) {}
+
+  findCheckingAccounts() {
+    const params = { type: '0' };
+    return this.http.get<any>(`${environment.apiUrl}/api/getarr`, { params });
+  }
+
+  findBank() {
+    return this.http.get<any>(`${environment.apiUrl}/api/getbanklist`);
+  }
+
+  findFee(accountId: string, amount: number, method: string) {
+    const params = {
+      accountId: accountId,
+      money: amount.toString(),
+      transferType: method
+    }
+    return this.http.get<any>(`${environment.apiUrl}/api/fee`, { params });
+  }
+
+  requestOTP() {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post<any>(`${environment.apiUrl}/api/sendverify`, {}, { headers });
+  }
+
+  intraBankTransfer(transferData: TransferModel, otp: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('requestAccountId', transferData.from);
+    body.set('accountId', transferData.to);
+    body.set('money', transferData.amount.toString());
+    body.set('message', transferData.description);
+    body.set('verifyCode', otp);
+    return this.http.post(`${environment.apiUrl}/api/transferinternal`, body.toString(), { headers });
+  }
+
+  interBankTransfer(transferData: TransferModel, otp: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('requestAccountId', transferData.from);
+    body.set('accountId', transferData.to);
+    body.set('bankId', transferData.bank);
+    body.set('money', transferData.amount.toString());
+    body.set('message', transferData.description);
+    body.set('verifyCode', otp);
+    return this.http.post(`${environment.apiUrl}/api/transferexternal`, body.toString(), { headers });
+  }
+  
+}

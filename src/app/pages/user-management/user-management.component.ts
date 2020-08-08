@@ -64,8 +64,8 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
     () => {
       user.status = 0;
       this.notification.showSuccess(`Đã chặn ${user.firstName} ${user.lastName}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
   }
 
@@ -74,9 +74,14 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
     () => {
       user.status = 1;
       this.notification.showSuccess(`Đã bỏ chặn ${user.firstName} ${user.lastName}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   ngOnDestroy(): void {

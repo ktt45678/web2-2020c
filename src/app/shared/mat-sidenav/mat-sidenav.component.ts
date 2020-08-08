@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthenticationService } from '../../services/authentication.service';
-import { UserService } from '../../services/user.service';
-import { UserModel } from 'src/app/modules/models/user.model';
+import { UserModel } from '../../modules/models/user.model';
 
 @Component({
   selector: 'app-mat-sidenav',
@@ -15,8 +14,7 @@ export class MatSidenavComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
   currentUserSubscription: Subscription;
 
-  constructor(private router: Router, private auth: AuthenticationService, private user: UserService) {
-  }
+  constructor(private router: Router, private auth: AuthenticationService) {}
 
   ngOnInit(): void {
     this.currentUserSubscription = this.auth.currentUser.subscribe(user => this.currentUser = user);

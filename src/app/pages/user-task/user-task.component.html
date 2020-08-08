@@ -20,7 +20,7 @@
       <p>Để tiếp tục sử dụng các dịch vụ của ngân hàng, bạn cần phải cung cấp giấy tờ tùy thân hợp lệ do chính phủ cấp và đợi phê duyệt từ ban quản lý, ấn <strong>Kích hoạt</strong> để bắt đầu quá trình kích hoạt.</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button routerLink="/updateidcard">Kích hoạt</button>
+      <button mat-button routerLink="/update-idcard">Kích hoạt</button>
     </mat-card-actions>
   </mat-card>
   <mat-card class="task-card" *ngIf="userStatus.approveStatus === 2">
@@ -29,7 +29,7 @@
       <mat-card-title>Đã nhận thông tin kích hoạt</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Bạn đã yêu cầu kích hoạt thành công và các nhân viên sẽ sớm kiểm tra thông tin mà bạn cung cấp, thông báo này sẽ biến mất và thư xác nhận sẽ được gửi tới email của bạn khi tài khoản được phê duyệt, nếu không bạn sẽ phải gửi lại một yêu cầu kích hoạt tài khoản khác.</p>
+      <p>Bạn đã yêu cầu kích hoạt thành công và các nhân viên sẽ sớm kiểm tra thông tin bạn đã cung cấp, thông báo này sẽ tiếp tục hiển thị cho đến khi tài khoản của bạn được phê duyệt và một bức thư xác nhận sẽ được gửi đến email. Nếu quá trình kích hoạt thất bại, bạn sẽ phải gửi lại một yêu cầu kích hoạt tài khoản khác.</p>
     </mat-card-content>
   </mat-card>
   <mat-card class="task-card" *ngIf="canRequestManager">

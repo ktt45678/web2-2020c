@@ -20,6 +20,7 @@ import { AccountInformationComponent } from '../../pages/account-information/acc
 import { AccountModificationComponent } from '../../pages/account-modification/account-modification.component';
 import { AuditLogComponent } from '../../pages/audit-log/audit-log.component';
 import { TransactionHistoryComponent } from '../../pages/transaction-history/transaction-history.component';
+import { AccountTransferComponent } from '../../pages/account-transfer/account-transfer.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
       { path: 'accounts/view/:accountid', component: AccountInformationComponent, canActivate: [RoleGuard] },
       { path: 'accounts/edit/:accountid', component: AccountModificationComponent, canActivate: [RoleGuard] },
       { path: 'log', component: AuditLogComponent, canActivate: [RoleGuard] },
-      { path: 'history', component: TransactionHistoryComponent, canActivate: [ActivateGuard] }
+      { path: 'history', component: TransactionHistoryComponent, canActivate: [ActivateGuard] },
+      { path: 'transfer', component: AccountTransferComponent, canActivate: [ActivateGuard] }
     ]
   }
 ];

@@ -62,8 +62,8 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
     () => {
       account.status = 0;
       this.notification.showSuccess(`Đã đóng tài khoản ${account.accountId}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
   }
 
@@ -72,9 +72,14 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
     () => {
       account.status = 1;
       this.notification.showSuccess(`Đã mở lại tài khoản ${account.accountId}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   ngOnDestroy(): void {
