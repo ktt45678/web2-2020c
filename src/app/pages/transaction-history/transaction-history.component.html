@@ -1,1 +1,70 @@
-<p>transaction-history works!</p>
+<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+<div class="container mt-2r user-table" *ngIf="currentUser && currentUser.userType === 0">
+  <div *ngIf="detailView" class="row">
+    <mat-form-field class="col-auto mr-auto">
+      <mat-label>Hiển thị theo ngày</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input (dateChange)="onDateFilterChange()" matStartDate placeholder="Từ ngày" #startDate>
+        <input (dateChange)="onDateFilterChange()" matEndDate placeholder="Đến ngày" #endDate>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker [touchUi]="mobileQuery.matches" #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-form-field class="col-auto">
+      <mat-label>Loại giao dịch</mat-label>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="transfer">Chuyển khoản</mat-option>
+        <mat-option value="loadup">Nạp tiền</mat-option>
+        <mat-option value="withdraw">Rút tiền</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="transaction-scroll">
+    <table mat-table [dataSource]="dataSource" class="w-100">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Mã GD</th>
+        <td mat-cell *matCellDef="let transaction">{{transaction.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef>Thời gian</th>
+        <td mat-cell *matCellDef="let transaction">{{transaction.date}} {{transaction.time}}</td>
+      </ng-container>
+      <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef>Nội dung giao dịch</th>
+        <td mat-cell *matCellDef="let transaction">
+          <ng-container *ngIf="transaction.action === 'Rút tiền (TKTT)'">
+            Tài khoản <strong>{{transaction.accountIdA}}</strong> đã thực hiện rút <strong>{{transaction.value | currency: transaction.currencyType}}</strong>
+          </ng-container>
+          <ng-container *ngIf="transaction.action === 'Rút tiền (TKTK)'">
+            Tài khoản <strong>{{transaction.accountIdA}}</strong> đã thực hiện rút <strong>{{transaction.value | currency: transaction.currencyType}}</strong>
+          </ng-container>
+          <ng-container *ngIf="transaction.action === 'Nạp tiền'">
+            Tài khoản <strong>{{transaction.accountIdA}}</strong> đã được thêm số tiền <strong>{{transaction.value | currency: transaction.currencyType}}</strong>
+          </ng-container>
+          <ng-container *ngIf="transaction.action === 'Chuyển khoản'">
+            Tài khoản <strong>{{transaction.accountIdA}}</strong> đã thực hiện chuyển <strong>{{transaction.value | currency: transaction.currencyType}}</strong> sang tài khoản <strong>{{transaction.accountIdB}}</strong> {{transaction.bankId ? 'thuộc ngân hàng ' + transaction.bankId : ''}}
+          </ng-container>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Nội dung</th>
+        <td mat-cell *matCellDef="let transaction">
+          <button *ngIf="transaction.message" mat-icon-button (click)="viewDescription(transaction.message)">
+            <mat-icon matTooltip="Xem nội dung giao dịch" matTooltipShowDelay="500" matTooltipPosition="above">description</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Tình trạng</th>
+        <td mat-cell *matCellDef="let transaction">
+          <mat-icon matTooltip="Thành công" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="transaction.status === 1">check</mat-icon>
+          <mat-icon matTooltip="Không thành công" matTooltipShowDelay="500" matTooltipPosition="above" *ngIf="transaction.status === 0">close</mat-icon>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator *ngIf="detailView" [length]="this.dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

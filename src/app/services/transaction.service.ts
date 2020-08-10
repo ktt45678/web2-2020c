@@ -24,10 +24,25 @@ export class TransactionService {
       accountId: accountId,
       money: amount.toString(),
       transferType: method
-    }
+    };
     return this.http.get<any>(`${environment.apiUrl}/api/fee`, { params });
   }
 
+  findTransactions(start = 0, limit = 10, from = '', to = '', type = '', accountId?: string) {
+    const params = {
+      start: start.toString(),
+      limit: limit.toString(),
+      fromDate: from,
+      toDate: to,
+      type: type,
+      accountId: accountId ? accountId : null
+    };
+    if (accountId) {
+      return this.http.get<any>(`${environment.apiUrl}/api/getuserlog`, { params });
+    }
+    return this.http.get<any>(`${environment.apiUrl}/api/getlog`, { params });
+  }
+  
   requestOTP() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post<any>(`${environment.apiUrl}/api/sendverify`, {}, { headers });

@@ -20,6 +20,9 @@
                 <mat-error *ngIf="caAmount.errors?.required">
                   Số tiền rút là <strong>bắt buộc</strong>
                 </mat-error>
+                <mat-error *ngIf="caAmount.errors?.min">
+                  Số tiền rút tối thiểu là <strong>20.000đ hoặc $1</strong>
+                </mat-error>
               </mat-form-field>
             </div>
             <div>

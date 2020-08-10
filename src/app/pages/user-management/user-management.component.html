@@ -1,23 +1,23 @@
 <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container mt-2r user-table" *ngIf="currentUser && currentUser.userType === 0">
+  <div class="row">
+    <mat-form-field class="col-auto mr-auto">
+      <mat-label>Tìm kiếm</mat-label>
+      <input matInput #search>
+    </mat-form-field>
+    <mat-form-field class="col-auto">
+      <mat-label>Loại người dùng</mat-label>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="user">Người dùng</mat-option>
+        <mat-option value="approved">Đã kích hoạt</mat-option>
+        <mat-option value="pending">Chờ phê duyệt</mat-option>
+        <mat-option value="manager">Nhân viên</mat-option>
+        <mat-option value="blocked">Bị chặn</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="user-scroll">
-    <div class="d-flex">
-      <mat-form-field>
-        <mat-label>Tìm kiếm</mat-label>
-        <input matInput #search>
-      </mat-form-field>
-      <mat-form-field class="ml-auto">
-        <mat-label>Loại người dùng</mat-label>
-        <mat-select value="all">
-          <mat-option value="all">Tất cả</mat-option>
-          <mat-option value="user">Người dùng</mat-option>
-          <mat-option value="approved">Đã kích hoạt</mat-option>
-          <mat-option value="pending">Chờ phê duyệt</mat-option>
-          <mat-option value="manager">Nhân viên</mat-option>
-          <mat-option value="blocked">Bị chặn</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
     <table mat-table [dataSource]="dataSource" class="w-100">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>

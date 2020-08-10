@@ -2,6 +2,41 @@
 <div class="container">
   <div *ngIf="currentUser" class="mt-2r">
     <app-user-task *ngIf="showTask"></app-user-task>
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-card class="user-card">
+          <mat-card-header>
+            <mat-icon class="card-icon font-19px text-muted" mat-card-avatar>person</mat-icon>
+            <mat-card-title class="font-15px text-muted">Đã kết nối</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="font-30px">{{currentUser.firstName}} {{currentUser.lastName}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button routerLink="/personal" mat-button>Xem thông tin</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-lg-6">
+        <mat-card class="user-card">
+          <mat-card-header>
+            <mat-icon class="card-icon font-19px text-muted" mat-card-avatar>account_balance</mat-icon>
+            <mat-card-title class="font-15px text-muted">Tài khoản</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="font-30px">12 tài khoản</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button routerLink="/accounts" mat-button>Xem tài khoản</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div class="info-history mt-2r">
+      <h4 class="fw-600">Giao dịch gần đây</h4>
+      <div class="info-content">
+        <app-transaction-history [detailView]="false"></app-transaction-history>
+      </div>
+    </div>
   </div>
-  <app-personal-information></app-personal-information>
 </div>

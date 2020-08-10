@@ -30,6 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ActivationComponent } from './pages/activation/activation.component';
+import { AuditLogComponent } from './pages/audit-log/audit-log.component';
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountCreationComponent } from './pages/account-creation/account-creation.component';
@@ -40,6 +41,7 @@ import { AccountTransferComponent } from './pages/account-transfer/account-trans
 import { AccountWithdrawalComponent } from './pages/account-withdrawal/account-withdrawal.component';
 import { PersonalInformationComponent } from './pages/personal-information/personal-information.component';
 import { PersonalModificationComponent } from './pages/personal-modification/personal-modification.component';
+import { TransactionHistoryComponent, TransactionDescriptionDialog } from './pages/transaction-history/transaction-history.component';
 import { UpdateAvatarComponent } from './pages/update-avatar/update-avatar.component';
 import { UpdateIdCardComponent } from './pages/update-idcard/update-idcard.component';
 import { UpdatePasswordComponent } from './pages/update-password/update-password.component';
@@ -56,8 +58,6 @@ import { SecurityPolicyComponent } from './pages/security-policy/security-policy
 import { ServicesComponent } from './pages/services/services.component';
 import { Error403Component } from './pages/error403/error403.component';
 import { Error404Component } from './pages/error404/error404.component';
-import { TransactionHistoryComponent } from './pages/transaction-history/transaction-history.component';
-import { AuditLogComponent } from './pages/audit-log/audit-log.component';
 
 // Services, modules
 import { appInitializer } from './modules/initializer/app.initializer';
@@ -99,6 +99,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
+    AuditLogComponent,
     HomeHeaderComponent,
     HomeFooterComponent,
     MatHeaderComponent,
@@ -136,13 +137,13 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatLayoutComponent,
     ExchangerateComponent,
     SideLayoutComponent,
+    TransactionHistoryComponent,
+    TransactionDescriptionDialog,
     UserManagementComponent,
     SecurityPolicyComponent,
     ServicesComponent,
     Error403Component,
     Error404Component,
-    TransactionHistoryComponent,
-    AuditLogComponent
   ],
   imports: [
     BrowserModule,

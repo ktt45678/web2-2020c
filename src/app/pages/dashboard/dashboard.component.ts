@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from 'src/app/modules/models/user.model';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +15,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
   loading = false;
   showTask = false;
+  timer: any;
+  time = new Date();
 
   constructor(private auth: AuthenticationService, private user: UserService, private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
     this.showTask = !this.user.taskFinished || !this.user.workClaimed;
+    this.timer = setInterval(() => {
+      this.time = new Date();
+    }, 1000);
   }
 
   showError(error) {
@@ -32,5 +38,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    clearInterval(this.timer);
   }
 }

@@ -1,21 +1,21 @@
 <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container mt-2r account-table">
   <p *ngIf="(dataSource.length$ | async) <= 0">Hiện chưa có tài khoản nào.</p>
+  <div class="row">
+    <mat-form-field class="col-auto mr-auto">
+      <mat-label>Tìm kiếm</mat-label>
+      <input matInput #search>
+    </mat-form-field>
+    <mat-form-field class="col-auto">
+      <mat-label>Loại tài khoản</mat-label>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="0">Tài khoản thanh toán</mat-option>
+        <mat-option value="1">Tài khoản tiết kiệm</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="account-scroll">
-    <div class="d-flex">
-      <mat-form-field>
-        <mat-label>Tìm kiếm</mat-label>
-        <input matInput #search>
-      </mat-form-field>
-      <mat-form-field class="ml-auto">
-        <mat-label>Loại tài khoản</mat-label>
-        <mat-select value="all">
-          <mat-option value="all">Tất cả</mat-option>
-          <mat-option value="0">Tài khoản thanh toán</mat-option>
-          <mat-option value="1">Tài khoản tiết kiệm</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
     <table mat-table [dataSource]="dataSource" class="w-100">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Số tài khoản</th>

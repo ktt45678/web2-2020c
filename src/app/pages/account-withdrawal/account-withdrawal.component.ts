@@ -42,8 +42,9 @@ export class AccountWithdrawalComponent implements OnInit {
   }
 
   createCAWithdrawalForm() {
+    const amountMin = this.selectedAccount.currencyType === 'VND' ? 20000 : 1;
     this.caWithdrawalForm = new FormGroup({
-      amount: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required, Validators.min(amountMin)]),
       description: new FormControl('')
     });
   }

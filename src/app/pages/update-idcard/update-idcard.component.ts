@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { concat } from 'rxjs';
@@ -10,7 +11,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UploadService } from '../../services/upload.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
-import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-update-idcard',

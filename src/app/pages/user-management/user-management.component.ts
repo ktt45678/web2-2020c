@@ -3,7 +3,6 @@ import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
 import { fromEvent, Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
@@ -26,7 +25,7 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChild(MatSelect) select: MatSelect;
   subscriptions = new Subscription();
 
-  constructor(private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;

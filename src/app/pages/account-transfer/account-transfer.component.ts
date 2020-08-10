@@ -104,7 +104,13 @@ export class AccountTransferComponent implements OnInit {
       amount: transferData.amount,
       description: transferData.description
     };
+    // Stuff about currency
     this.transferData.currency = this.currentUserAccounts.find(x => x.accountId === transferData.from).currencyType;
+    const amountMin = this.transferData.currency === 'VND' ? 20000 : 1;
+    if (this.transferData.amount < amountMin) {
+      this.notification.showInfo('Số tiền gửi tối thiểu là 20,000đ hoặc $1');
+      return;
+    }
     this.createConfirmationForm();
     this.transaction.findFee(this.transferData.from, this.transferData.amount, this.transferData.method).subscribe(data => {
       this.transferData.fee = Number(data.fee);
@@ -126,6 +132,11 @@ export class AccountTransferComponent implements OnInit {
       description: transferData.description
     };
     this.transferData.currency = this.currentUserAccounts.find(x => x.accountId === transferData.from).currencyType;
+    const amountMin = this.transferData.currency === 'VND' ? 20000 : 1;
+    if (this.transferData.amount < amountMin) {
+      this.notification.showInfo('Số tiền gửi tối thiểu là 20,000đ hoặc $1');
+      return;
+    }
     this.createConfirmationForm();
     this.transaction.findFee(this.transferData.from, this.transferData.amount, this.transferData.method).subscribe(data => {
       this.transferData.fee = Number(data.fee);
