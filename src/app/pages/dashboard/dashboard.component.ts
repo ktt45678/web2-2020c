@@ -4,7 +4,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
 import { UserModel } from 'src/app/modules/models/user.model';
-import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
+import { StatusModel } from 'src/app/modules/models/status.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,19 +13,26 @@ import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   currentUser: UserModel;
+  currentUserStatus: StatusModel;
+  accountCount: number;
   loading = false;
-  showTask = false;
-  timer: any;
-  time = new Date();
+  workClaimed = false;
+  userTaskFinished = false;
 
   constructor(private auth: AuthenticationService, private user: UserService, private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
-    this.showTask = !this.user.taskFinished || !this.user.workClaimed;
-    this.timer = setInterval(() => {
-      this.time = new Date();
-    }, 1000);
+    this.user.findStatus().subscribe(status => {
+      this.currentUserStatus = status;
+      this.userTaskFinished = status.approveStatus === 1 && status.emailVerified !== 0;
+    });
+    this.user.findManager().subscribe(data => {
+      this.workClaimed = data.count > 0;
+    });
+    this.user.findAccounts(0, 0, '').subscribe(data => {
+      this.accountCount = data.count;
+    });
   }
 
   showError(error) {
@@ -38,6 +45,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.timer);
   }
 }

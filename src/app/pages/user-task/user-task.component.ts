@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { NotificationService } from '../../services/notification.service';
@@ -11,21 +11,12 @@ import { StatusModel } from '../../modules/models/status.model';
   styleUrls: ['./user-task.component.scss']
 })
 export class UserTaskComponent implements OnInit, OnDestroy {
-  userStatus: StatusModel;
-  canRequestManager = false;
+  @Input() currentUserStatus: StatusModel;
+  @Input() workAvailable: boolean;
 
   constructor(private user: UserService, private notification: NotificationService) { }
 
   ngOnInit(): void {
-    this.user.findStatus().pipe(first()).subscribe(data => {
-      this.userStatus = data;
-    });
-    this.user.findManager().pipe(first()).subscribe(data => {
-      const result = JSON.parse(JSON.stringify(data));
-      if (result.count === 0) {
-        this.canRequestManager = true;
-      }
-    });
   }
 
   sendActivationEmail() {
@@ -41,7 +32,7 @@ export class UserTaskComponent implements OnInit, OnDestroy {
     this.user.requestManager().pipe(first()).subscribe(
     () => {
       this.notification.showSuccess("Đăng ký trở thành nhân viên thành công");
-      this.canRequestManager = false;
+      this.workAvailable = false;
     }, error => {
       this.showError(error);
     });

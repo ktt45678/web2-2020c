@@ -1,3 +1,7 @@
+.font-13p5px {
+  font-size: 13.5px;
+}
+
 .font-15px {
   font-size: 15px;
 }
@@ -10,8 +14,19 @@
   font-size: 30px;
 }
 
+.fw-600 {
+  font-weight: 600;
+}
+
 .user-card {
-  .mat-icon {
+  .card-icon {
     width: 8px;
   }
+  .text-body {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 8px 0 8px;
+  }
 }
+

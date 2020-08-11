@@ -1,3 +1,4 @@
 export class TokenModel {
-  token?: string;
+  token: string;
+  enable2fa: number;
 }

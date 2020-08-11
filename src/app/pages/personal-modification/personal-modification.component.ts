@@ -42,7 +42,9 @@ export class PersonalModificationComponent implements OnInit, OnDestroy {
       username: new FormControl(this.currentUser.username, [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(regex.username)]),
       tel: new FormControl(this.currentUser.phoneNumber, [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern(regex.tel)]),
       email: new FormControl(this.currentUser.email, [Validators.required, Validators.minLength(5), Validators.email]),
-      address: new FormControl(this.currentUser.address, [Validators.required, Validators.minLength(6), Validators.maxLength(100)])
+      address: new FormControl(this.currentUser.address, [Validators.required, Validators.minLength(6), Validators.maxLength(100)]),
+      twofactorauth: new FormControl(this.currentUser.enable2fa),
+      noticestatus: new FormControl(this.currentUser.enableNoti)
     });
   }
 
