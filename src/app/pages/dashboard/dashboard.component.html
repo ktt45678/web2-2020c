@@ -1,7 +1,49 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container">
-  <div *ngIf="currentUser" class="mt-2r">
-    <app-user-task *ngIf="showTask"></app-user-task>
+  <div class="mt-2r">
+    <app-user-task *ngIf="!userTaskFinished || !workClaimed" [currentUserStatus]="currentUserStatus" [workAvailable]="!workClaimed"></app-user-task>
+    <div *ngIf="userTaskFinished" class="row">
+      <div class="col-lg-6">
+        <mat-card class="user-card">
+          <mat-card-header>
+            <mat-icon class="card-icon font-19px text-muted" mat-card-avatar>person</mat-icon>
+            <mat-card-title class="font-15px text-muted">Đã kết nối</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="font-30px text-body">{{currentUser.firstName}} {{currentUser.lastName}}</p>
+            <div class="mt-3">
+              <p class="font-13p5px mb-0"><mat-icon class="font-13p5px">check</mat-icon> Đã xác thực Email</p>
+              <p class="font-13p5px mb-0"><mat-icon class="font-13p5px">check</mat-icon> Đã cập nhật giấy tờ tùy thân</p>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button routerLink="/personal" mat-button>Xem thông tin</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="col-lg-6">
+        <mat-card class="user-card">
+          <mat-card-header>
+            <mat-icon class="card-icon font-19px text-muted" mat-card-avatar>account_balance</mat-icon>
+            <mat-card-title class="font-15px text-muted">Tài khoản</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="font-30px text-body">{{accountCount}} Tài Khoản</p>
+            <div class="mt-3">
+              <p class="font-13p5px mb-0"><mat-icon class="font-13p5px">check</mat-icon> Có thể yêu cầu tạo tài khoản</p>
+              <p class="font-13p5px mb-0"><mat-icon class="font-13p5px">check</mat-icon> Có thể thực hiện giao dịch trong và ngoài ngân hàng</p>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button routerLink="/accounts" mat-button>Xem tài khoản</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="userTaskFinished" class="info-history mt-2r">
+      <h4 class="fw-600">Giao dịch gần đây</h4>
+      <div class="info-content">
+        <app-transaction-history [detailView]="false"></app-transaction-history>
+      </div>
+    </div>
   </div>
-  <app-personal-information></app-personal-information>
 </div>

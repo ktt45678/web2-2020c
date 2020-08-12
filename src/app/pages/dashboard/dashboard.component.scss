@@ -1,0 +1,39 @@
+.font-13p5px {
+  font-size: 13.5px;
+}
+
+.font-15px {
+  font-size: 15px;
+}
+
+.font-19px {
+  font-size: 19px;
+}
+
+.font-30px {
+  font-size: 30px;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.user-card {
+  .card-icon {
+    width: 8px;
+  }
+  .text-body {
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 8px 0 8px;
+  }
+}
+
+@media only screen and (max-width:991px) {
+  .row {
+    .col-lg-6:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+}

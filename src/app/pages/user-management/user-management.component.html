@@ -1,23 +1,22 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
-<div class="container mt-2r user-table" *ngIf="currentUser && currentUser.userType === 0">
+<div class="container mt-2r user-table">
+  <div class="row">
+    <mat-form-field class="col-auto mr-auto">
+      <mat-label>Tìm kiếm</mat-label>
+      <input matInput #search>
+    </mat-form-field>
+    <mat-form-field class="col-auto">
+      <mat-label>Loại người dùng</mat-label>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="user">Người dùng</mat-option>
+        <mat-option value="approved">Đã kích hoạt</mat-option>
+        <mat-option value="pending">Chờ phê duyệt</mat-option>
+        <mat-option value="manager">Nhân viên</mat-option>
+        <mat-option value="blocked">Bị chặn</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="user-scroll">
-    <div class="d-flex">
-      <mat-form-field>
-        <mat-label>Tìm kiếm</mat-label>
-        <input matInput #search>
-      </mat-form-field>
-      <mat-form-field class="ml-auto">
-        <mat-label>Loại người dùng</mat-label>
-        <mat-select value="all">
-          <mat-option value="all">Tất cả</mat-option>
-          <mat-option value="user">Người dùng</mat-option>
-          <mat-option value="approved">Đã kích hoạt</mat-option>
-          <mat-option value="pending">Chờ phê duyệt</mat-option>
-          <mat-option value="manager">Nhân viên</mat-option>
-          <mat-option value="blocked">Bị chặn</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
     <table mat-table [dataSource]="dataSource" class="w-100">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -62,8 +61,9 @@
   <mat-paginator [length]="this.dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <mat-menu #actionMenu="matMenu" xPosition="before">
     <ng-template matMenuContent let-user="user">
-      <button (click)="viewUser(user)" mat-menu-item>Xem thông tin</button>
-      <button (click)="editUser(user)" mat-menu-item>Chỉnh sửa</button>
+      <button [routerLink]="['view', user.id]" mat-menu-item>Xem thông tin</button>
+      <button [routerLink]="['edit', user.id]" mat-menu-item>Chỉnh sửa</button>
+      <button [routerLink]="['/accounts/create', user.id]" mat-menu-item>Tạo tài khoản</button>
       <button (click)="blockUser(user)" [disabled]="currentUser.id === user.id" *ngIf="user.status === 1" mat-menu-item>Chặn</button>
       <button (click)="unblockUser(user)" *ngIf="user.status === 0" mat-menu-item>Bỏ chặn</button>
     </ng-template>

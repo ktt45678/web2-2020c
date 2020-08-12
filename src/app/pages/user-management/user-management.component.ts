@@ -3,7 +3,6 @@ import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
 import { fromEvent, Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from '../../services/management.service';
@@ -26,7 +25,7 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   @ViewChild(MatSelect) select: MatSelect;
   subscriptions = new Subscription();
 
-  constructor(private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private auth: AuthenticationService, private manage: ManagementService, private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUserValue;
@@ -34,29 +33,17 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit(): void {
-    if (this.searchInput && this.paginator && this.select) {
-      this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
-        this.paginator.pageIndex = 0;
-        this.loadUsersPage();
-      })).subscribe());
-      this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadUsersPage())).subscribe());
-      this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadUsersPage())).subscribe());
-    }
-    if (this.currentUser && this.currentUser.userType === 0) {
+    this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
+      this.paginator.pageIndex = 0;
       this.loadUsersPage();
-    }
+    })).subscribe());
+    this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadUsersPage())).subscribe());
+    this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadUsersPage())).subscribe());
+    this.loadUsersPage();
   }
 
   loadUsersPage() {
     this.dataSource.loadUsers(this.paginator.pageIndex, this.paginator.pageSize, this.select.value, this.searchInput.nativeElement.value);
-  }
-
-  viewUser(user) {
-    this.router.navigate(['view', user.id], { relativeTo: this.route });
-  }
-
-  editUser(user) {
-    this.router.navigate(['edit', user.id], { relativeTo: this.route });
   }
 
   blockUser(user) {
@@ -64,8 +51,8 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
     () => {
       user.status = 0;
       this.notification.showSuccess(`Đã chặn ${user.firstName} ${user.lastName}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
   }
 
@@ -74,9 +61,14 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
     () => {
       user.status = 1;
       this.notification.showSuccess(`Đã bỏ chặn ${user.firstName} ${user.lastName}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   ngOnDestroy(): void {

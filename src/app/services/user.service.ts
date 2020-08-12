@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { AccountModel } from '../modules/models/account.model';
 import { UserModel } from '../modules/models/user.model';
@@ -23,14 +23,6 @@ export class UserService {
     this.userAvatar = this.userAvatarSubject.asObservable();
     this.userAudioSubject = new BehaviorSubject<UserStorageModel>(null);
     this.userAudio = this.userAudioSubject.asObservable();
-  }
-
-  public get taskFinished(): Boolean {
-    return JSON.parse(localStorage.getItem('task_finished'));
-  }
-
-  public get workClaimed(): Boolean {
-    return JSON.parse(localStorage.getItem('work_claimed'));
   }
   
   updateIdCard(updateData) {
@@ -62,19 +54,19 @@ export class UserService {
     body.set('phoneNumber', updateData.tel);
     body.set('email', updateData.email);
     body.set('address', updateData.address);
-    return this.http.post(`${environment.apiUrl}/api/updateuserinfo`, body.toString(), { headers });
+    body.set('enable2fa', updateData.twofactorauth ? '1' : '0');
+    body.set('enableNoti', updateData.noticestatus ? '1' : '0');
+    return this.http.post(`${environment.apiUrl}/api/updateinfo`, body.toString(), { headers });
   }
 
   sendActivationEmail() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    return this.http.post(`${environment.apiUrl}/api/resend`, body.toString(), { headers });
+    return this.http.post(`${environment.apiUrl}/api/resend`, {}, { headers });
   }
 
   requestManager() {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    const body = new URLSearchParams();
-    return this.http.post(`${environment.apiUrl}/api/requeststaff`, body.toString(), { headers });
+    return this.http.post(`${environment.apiUrl}/api/requeststaff`, {}, { headers });
   }
 
   findAccount(id: string) {
@@ -104,24 +96,22 @@ export class UserService {
     }));
   }
 
+  findBanks() {
+    return this.http.get<any>(`${environment.apiUrl}/api/getbanklist`);
+  }
+
   findInfo(type = 'full') {
     const params = { type };
     return this.http.get<UserModel>(`${environment.apiUrl}/api/getinfo`, { params });
   }
 
   findManager() {
-    return this.http.get<any>(`${environment.apiUrl}/api/requeststaff`).pipe(map(data => {
-      localStorage.setItem('work_claimed', JSON.stringify(data.count > 0));
-      return data;
-    }));
+    return this.http.get<any>(`${environment.apiUrl}/api/requeststaff`);
   }
 
   findStatus() {
     const params = { type: 'status' };
-    return this.http.get<StatusModel>(`${environment.apiUrl}/api/getinfo`, { params }).pipe(map(status => {
-      localStorage.setItem('task_finished', JSON.stringify(status.approveStatus === 1 && status.emailVerified !== 0));
-      return status;
-    }));
+    return this.http.get<StatusModel>(`${environment.apiUrl}/api/getinfo`, { params });
   }
 
   getRate() {

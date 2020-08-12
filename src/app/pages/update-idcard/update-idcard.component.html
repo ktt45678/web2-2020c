@@ -1,6 +1,5 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container">
-  <div *ngIf="currentUser" class="mt-2r">
+  <div class="mt-2r">
     <div class="update-form ml-auto mr-auto br-10px">
       <div [ngClass]="loading ? 'visible' : 'invisible'">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -64,6 +63,7 @@
               <mat-progress-bar class="rounded" *ngIf="loading" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
             </div>
             <p class="text-muted mt-2">Để xác thực tài khoản, bạn cần cung cấp 2 ảnh chụp bao gồm số CMND/CCCD và ngày cấp từ giấy tờ tùy thân mà bạn sở hữu. Những hình ảnh mà bạn tải lên sẽ được lưu trữ tạm thời trên hệ thống và các nhân viên sẽ tiến hành kiểm tra xác thực. Chúng tôi cam kết các hình ảnh này sẽ bị xóa vĩnh viễn ngay sau khi việc xác thực hoàn tất.</p>
+            <p *ngIf="currentUser.approveStatus === 1" class="text-danger">Nếu bạn cập nhật giấy tờ tùy thân mới, bạn sẽ không thể tiếp tục sử dụng các dịch vụ của ngân hàng cho đến khi việc xác thực hoàn tất.</p>
           </div>
           <div class="d-flex">
             <div>

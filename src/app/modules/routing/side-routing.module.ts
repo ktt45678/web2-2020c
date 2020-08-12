@@ -18,8 +18,10 @@ import { AccountCreationComponent } from '../../pages/account-creation/account-c
 import { AccountManagementComponent } from '../../pages/account-management/account-management.component';
 import { AccountInformationComponent } from '../../pages/account-information/account-information.component';
 import { AccountModificationComponent } from '../../pages/account-modification/account-modification.component';
+import { AccountWithdrawalComponent } from '../../pages/account-withdrawal/account-withdrawal.component';
 import { AuditLogComponent } from '../../pages/audit-log/audit-log.component';
 import { TransactionHistoryComponent } from '../../pages/transaction-history/transaction-history.component';
+import { AccountTransferComponent } from '../../pages/account-transfer/account-transfer.component';
 
 const routes: Routes = [
   {
@@ -39,8 +41,10 @@ const routes: Routes = [
       { path: 'accounts/create/:userid', component: AccountCreationComponent, canActivate: [RoleGuard] },
       { path: 'accounts/view/:accountid', component: AccountInformationComponent, canActivate: [RoleGuard] },
       { path: 'accounts/edit/:accountid', component: AccountModificationComponent, canActivate: [RoleGuard] },
+      { path: 'accounts/withdraw/:accountid', component: AccountWithdrawalComponent, canActivate: [RoleGuard] },
       { path: 'log', component: AuditLogComponent, canActivate: [RoleGuard] },
-      { path: 'history', component: TransactionHistoryComponent, canActivate: [ActivateGuard] }
+      { path: 'history', component: TransactionHistoryComponent, canActivate: [ActivateGuard] },
+      { path: 'transfer', component: AccountTransferComponent, canActivate: [ActivateGuard] }
     ]
   }
 ];

@@ -1,5 +1,7 @@
 <div class="mt-2r">
-  <mat-spinner *ngIf="!selectedUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="!selectedUser" class="body-spinner">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
   <div *ngIf="selectedUser" class="container">
     <div class="account-form ml-auto mr-auto br-10px">
       <div [ngClass]="loading ? 'visible' : 'invisible'">
@@ -8,7 +10,7 @@
       <div class="account-inner">
         <h2 class="mb-3 text-center">TẠO TÀI KHOẢN</h2>
         <div *ngIf="!accountType" class="account-selector">
-          <form [formGroup]="selectAccountForm" (ngSubmit)="onSelectAccount(selectAccountForm.value)">
+          <form [formGroup]="accountSelectionForm" (ngSubmit)="onSelectAccount(accountSelectionForm.value)">
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Loại tài khoản</mat-label>
@@ -49,7 +51,7 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Người dùng</mat-label>
                 <input type="text" formControlName="owner" matInput readonly>
-                <mat-error *ngIf="checkingOwner.errors?.required">
+                <mat-error *ngIf="caOwner.errors?.required">
                   Người dùng là <strong>bắt buộc</strong>
                 </mat-error>
               </mat-form-field>
@@ -59,10 +61,10 @@
                 <mat-label>Số dư ban đầu</mat-label>
                 <input type="number" formControlName="balance" matInput>
                 <mat-icon matSuffix>attach_money</mat-icon>
-                <mat-error *ngIf="checkingBalance.errors?.required">
+                <mat-error *ngIf="caBalance.errors?.required">
                   Số dư ban đầu là <strong>bắt buộc</strong>
                 </mat-error>
-                <mat-error *ngIf="checkingBalance.errors?.min">
+                <mat-error *ngIf="caBalance.errors?.min">
                   Số dư ban đầu tối thiểu là <strong>500,000đ</strong> hoặc <strong>$23</strong>
                 </mat-error>
               </mat-form-field>
@@ -77,13 +79,13 @@
             </div>
           </form>
         </div>
-        <div *ngIf="accountType === '1'" class="saving-account">
-          <form [formGroup]="savingAccountForm" (ngSubmit)="onSavingAccount(savingAccountForm.value)">
+        <div *ngIf="accountType === '1'" class="savings-account">
+          <form [formGroup]="savingsAccountForm" (ngSubmit)="onSavingAccount(savingsAccountForm.value)">
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Người dùng</mat-label>
                 <input type="text" formControlName="owner" matInput readonly>
-                <mat-error *ngIf="savingOwner.errors?.required">
+                <mat-error *ngIf="saOwner.errors?.required">
                   Người dùng là <strong>bắt buộc</strong>
                 </mat-error>
               </mat-form-field>
@@ -100,7 +102,7 @@
                   <mat-option value="30">30 tháng</mat-option>
                   <mat-option value="36">36 tháng</mat-option>
                 </mat-select>
-                <mat-error *ngIf="savingTerm.errors?.required">
+                <mat-error *ngIf="saTerm.errors?.required">
                   Kỳ hạn là <strong>bắt buộc</strong>
                 </mat-error>
               </mat-form-field>
@@ -110,10 +112,10 @@
                 <mat-label>Số dư ban đầu</mat-label>
                 <input type="number" formControlName="balance" matInput>
                 <mat-icon matSuffix>account_balance</mat-icon>
-                <mat-error *ngIf="savingBalance.errors?.required">
+                <mat-error *ngIf="saBalance.errors?.required">
                   Số dư ban đầu là <strong>bắt buộc</strong>
                 </mat-error>
-                <mat-error *ngIf="savingBalance.errors?.min">
+                <mat-error *ngIf="saBalance.errors?.min">
                   Số dư ban đầu tối thiểu là <strong>500,000đ</strong> hoặc <strong>$23</strong>
                 </mat-error>
               </mat-form-field>

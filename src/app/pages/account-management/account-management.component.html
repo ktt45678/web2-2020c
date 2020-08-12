@@ -1,21 +1,19 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container mt-2r account-table">
-  <p *ngIf="(dataSource.length$ | async) <= 0">Hiện chưa có tài khoản nào.</p>
+  <div class="row">
+    <mat-form-field class="col-auto mr-auto">
+      <mat-label>Tìm kiếm</mat-label>
+      <input matInput #search>
+    </mat-form-field>
+    <mat-form-field class="col-auto">
+      <mat-label>Loại tài khoản</mat-label>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="0">Tài khoản thanh toán</mat-option>
+        <mat-option value="1">Tài khoản tiết kiệm</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div class="account-scroll">
-    <div class="d-flex">
-      <mat-form-field>
-        <mat-label>Tìm kiếm</mat-label>
-        <input matInput #search>
-      </mat-form-field>
-      <mat-form-field class="ml-auto">
-        <mat-label>Loại tài khoản</mat-label>
-        <mat-select value="all">
-          <mat-option value="all">Tất cả</mat-option>
-          <mat-option value="0">Tài khoản thanh toán</mat-option>
-          <mat-option value="1">Tài khoản tiết kiệm</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
     <table mat-table [dataSource]="dataSource" class="w-100">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Số tài khoản</th>
@@ -44,7 +42,7 @@
         <th mat-header-cell *matHeaderCellDef>Chi tiết</th>
         <td mat-cell *matCellDef="let account">
           <button *ngIf="currentUser.userType === 0" mat-icon-button [matMenuTriggerFor]="actionMenu" [matMenuTriggerData]="{account: account}"><mat-icon>more_horiz</mat-icon></button>
-          <button *ngIf="currentUser.userType !== 0" [routerLink]="['/accounts', 'view', account.accountId]" mat-icon-button><mat-icon>history</mat-icon></button>
+          <button *ngIf="currentUser.userType !== 0" routerLink="/history" mat-icon-button><mat-icon>history</mat-icon></button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -57,6 +55,7 @@
       <button [routerLink]="['/accounts', 'view', account.accountId]" mat-menu-item>Xem thông tin</button>
       <button [routerLink]="['/accounts', 'view', account.accountId]" mat-menu-item>Lịch sử giao dịch</button>
       <button [routerLink]="['/accounts', 'edit', account.accountId]" mat-menu-item>Thay đổi</button>
+      <button [disabled]="account.status === 0" [routerLink]="['/accounts', 'withdraw', account.accountId]" mat-menu-item>Rút tiền</button>
       <button *ngIf="account.status === 1" (click)="closeAccount(account)" mat-menu-item>Đóng tài khoản</button>
       <button *ngIf="account.status === 0" (click)="openAccount(account)" mat-menu-item>Mở tài khoản</button>
     </ng-template>

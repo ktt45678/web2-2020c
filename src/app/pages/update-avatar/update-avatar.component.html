@@ -1,6 +1,5 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container">
-  <div *ngIf="currentUser" class="mt-2r">
+  <div class="mt-2r">
     <div class="update-form ml-auto mr-auto br-10px">
       <div [ngClass]="loading ? 'visible' : 'invisible'">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>

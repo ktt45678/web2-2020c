@@ -35,8 +35,8 @@ export class PasswordRecoveryComponent implements OnInit {
     if (this.token) {
       this.auth.validatePasswordRecovery(this.token).pipe(first()).subscribe(data => {
         this.hasToken = true;
-      }, error => {
-        this.notification.showError('Liên kết khôi phục mật khẩu không hợp lệ');
+      }, () => {
+        this.notification.showInfo('Liên kết khôi phục mật khẩu không hợp lệ');
       });
     }
   }
@@ -57,8 +57,7 @@ export class PasswordRecoveryComponent implements OnInit {
       this.afterRespone();
       this.recoveryForm.enable();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.afterRespone();
       this.recoveryForm.enable();
     });
@@ -76,11 +75,15 @@ export class PasswordRecoveryComponent implements OnInit {
       this.afterRespone();
       this.resetPasswordForm.enable();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.afterRespone();
       this.resetPasswordForm.enable();
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   afterRespone() {

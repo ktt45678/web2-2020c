@@ -1,0 +1,16 @@
+.log-scroll {
+  overflow-x: auto;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  height: 40px !important;
+}
+
+.mat-table {
+  .mat-cell:nth-child(1), .mat-header-cell:nth-child(1) {
+    width: 200px;
+  }
+  .mat-cell:nth-child(2), .mat-header-cell:nth-child(2) {
+    width: auto;
+  }
+}

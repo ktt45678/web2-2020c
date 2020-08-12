@@ -1,5 +1,7 @@
 <div class="mt-2r">
-  <mat-spinner *ngIf="!selectedUser" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="!selectedUser" class="body-spinner">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
   <div class="container">
     <div *ngIf="selectedUser" class="user-info">
       <div class="info-head rounded shadow-sm p-3">

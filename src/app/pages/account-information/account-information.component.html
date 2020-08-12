@@ -1,7 +1,10 @@
 <div class="mt-2r">
-  <mat-spinner *ngIf="!selectedAccount" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="!selectedAccount" class="body-spinner">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
   <div *ngIf="selectedAccount" class="container">
     <div class="account-info">
+      <h4 class="fw-600">Thông tin chi tiết</h4>
       <div class="info-content row">
         <div class="col-md-5">
           <h5>Số tài khoản</h5>
@@ -27,6 +30,12 @@
           <h5>Ngày đóng</h5>
           <p>{{selectedAccount.closedDate || 'Không có'}}</p>
         </div>
+      </div>
+    </div>
+    <div class="info-history mt-2r">
+      <h4 class="fw-600">Lịch sử giao dịch</h4>
+      <div class="info-content">
+        <app-transaction-history [accountId]="selectedAccount.accountId"></app-transaction-history>
       </div>
     </div>
   </div>

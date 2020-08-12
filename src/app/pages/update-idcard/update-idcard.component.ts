@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { concat } from 'rxjs';
@@ -10,7 +11,6 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UploadService } from '../../services/upload.service';
 import { NotificationService } from '../../services/notification.service';
 import { UserService } from '../../services/user.service';
-import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-update-idcard',
@@ -53,7 +53,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   fileInputChange(fileInputEvent: any) {
     if (fileInputEvent.target.files.length > 0) {
       if (fileInputEvent.target.files[0].size > this.sizeLimit) {
-        this.notification.showError('Giới hạn tập tin tải lên là 8MB');
+        this.notification.showInfo('Giới hạn tập tin tải lên là 8MB');
         return;
       }
       this.selectedFile = fileInputEvent.target.files[0];
@@ -67,7 +67,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
   fileInputChange2(fileInputEvent: any) {
     if (fileInputEvent.target.files.length > 0) {
       if (fileInputEvent.target.files[0].size > this.sizeLimit) {
-        this.notification.showError('Giới hạn tập tin tải lên là 8MB');
+        this.notification.showInfo('Giới hạn tập tin tải lên là 8MB');
         return;
       }
       this.selectedFile2 = fileInputEvent.target.files[0];
@@ -102,7 +102,7 @@ export class UpdateIdCardComponent implements OnInit, OnDestroy {
     // Upload id card photos for standard users
     if (this.currentUser.userType !== 0) {
       if (!this.selectedFile || !this.selectedFile2) {
-        this.notification.showError('Bạn chưa cung cấp ảnh chụp');
+        this.notification.showInfo('Bạn chưa cung cấp ảnh chụp');
         this.afterRespone();
         return;
       }

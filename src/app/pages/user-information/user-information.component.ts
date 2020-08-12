@@ -24,13 +24,9 @@ export class UserInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('userid');
-    this.manage.findUser(this.userId).subscribe(data => this.selectedUser = data);
-    this.manage.findSubmittedIdCards(this.userId).subscribe(data => {
-      this.submittedIdCards = data;
-    });
-    this.manage.findAvatar(this.userId).subscribe(avatars => {
-      this.selectedUserAvatar = avatars[0];
-    });
+    this.manage.findUser(this.userId).subscribe(data => this.selectedUser = data, error => this.showError(error));
+    this.manage.findSubmittedIdCards(this.userId).subscribe(data => this.submittedIdCards = data);
+    this.manage.findAvatar(this.userId).subscribe(avatars => this.selectedUserAvatar = avatars[0]);
   }
 
   approveUser() {
@@ -39,8 +35,8 @@ export class UserInformationComponent implements OnInit {
       this.notification.showSuccess('Đã phê duyệt thành công');
       this.selectedUser.approveStatus = 1;
       this.afterRespone();
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
   }
 
@@ -50,9 +46,14 @@ export class UserInformationComponent implements OnInit {
       this.notification.showSuccess('Đã từ chối phê duyệt');
       this.selectedUser.approveStatus = 0;
       this.afterRespone();
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   afterRespone() {

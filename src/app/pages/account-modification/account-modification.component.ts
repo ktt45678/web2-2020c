@@ -62,6 +62,11 @@ export class AccountModificationComponent implements OnInit {
       this.notification.showSuccess(`Đã nạp thành công ${payInData.amount} ${payInData.type} vào tài khoản ${this.accountId}`);
       this.payInForm.enable();
       this.afterRespone();
+      // It's unable to pay in again when the savings account is activated, so change status to open
+      if (this.selectedAccount.accountType === 1) {
+        this.selectedAccount.status = 1;
+        this.status.setValue("1");
+      }
     }, error => {
       this.showError(error);
       this.payInForm.enable();
@@ -80,6 +85,8 @@ export class AccountModificationComponent implements OnInit {
       this.notification.showSuccess('Thay đổi thông tin thành công');
       this.updateAccountForm.enable();
       this.afterRespone();
+      // We need to make sure that it's possible to pay in after deactivating the savings account
+      this.selectedAccount.status = Number(accountData.status);
     }, error => {
       this.showError(error);
       this.updateAccountForm.enable();

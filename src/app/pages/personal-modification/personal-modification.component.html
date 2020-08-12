@@ -1,7 +1,6 @@
 <div class="mt-2r">
-  <mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
   <div class="container">
-    <div *ngIf="currentUser" class="user-updateinfo ml-auto mr-auto br-10px">
+    <div class="user-updateinfo ml-auto mr-auto br-10px">
       <div class="updateinfo-inner">
         <h2 class="text-center mb-3 pt-32px">THIẾT LẬP TÀI KHOẢN</h2>
         <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
@@ -120,6 +119,12 @@
                       Email là <strong>bắt buộc</strong>
                     </mat-error>
                   </mat-form-field>
+                </div>
+                <div class="mt-2">
+                  <mat-checkbox color="primary" formControlName="twofactorauth">Xác thực hai bước khi đăng nhập</mat-checkbox>
+                </div>
+                <div>
+                  <mat-checkbox color="primary" formControlName="noticestatus">Thông báo cho tôi khi tài khoản có sự thay đổi</mat-checkbox>
                 </div>
               </div>
               <div class="pl-32px pr-32px pb-32px">

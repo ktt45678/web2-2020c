@@ -62,15 +62,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return;
     }
     if (registerData.password !== registerData.confirmpassword) {
-      this.notification.showError('Xác nhận mật khẩu không chính xác');
+      this.notification.showInfo('Xác nhận mật khẩu không chính xác');
       this.captchaRef.reset();
       return;
     }
     this.loading = true;
     this.registerForm.disable();
     this.reCaptcha.verify(captchaResponse).pipe(first()).subscribe(() => {},
-    error => {
-      this.notification.showError('Lỗi xác thực captcha');
+    () => {
+      this.notification.showInfo('Lỗi xác thực captcha');
       this.afterRespone();
       return;
     });
@@ -79,10 +79,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.notification.showSuccess('Đăng kí thành công, vui lòng kiểm tra email của bạn');
       this.afterRespone();
     }, error => {
-      const message = JSON.parse(JSON.stringify(error));
-      this.notification.showError(message[0]?.code || message?.code);
+      this.showError(error);
       this.afterRespone();
     });
+  }
+  
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   afterRespone() {

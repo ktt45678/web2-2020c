@@ -72,7 +72,7 @@ export class UserModificationComponent implements OnInit, OnDestroy {
       if (user.id === this.currentUser.id) {
         this.isSelfEdit = true;
       }
-    })).subscribe(data => this.selectedUser = data);
+    })).subscribe(data => this.selectedUser = data, error => this.showError(error));
   }
 
   get firstname() { return this.editorForm.get('firstname'); }

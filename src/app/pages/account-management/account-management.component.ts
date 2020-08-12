@@ -36,17 +36,13 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngAfterViewInit(): void {
-    if (this.searchInput && this.paginator && this.select) {
-      this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
-        this.paginator.pageIndex = 0;
-        this.loadAccountsPage();
-      })).subscribe());
-      this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadAccountsPage())).subscribe());
-      this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadAccountsPage())).subscribe());
-    }
-    if (this.currentUser) {
+    this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
+      this.paginator.pageIndex = 0;
       this.loadAccountsPage();
-    }
+    })).subscribe());
+    this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadAccountsPage())).subscribe());
+    this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadAccountsPage())).subscribe());
+    this.loadAccountsPage();
   }
 
   loadAccountsPage() {
@@ -62,8 +58,8 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
     () => {
       account.status = 0;
       this.notification.showSuccess(`Đã đóng tài khoản ${account.accountId}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
   }
 
@@ -72,9 +68,14 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
     () => {
       account.status = 1;
       this.notification.showSuccess(`Đã mở lại tài khoản ${account.accountId}`);
-    }, () => {
-      this.notification.showError('Đã có lỗi xảy ra');
+    }, error => {
+      this.showError(error);
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   ngOnDestroy(): void {

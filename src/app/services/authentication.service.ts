@@ -102,15 +102,29 @@ export class AuthenticationService {
     clearTimeout(this.refreshTokenTimeout);
   }
 
+  twoFactorAuth(loginData) {
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    const body = new URLSearchParams();
+    body.set('verifyCode', loginData.code);
+    return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/verify2fa`, body.toString(), { headers }).pipe(map(data => {
+      localStorage.setItem('token', JSON.stringify(data.token));
+      const user = new JwtHelperService().decodeToken(data.token);
+      this.currentUserSubject.next(user);
+      return data;
+    }));
+  }
+
   login(loginData) {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
     body.set('username', loginData.username);
     body.set('password', loginData.password);
     return this.http.post<TokenModel>(`${environment.apiUrl}/api/auth/login`, body.toString(), { headers }).pipe(map(data => {
-      localStorage.setItem('token', JSON.stringify(data.token));
-      const user = new JwtHelperService().decodeToken(data.token);
-      this.currentUserSubject.next(user);
+      if (data.token) {
+        localStorage.setItem('token', JSON.stringify(data.token));
+        const user = new JwtHelperService().decodeToken(data.token);
+        this.currentUserSubject.next(user);
+      }
       return data;
     }));
   }
@@ -121,7 +135,5 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
     this.stopRefreshTokenTimer();
     localStorage.removeItem('token');
-    localStorage.removeItem('task_finished');
-    localStorage.removeItem('work_claimed');
   }
 }

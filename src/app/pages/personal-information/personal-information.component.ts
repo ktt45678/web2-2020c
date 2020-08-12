@@ -16,13 +16,18 @@ export class PersonalInformationComponent implements OnInit {
   currentUser: UserModel;
   currentUserAvatar: UserImageModel;
 
-  constructor(private route: ActivatedRoute, private router: Router, private user: UserService, private notification: NotificationService, private location: Location) { }
+  constructor(private user: UserService, private notification: NotificationService, private location: Location) { }
 
   ngOnInit(): void {
-    this.user.findInfo().subscribe(data => this.currentUser = data);
+    this.user.findInfo().subscribe(data => this.currentUser = data, error => this.showError(error));
     this.user.findAvatar().subscribe(avatars => {
       this.currentUserAvatar = avatars[0];
     });
+  }
+
+  showError(error) {
+    const message = JSON.parse(JSON.stringify(error));
+    this.notification.showError(message[0]?.code || message?.code);
   }
 
   openUri(uri) {

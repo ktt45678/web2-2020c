@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-
 import { AccountModel } from '../modules/models/account.model';
 import { UserImageModel } from '../modules/models/user-image.model';
 import { UserModel } from '../modules/models/user.model';
@@ -56,14 +55,14 @@ export class ManagementService {
     return this.http.get<any>(`${environment.apiUrl}/api/getuseraccount`, { params });
   }
 
-  findAuditLog(start: string, limit: string, userId: string, type: string) {
+  findAuditLogs(start = 0, limit = 10, type = '', keyword = '') {
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams();
-    body.set('start', start);
-    body.set('limit', limit);
-    body.set('userId', userId);
+    body.set('start', start.toString());
+    body.set('limit', limit.toString());
     body.set('type', type);
-    return this.http.post(`${environment.apiUrl}/api/getaudit`, body.toString(), { headers });
+    body.set('by', keyword);
+    return this.http.post<any>(`${environment.apiUrl}/api/getaudit`, body.toString(), { headers });
   }
 
   findAvatar(userId: string) {
