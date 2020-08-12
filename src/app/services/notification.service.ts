@@ -39,7 +39,7 @@ export class NotificationService {
         return 'Số tiền không được rỗng';
       case 'MONEY_INVALID':
         //return 'your input value is invalid, only positive value';
-        return 'Số tiền không hợp lệ , số tiền chỉ có thể là giá trị dương';
+        return 'Số tiền không hợp lệ, số tiền chỉ có thể là giá trị dương';
       case 'MESSAGE_TOO_SHORT':
         //return 'your message too long, maximum: 512 characters';
         return 'Tin nhắn quá dài, tin nhắn tối đa 512 kí tự';
@@ -84,7 +84,7 @@ export class NotificationService {
         return 'Đã đạt mức chuyển khoản tối đa hằng tháng (10.000.000.000 VND)';
       case 'REFUND':
         //return 'Something happened, can not transfer at now, we have refunded';
-        return 'Đã có lỗi xảy ra , không thể thực hiện chuyển khoản tại thời điểm này , số tiền gửi đã được hoàn trả';
+        return 'Đã có lỗi xảy ra, không thể thực hiện chuyển khoản tại thời điểm này, số tiền gửi đã được hoàn trả';
       case 'INVALID_TERM':
         //return 'Term can only: 3, 6, 12, 18, 24, 30, 36';
         return 'Kì hạn chỉ có thể là : 3, 6, 12, 18, 24, 30, 36';
@@ -93,7 +93,7 @@ export class NotificationService {
         return 'Đơn vị tiền chỉ có thể là VND hoặc USD';
       case 'TOO_LOW_BALANCE':
         //return 'Minimum required for create an account is 500000VND (about 22USD)';
-        return 'Số tiền tối thiểu để tạo ài khoản là 500.000 VND ( khoảng 22 USD )';
+        return 'Số tiền tối thiểu để tạo tài khoản là 500.000 VND (khoảng 22 USD)';
       case 'INVALID_ACCOUNT_TYPE':
         //return 'accountType can only 0 or 1';
         return 'Loại tài khoảng không hợp lệ';
@@ -114,7 +114,7 @@ export class NotificationService {
         return 'Email này đã được sử dụng';
       case 'EMAIL_TOO_SHORT':
         //return 'Email to short, min is 5';
-        return 'Email quá ngắn , tối thiểu 5 kí tự';
+        return 'Email quá ngắn, tối thiểu 5 kí tự';
       case 'EMAIL_INVALID':
         //return 'Invalid email type';
         return 'Loại email không hợp lệ';
@@ -123,10 +123,10 @@ export class NotificationService {
         return 'Tên người dùng đã được dùng bởi tài khoản khác';
       case 'USERNAME_TOO_SHORT':
         //return 'username to short, min is 3';
-        return "Tên người dùng quá ngắn , tối thiểu 3 kí tự";
+        return "Tên người dùng quá ngắn, tối thiểu 3 kí tự";
       case 'USERNAME_TOO_LONG':
        //return 'username to long, max is 20';
-        return 'Tên người dùng quá dài , tối đa 20 kí tự';
+        return 'Tên người dùng quá dài, tối đa 20 kí tự';
       case 'USERNAME_INVALID':
         //return 'username only can be alphabetic none UTF-8 and number, start with alphabetic none-UTF8';
         return 'Tên người dùng chỉ có thể là và bắt đầu bằng chữ không dấu';
@@ -144,37 +144,37 @@ export class NotificationService {
         return 'Mật khẩu không trùng với xác nhận mật khẩu';
       case 'LASTNAME_TOO_SHORT':
         //return 'lastName to short, min is 3';
-        return 'Tên quá ngắn , tối thiểu 3 kí tự';
+        return 'Tên quá ngắn, tối thiểu 3 kí tự';
       case 'LASTNAME_TOO_LONG':
         //return 'lastName to long, max is 20';
-        return 'Tên quá dài , tối đa 20 kí tự';
+        return 'Tên quá dài, tối đa 20 kí tự';
       case 'LASTNAME_INVALID':
         //return 'lastName only can be alphabetic utf8, number and dot, must start with alphabetic uft8';
-        return 'Tên phải bắt đầu bằng chữ cái có dấu và chỉ có thể bao gồm chữ có dấu , số và dấu chấm';
+        return 'Tên phải bắt đầu bằng chữ cái có dấu và chỉ có thể bao gồm chữ có dấu, số và dấu chấm';
       case 'FIRSTNAME_TOO_SHORT':
         //return 'firstName to short, min is 3';
-        return 'Họ quá ngắn , tối thiểu 3 kí tự';
+        return 'Họ quá ngắn, tối thiểu 3 kí tự';
       case 'FIRSTNAME_TOO_LONG':
         //return 'firstName to long, max is 20';
-        return 'Họ quá dài , tối đa 20 kí tự';
+        return 'Họ quá dài, tối đa 20 kí tự';
       case 'FIRSTNAME_INVALID':
         //return 'firstName only can be alphabetic utf8, number and dot, must start with alphabetic utf8';
-        return 'Họ phải bắt đầu bằng chữ cái có dấu và chỉ có thể bao gồm chữ có dấu , số và dấu chấm';
+        return 'Họ phải bắt đầu bằng chữ cái có dấu và chỉ có thể bao gồm chữ có dấu, số và dấu chấm';
       case 'ADDRESS_TOO_SHORT':
         //return 'address to short, min is 6';
-        return 'Địa chỉ quá ngắn , tối thiểu là 6 kí tự';
+        return 'Địa chỉ quá ngắn, tối thiểu là 6 kí tự';
       case 'ADDRESS_TOO_LONG':
         //return 'address to long, max is 100';
-        return 'Địa chỉ quá dài , tối đa 100 kí tự';
+        return 'Địa chỉ quá dài, tối đa 100 kí tự';
       case 'PHONENUMBER_CONFLICT':
         //return 'phoneNumber already used by other people';
         return 'Số điện thoại đã được dùng bởi tài khoản khác';
       case 'PHONENUMBER_TOO_SHORT':
         //return 'phoneNumber to short, min is 3';
-        return 'Số điện thoại quá ngắn ,tối thiểu 3 kí tự';
+        return 'Số điện thoại quá ngắn, tối thiểu 3 kí tự';
       case 'PHONENUMBER_TOO_LONG':
         //return 'phoneNumber to long, max is 20';
-        return 'Số điện thoại quá dài , tối đa 20 kí tự';
+        return 'Số điện thoại quá dài, tối đa 20 kí tự';
       case 'PHONENUMBER_INVALID':
         //return 'phoneNumber only can be number or number with 1 plus at start';
         return 'Số điện thoại chỉ có thể bao gồm số và bắt đầu từ 1';
@@ -183,7 +183,7 @@ export class NotificationService {
         return 'CMND/CCCD đã được sử dụng bởi tài khoản khác';
       case 'CITIZENIDENTIFICATIONID_TOO_SHORT':
         //return 'citizenIdentificationId to short, min is 5';
-        return 'CMND/CCCD quá ngắn , tối thiểu là 5 kí tự';
+        return 'CMND/CCCD quá ngắn, tối thiểu là 5 kí tự';
       case 'DATEOFBIRTH_INVALID':
         //return 'Invalid dateOfBirth, can only DD/MM/YYYY';
         return 'Ngày sinh không đúng định dạng DD/MM/YYYY';
@@ -192,7 +192,7 @@ export class NotificationService {
         return 'Mã kích hoạt không hợp lệ';
       case 'FORGOTCODE_INVALID':
         //return 'Invalid forgotCode';
-        return 'Mã tái kích hoạt không hợp lệ';
+        return 'Mã khôi phục mật khẩu không hợp lệ';
       case 'VERIFYCODE_INVALID':
         //return 'Invalid or wrong verifyCode';
         return 'Mã xác nhận không hợp lệ';
@@ -210,13 +210,13 @@ export class NotificationService {
         return 'Người dùng đã xác minh email';
       case 'ACTIVE_SENT':
         //return 'Email has been sent to your inbox, please wait 5 minutes to use resend again';
-        return 'Email đã được gửi đi , vui lòng chờ 5 phút để thực hiện gửi lại';
+        return 'Email đã được gửi đi, vui lòng chờ 5 phút để thực hiện gửi lại';
       case 'ISSUEDATE_INVALID':
         //return 'Invalid issueDate, can only DD/MM/YYYY';
         return 'Ngày cấp không đúng định dạng DD/MM/YYYY';
       case 'IDENTIFICATIONTYPE_INVALID':
         //return 'Invalid identificationType, can only be CMND or CCCD';
-        return 'Loại chứng minh thư không hợp lệ , chứng minh thư chỉ có thể là CMND/CCCD';
+        return 'Loại chứng minh thư không hợp lệ, chứng minh thư chỉ có thể là CMND/CCCD';
       case 'ENABLE2FA_INVALID':
         //return 'Invalid enable2fa, can only be 0 or 1';
         return 'Kích hoạt xác minh 2 bước không thành công';
@@ -225,7 +225,7 @@ export class NotificationService {
         return 'Xin vui lòng chờ nhân viên xác nhận ảnh chứng minh thư';
       case 'USER_BLOCKED':
         //return 'Your account has been blocked, please contact the staff for more info';
-        return 'Tài khoản của bạn đã bị khóa , vui lòng liên hệ nhân viên để biết thêm chi tiết';
+        return 'Tài khoản của bạn đã bị khóa, vui lòng liên hệ nhân viên để biết thêm chi tiết';
       case 'USER_NOT_VERIFY':
         //return 'This user not verify citizenIdentification Id yet';        
         return 'Người dùng chưa xác minh bằng chứng minh thư';        
