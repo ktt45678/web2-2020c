@@ -87,7 +87,7 @@ export class AccountTransferComponent implements OnInit {
     }
     if (selectData.method === 'inter') {
       this.createInterBankTransferForm();
-      this.user.findBank().subscribe(data => this.availableBanks = data.list);
+      this.user.findBanks().subscribe(data => this.availableBanks = data.list);
     }
     this.transaction.findCheckingAccounts().subscribe(data => this.currentUserAccounts = data);
     this.stage = selectData.method;

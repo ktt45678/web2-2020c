@@ -6,10 +6,8 @@ import { MatSelect } from '@angular/material/select';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { AuthenticationService } from '../../services/authentication.service';
 import { TransactionService } from '../../services/transaction.service';
 import { NotificationService } from '../../services/notification.service';
-import { UserModel } from '../../modules/models/user.model';
 import { TransactionDataSource } from '../../modules/template/transaction.datasource';
 
 @Component({
@@ -23,7 +21,6 @@ export class TransactionHistoryComponent implements OnInit, AfterViewInit, OnDes
   @Input() detailView = true;
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-  currentUser: UserModel;
   dataSource: TransactionDataSource;
   displayedColumns: string[] = ['id', 'time', 'content', 'description', 'status'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,14 +29,13 @@ export class TransactionHistoryComponent implements OnInit, AfterViewInit, OnDes
   @ViewChild(MatSelect) select: MatSelect;
   subscriptions = new Subscription();
 
-  constructor(private auth: AuthenticationService, private transaction: TransactionService, private notification: NotificationService, private dialog: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(private transaction: TransactionService, private notification: NotificationService, private dialog: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnInit(): void {
-    this.currentUser = this.auth.currentUserValue;
     this.dataSource = new TransactionDataSource(this.transaction);
   }
 
@@ -48,9 +44,7 @@ export class TransactionHistoryComponent implements OnInit, AfterViewInit, OnDes
       this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadTransactionsPage())).subscribe());
       this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadTransactionsPage())).subscribe());
     }
-    if (this.currentUser) {
-      this.loadTransactionsPage();
-    }
+    this.loadTransactionsPage();
   }
 
   onDateFilterChange() {

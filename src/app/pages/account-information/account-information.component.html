@@ -1,5 +1,7 @@
 <div class="mt-2r">
-  <mat-spinner *ngIf="!selectedAccount" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="!selectedAccount" class="body-spinner">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
   <div *ngIf="selectedAccount" class="container">
     <div class="account-info">
       <h4 class="fw-600">Thông tin chi tiết</h4>

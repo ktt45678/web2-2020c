@@ -36,17 +36,13 @@ export class AccountManagementComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngAfterViewInit(): void {
-    if (this.searchInput && this.paginator && this.select) {
-      this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
-        this.paginator.pageIndex = 0;
-        this.loadAccountsPage();
-      })).subscribe());
-      this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadAccountsPage())).subscribe());
-      this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadAccountsPage())).subscribe());
-    }
-    if (this.currentUser) {
+    this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
+      this.paginator.pageIndex = 0;
       this.loadAccountsPage();
-    }
+    })).subscribe());
+    this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadAccountsPage())).subscribe());
+    this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadAccountsPage())).subscribe());
+    this.loadAccountsPage();
   }
 
   loadAccountsPage() {

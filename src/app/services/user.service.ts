@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { AccountModel } from '../modules/models/account.model';
 import { UserModel } from '../modules/models/user.model';
@@ -96,7 +96,7 @@ export class UserService {
     }));
   }
 
-  findBank() {
+  findBanks() {
     return this.http.get<any>(`${environment.apiUrl}/api/getbanklist`);
   }
 

@@ -1,6 +1,4 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container mt-2r account-table">
-  <p *ngIf="(dataSource.length$ | async) <= 0">Hiện chưa có tài khoản nào.</p>
   <div class="row">
     <mat-form-field class="col-auto mr-auto">
       <mat-label>Tìm kiếm</mat-label>
@@ -44,7 +42,7 @@
         <th mat-header-cell *matHeaderCellDef>Chi tiết</th>
         <td mat-cell *matCellDef="let account">
           <button *ngIf="currentUser.userType === 0" mat-icon-button [matMenuTriggerFor]="actionMenu" [matMenuTriggerData]="{account: account}"><mat-icon>more_horiz</mat-icon></button>
-          <button *ngIf="currentUser.userType !== 0" [routerLink]="['/accounts', 'view', account.accountId]" mat-icon-button><mat-icon>history</mat-icon></button>
+          <button *ngIf="currentUser.userType !== 0" routerLink="/history" mat-icon-button><mat-icon>history</mat-icon></button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

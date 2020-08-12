@@ -73,5 +73,9 @@ a, a:hover {
 }
 
 .body-spinner {
-  margin: 15vh auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  margin-bottom: 35px;
 }

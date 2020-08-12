@@ -33,17 +33,13 @@ export class UserManagementComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngAfterViewInit(): void {
-    if (this.searchInput && this.paginator && this.select) {
-      this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
-        this.paginator.pageIndex = 0;
-        this.loadUsersPage();
-      })).subscribe());
-      this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadUsersPage())).subscribe());
-      this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadUsersPage())).subscribe());
-    }
-    if (this.currentUser && this.currentUser.userType === 0) {
+    this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
+      this.paginator.pageIndex = 0;
       this.loadUsersPage();
-    }
+    })).subscribe());
+    this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadUsersPage())).subscribe());
+    this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadUsersPage())).subscribe());
+    this.loadUsersPage();
   }
 
   loadUsersPage() {

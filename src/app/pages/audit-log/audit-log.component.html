@@ -1,5 +1,37 @@
-<div class="mt-2r">
-  <div class="container">
-    
+<div class="container mt-2r log-table">
+  <div class="row">
+    <mat-form-field class="col-auto mr-auto">
+      <mat-label>Tìm kiếm theo nhân viên</mat-label>
+      <input matInput #search>
+    </mat-form-field>
+    <mat-form-field class="col-auto">
+      <mat-label>Lọc theo hoạt động</mat-label>
+      <mat-select value="all">
+        <mat-option value="all">Tất cả</mat-option>
+        <mat-option value="approve">Phê duyệt yêu cầu</mat-option>
+        <mat-option value="deny">Từ chối yêu cầu</mat-option>
+        <mat-option value="addbalance">Nạp tiền</mat-option>
+        <mat-option value="withdraw">Rút tiền</mat-option>
+        <mat-option value="edituser">Thông tin người dùng</mat-option>
+        <mat-option value="editaccount">Thông tin tài khoản</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
+  <div class="log-scroll">
+    <table mat-table [dataSource]="dataSource" class="w-100">
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef>Thời gian</th>
+        <td mat-cell *matCellDef="let log">{{log.date}} - {{log.time}}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Hoạt động</th>
+        <td mat-cell *matCellDef="let log">
+          <strong>{{log.fullName_user}}</strong> đã thực hiện {{log.action}} của người dùng <strong>{{log.fullName_target}}</strong>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator [length]="this.dataSource.length$ | async" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

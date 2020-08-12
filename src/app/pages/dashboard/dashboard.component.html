@@ -1,6 +1,5 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
 <div class="container">
-  <div *ngIf="currentUser" class="mt-2r">
+  <div class="mt-2r">
     <app-user-task *ngIf="!userTaskFinished || !workClaimed" [currentUserStatus]="currentUserStatus" [workAvailable]="!workClaimed"></app-user-task>
     <div *ngIf="userTaskFinished" class="row">
       <div class="col-lg-6">

@@ -1,5 +1,4 @@
-<mat-spinner *ngIf="!currentUser" mode="indeterminate" class="body-spinner"></mat-spinner>
-<div class="container mt-2r user-table" *ngIf="currentUser">
+<div class="container mt-2r user-table">
   <div *ngIf="detailView" class="row">
     <mat-form-field class="col-auto mr-auto">
       <mat-label>Hiển thị theo ngày</mat-label>
@@ -28,7 +27,7 @@
       </ng-container>
       <ng-container matColumnDef="time">
         <th mat-header-cell *matHeaderCellDef>Thời gian</th>
-        <td mat-cell *matCellDef="let transaction">{{transaction.date}} {{transaction.time}}</td>
+        <td mat-cell *matCellDef="let transaction">{{transaction.date}} - {{transaction.time}}</td>
       </ng-container>
       <ng-container matColumnDef="content">
         <th mat-header-cell *matHeaderCellDef>Giao dịch</th>

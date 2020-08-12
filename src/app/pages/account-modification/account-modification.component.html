@@ -1,5 +1,7 @@
 <div class="mt-2r">
-  <mat-spinner *ngIf="!selectedAccount" mode="indeterminate" class="body-spinner"></mat-spinner>
+  <div *ngIf="!selectedAccount" class="body-spinner">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
   <div *ngIf="selectedAccount" class="container">
     <div class="account-form ml-auto mr-auto br-10px">
       <div [ngClass]="loading ? 'visible' : 'invisible'">
