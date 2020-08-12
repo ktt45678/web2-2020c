@@ -94,6 +94,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { LiveRateComponent } from './shared/live-rate/live-rate.component';
 
 
 @NgModule({
@@ -142,7 +143,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     Error403Component,
     Error404Component,
     TransactionHistoryComponent,
-    AuditLogComponent
+    AuditLogComponent,
+    LiveRateComponent
   ],
   imports: [
     BrowserModule,

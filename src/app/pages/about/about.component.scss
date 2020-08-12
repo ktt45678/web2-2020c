@@ -103,3 +103,15 @@ img {
     from { opacity: 0; }
     to { opacity: 1; }  
 }
+
+.project-container{
+    width: 100%;
+    hr{
+        width: 100%;
+    }
+}
+
+.project-container .project-component .list{
+    text-align: left;
+    justify-content: left;
+}

@@ -123,5 +123,9 @@ export class UserService {
       return status;
     }));
   }
+
+  getRate() {
+    return this.http.get<any>(`${environment.apiUrl}/api/rate`);
+  }
   
 }

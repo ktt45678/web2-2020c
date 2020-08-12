@@ -20,6 +20,7 @@ export class JwtInterceptor implements HttpInterceptor {
         headers: request.headers.set('token', accessToken)
       });
     }
+    console.log(request);
     return next.handle(request);
   }
 }

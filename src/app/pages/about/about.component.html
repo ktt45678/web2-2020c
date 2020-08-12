@@ -3,14 +3,36 @@
       <br><br>
       <h2>THÔNG TIN VỀ NHÓM</h2>
       <div class="main-container">
-        <mat-horizontal-stepper #stepper>
+        <div class="container">
+          <mat-horizontal-stepper #stepper>
             <mat-step>
               <ng-template matStepLabel class="label">Frontend</ng-template>
-              <div class="container">
+
                 <div class="fe-container">
                   <div class="fe-row">
                     <div class="fe-item">
                       <mat-card class="personal-info-card" id="fe01">
+                        <mat-card-header>
+                          <div mat-card-avatar class="profile-image" defaultImage="/assets/img/upper-placeholder.png" lazyLoad="/assets/img/upper.png"></div>
+                          <mat-card-title>Vương Gia Huy</mat-card-title>
+                          <mat-card-subtitle>1760078</mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="main-image">
+                          <img mat-card-image defaultImage = "/assets/img/center-placeholder.png" lazyLoad ="/assets/img/center.png" alt="Photo of a group member">
+                        </div>
+                        <mat-card-content>
+                          <p>Frontend chính</p>
+                          <p>Thiết kế giao diện và thiết lập môi trường làm việc</p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                          <button mat-button id="facebook-button"><a href="https://www.facebook.com/kriceai" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
+                          <button mat-button id="github-button"><a href="https://github.com/ktt45678" target="_blank"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></a></button>
+                        </mat-card-actions>
+                      </mat-card>
+                    </div> 
+
+                    <div class="fe-item">
+                      <mat-card class="personal-info-card" id="fe02">
                         <mat-card-header>
                           <div mat-card-avatar class="profile-image" defaultImage="/assets/img/upper-placeholder.png" lazyLoad="/assets/img/upper.png"></div>
                           <mat-card-title>Ngô Thanh Long</mat-card-title>
@@ -21,8 +43,8 @@
                             <img mat-card-image defaultImage = "/assets/img/center-placeholder.png" lazyLoad ="/assets/img/center.png" alt="Photo of a group member">
                         </div>
                         <mat-card-content>
-                          <p>Thiết kế giao diện</p>
-                          <p>VIM STUCK</p>
+                          <p>Frontend phụ</p>
+                          <p>Thiết kế giao diện và cung cấp nội dung bên ngoài</p>
                         </mat-card-content>
                         <mat-card-actions>
                             <button mat-button id="facebook-button"><a href="https://www.facebook.com/YoloTnt" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
@@ -31,31 +53,9 @@
                         </mat-card-actions>
                       </mat-card>
                     </div>  
-
-                    <div class="fe-item">
-                      <mat-card class="personal-info-card" id="fe02">
-                        <mat-card-header>
-                          <div mat-card-avatar class="profile-image" defaultImage="/assets/img/upper-placeholder.png" lazyLoad="/assets/img/upper.png"></div>
-                          <mat-card-title>Vương Gia Huy</mat-card-title>
-                          <mat-card-subtitle>1760078</mat-card-subtitle>
-                        </mat-card-header>
-                        <div class="main-image">
-                          <img mat-card-image defaultImage = "/assets/img/center-placeholder.png" lazyLoad ="/assets/img/center.png" alt="Photo of a group member">
-                        </div>
-                        <mat-card-content>
-                          <p>Also Thiết kế giao diện</p>
-                          <p>Horny</p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                          <button mat-button id="facebook-button"><a href="https://www.facebook.com/kriceai" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
-                          <button mat-button id="github-button"><a href="https://github.com/ktt45678" target="_blank"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></a></button>
-                        </mat-card-actions>
-                      </mat-card>
-                    </div> 
                   </div>
                 </div>
 
-              </div>
                 <div class="stepnav">
                   <button mat-button matStepperNext id="nextButton">Next</button>
                 </div>
@@ -69,19 +69,19 @@
                       <mat-card class="personal-info-card" id="be01">
                         <mat-card-header>
                           <div mat-card-avatar class="profile-image" defaultImage="/assets/img/upper-placeholder.png" lazyLoad="/assets/img/upper.png"></div>
-                          <mat-card-title>Đặng Trung Hiếu</mat-card-title>
-                          <mat-card-subtitle>1760062</mat-card-subtitle>
+                          <mat-card-title>Nguyễn Thế Ngọc</mat-card-title>
+                          <mat-card-subtitle>1760120</mat-card-subtitle>
                         </mat-card-header>
                         <div class="main-image">
                           <img mat-card-image defaultImage = "/assets/img/center-placeholder.png" lazyLoad ="/assets/img/center.png" alt="Photo of a group member">
                         </div>
                         <mat-card-content>
-                          <p>Có tham dự</p>
-                          <p>>anon update lỗi</p>
+                          <p>Backend chính</p>
+                          <p>Thiết kế Database và mô hình API</p>
                         </mat-card-content>
                         <mat-card-actions>
-                          <button mat-button id="facebook-button"><a href="https://www.facebook.com/trunghieu.dang.2304" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
-                          <button mat-button id="github-button"><a href="https://github.com/hieu2304" target="_blank"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></a></button>
+                          <button mat-button id="facebook-button"><a href="https://www.facebook.com/Ngoc.SOTN" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
+                          <button mat-button id="github-button"><a href="https://github.com/NgocTheNguyen" target="_blank"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></a></button>
                         </mat-card-actions>
                       </mat-card>
                     </div>
@@ -90,19 +90,19 @@
                       <mat-card class="personal-info-card" id="be02">
                         <mat-card-header>
                           <div mat-card-avatar class="profile-image" defaultImage="/assets/img/upper-placeholder.png" lazyLoad="/assets/img/upper.png"></div>
-                          <mat-card-title>Nguyễn Thế Ngọc</mat-card-title>
-                          <mat-card-subtitle>1760120</mat-card-subtitle>
+                          <mat-card-title>Đặng Trung Hiếu</mat-card-title>
+                          <mat-card-subtitle>1760062</mat-card-subtitle>
                         </mat-card-header>
                         <div class="main-image">
                           <img mat-card-image defaultImage = "/assets/img/center-placeholder.png" lazyLoad ="/assets/img/center.png" alt="Photo of a group member">
                         </div>
                         <mat-card-content>
-                          <p>Thiết kế Database và mô hình API</p>
-                          <p>Gián điệp Trung Cộng</p>
+                          <p>Backend phụ</p>  
+                          <p>Hỗ trợ viết API</p>
                         </mat-card-content>
                         <mat-card-actions>
-                          <button mat-button id="facebook-button"><a href="https://www.facebook.com/Ngoc.SOTN" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
-                          <button mat-button id="github-button"><a href="https://github.com/NgocTheNguyen" target="_blank"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></a></button>
+                          <button mat-button id="facebook-button"><a href="https://www.facebook.com/trunghieu.dang.2304" target="_blank"><i><fa-icon [icon]="FacebookIcon"></fa-icon></i></a></button>
+                          <button mat-button id="github-button"><a href="https://github.com/hieu2304" target="_blank"><i><fa-icon [icon]="GithubIcon"></fa-icon></i></a></button>
                         </mat-card-actions>
                       </mat-card>
                     </div>
@@ -117,16 +117,29 @@
             <mat-step>
               <ng-template matStepLabel class="label">Project</ng-template>
               <div class="project-container">
-                <div class="list">
-                    <mat-list style="align-items: center;">
-                        <mat-list-item> Thành phần frontend </mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item> Thành phần backend </mat-list-item>
-                        <mat-divider></mat-divider>
-                        <mat-list-item> Các dịch vụ lưu trữ </mat-list-item>
-                        <mat-divider></mat-divider>
-                    </mat-list> 
-                </div> 
+                <div class="project-component">
+                  <div class="list">
+                    <p></p>
+                    <h4>Thành phần Frontend</h4>
+                    <p>Angular</p>
+                    <p>Bootstrap</p>
+                    <p>Lazyload Image</p>
+                    <p>AOS animation</p>
+                    <p>Google Maps API</p>
+                    <hr>
+                    <h4>Thành phần Backend</h4>
+                    <p>Express-JWT</p>
+                    <p>Decimal.js</p>
+                    <p>Google reCAPTCHA V2</p>
+                    <p>API lấy tỷ lệ đổi tiền VND USD</p>
+                    <hr>
+                    <h4>Các dịch vụ lưu trữ</h4>
+                    <p>Microsoft Azure</p>
+                    <p>Google Cloud</p>
+                    <p>Netlify</p>
+                    <hr>
+                  </div> 
+                </div>
                 
                 <div>
                   <button mat-button id="github-button" matTooltip="Frontend Repositories">
@@ -143,6 +156,7 @@
               </div>
             </mat-step>
           </mat-horizontal-stepper>
-      </div>  
-    </div>
+      </div> 
+    </div> 
+  </div>
 </div>

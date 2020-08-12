@@ -6,6 +6,8 @@ import {MediaMatcher} from '@angular/cdk/layout';
   templateUrl: './policy.component.html',
   styleUrls: ['./policy.component.scss']
 })
+
+
 // export class PolicyComponent implements OnInit {
 
 //   constructor() { }
@@ -18,6 +20,10 @@ import {MediaMatcher} from '@angular/cdk/layout';
 
 export class PolicyComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({behavior: 'smooth'});
+  }
 
   private _mobileQueryListener: () => void;
 

@@ -12,21 +12,21 @@
         <mat-sidenav-container>
           <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'">
             <mat-nav-list>       
-              <a mat-list-item href="/home">
-                <span matLine>Mở đầu</span>
-                  <button mat-icon-button id="test">
+              <a mat-list-item >
+                <span matLine (click)="scroll(Opening)">Mở đầu</span>
+                  <button mat-icon-button id="Opening" (click)="scroll(Opening)">
                     <mat-icon>account_balance</mat-icon>
                   </button>
               </a>
-              <a mat-list-item href="/home">
-                <span matLine>Quyền lợi</span>
-                  <button mat-icon-button id="test">
+              <a mat-list-item >
+                <span matLine (click)="scroll(Benefit)">Quyền lợi</span>
+                  <button mat-icon-button id="Benefit" (click)="scroll(Benefit)">
                     <mat-icon>assignment_ind</mat-icon>
                   </button>
               </a>
-              <a mat-list-item href="/home">
-                <span matLine>Trách nhiệm</span>
-                  <button mat-icon-button id="test">
+              <a mat-list-item >
+                <span matLine (click)="scroll(Responsibility)">Trách nhiệm</span>
+                  <button mat-icon-button id="Responsibility" (click)="scroll(Responsibility)">
                     <mat-icon>fact_check</mat-icon>
                   </button>
               </a>
@@ -43,9 +43,9 @@
                   </h6>
                       <div class="md-space"></div>  
                       <mat-divider></mat-divider>
-                      <div class="md-space"></div>
+                      <div class="md-space" #Opening></div>
                       <h6>Điều 1. Một số Định nghĩa dùng cho các thỏa thuận liên quan đến việc sử dụng iWhitefoo</h6>
-                      <textarea class="ruleset1" name="ruleset1" id="ruleset1" readonly>
+                      <textarea class="ruleset1" name="ruleset1" id="ruleset1" readonly >
 -  WhitefooBank là Ngân hàng thương mại cổ phần Waifu Thương Tín thực hiện cung cấp iWhitefoo theo quy định của Ngân hàng Nhà Nước Việt Nam.
 
 -  Khách hàng (KH) là các tổ chức, cá nhân là chủ tài khoản tiền gửi được mở tại WhitefooBank và là chủ thể đứng tên trên bản đăng ký sử dụng dịch vụ liên quan đến iWhitefoo.
@@ -84,9 +84,9 @@
                       </textarea>
                       <div class="md-space"></div>
                       <mat-divider></mat-divider>
-                      <div class="md-space"></div>
+                      <div class="md-space" #Benefit></div>
                       <h6>Điều 2. Quyền và trách nhiệm của khách hàng</h6>
-                      <p style="font-weight: bold; padding-top: 15px;">2.1 Quyền của khách hàng</p>
+                      <p style="font-weight: bold; padding-top: 15px;" >2.1 Quyền của khách hàng</p>
                       <textarea class="ruleset2" name="ruleset2" id="ruleset2" readonly >
 - Được truy cập vào trang web của kênh iWhitefoo và sử dụng các dịch vụ cung cấp qua kênh này theo gói dịch vụ KH đã đăng ký.
 
@@ -100,9 +100,9 @@
 
 - Các quyền khác theo quy định của bản Điều kiện và Điều khoản sử  dụng này và các quy định có liên quan đến pháp luật.
                         </textarea>
-
-                        <p style="font-weight: bold; padding-top: 15px;">2.2 Trách nhiệm của khách hàng</p>
-                        <textarea class="ruleset3" name="ruleset3" id="ruleset3" readonly>
+                        <br #Responsibility> 
+                        <p style="font-weight: bold; padding-top: 15px;" >2.2 Trách nhiệm của khách hàng</p>
+                        <textarea class="ruleset3" name="ruleset3" id="ruleset3" readonly >
 - Mở tài khoản tiền gửi không kỳ hạn tại WhitefooBank và tuân thủ các quy định về mở, sử dụng tài khoản của WhitefooBank và pháp luật.
 
 - Đọc, hiểu, tuân thủ và ràng buộc bởi các quy định, hướng dẫn liên quan đến Hợp đồng này trước khi sử dụng.
@@ -143,7 +143,7 @@
                     <div class="redirector-space"></div>
                       <div class="redirector">
                           <button mat-button>
-                              <a href="/contact">Liên hệ trực tiếp để giải đáp các thắc mắc &#8594;</a>
+                              <a routerLink="/contact">Liên hệ trực tiếp để giải đáp các thắc mắc &#8594;</a>
                           </button>
                       </div>
                   </div>
