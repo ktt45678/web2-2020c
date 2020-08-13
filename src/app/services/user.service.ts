@@ -69,11 +69,6 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/api/requeststaff`, {}, { headers });
   }
 
-  findAccount(id: string) {
-    const params = { id };
-    return this.http.get<AccountModel>(`${environment.apiUrl}/api/getaccountinfo`, { params });
-  }
-
   findAccounts(start = 0, limit = 10, type = '', keyword = '') {
     const params = {
       start: start.toString(),

@@ -31,6 +31,7 @@ export class AccountWithdrawalComponent implements OnInit {
     this.currentUser = this.auth.currentUserValue;
     const accountId = this.route.snapshot.paramMap.get('accountid');
     this.manage.findAccount(accountId).pipe(tap(account => {
+      this.selectedAccount = account;
       if (account.accountType === 0) {
         this.createCAWithdrawalForm();
         this.stage = 'checking';
@@ -38,7 +39,7 @@ export class AccountWithdrawalComponent implements OnInit {
         this.createSAWithdrawalForm();
         this.stage = 'savings';
       }
-    })).subscribe(account => this.selectedAccount = account, error => this.showError(error));
+    })).subscribe(() => {}, error => this.showError(error));
   }
 
   createCAWithdrawalForm() {
