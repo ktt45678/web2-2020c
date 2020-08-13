@@ -1,14 +1,20 @@
 <div class="container mt-2r user-table">
   <div *ngIf="detailView" class="row">
-    <mat-form-field class="col-auto mr-auto">
-      <mat-label>Hiển thị theo ngày</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input (dateChange)="onDateFilterChange()" matStartDate placeholder="Từ ngày" #startDate>
-        <input (dateChange)="onDateFilterChange()" matEndDate placeholder="Đến ngày" #endDate>
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker [touchUi]="mobileQuery.matches" #picker></mat-date-range-picker>
-    </mat-form-field>
+    <div class="row col-auto mr-auto">
+      <mat-form-field class="col-auto">
+        <mat-label>Tìm kiếm theo tài khoản</mat-label>
+        <input matInput #search>
+      </mat-form-field>
+      <mat-form-field class="col-auto">
+        <mat-label>Hiển thị theo ngày</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input (dateChange)="onDateFilterChange()" matStartDate placeholder="Từ ngày" #startDate>
+          <input (dateChange)="onDateFilterChange()" matEndDate placeholder="Đến ngày" #endDate>
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker [touchUi]="mobileQuery.matches" #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
     <mat-form-field class="col-auto">
       <mat-label>Loại giao dịch</mat-label>
       <mat-select value="all">

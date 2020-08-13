@@ -39,7 +39,7 @@ const routes: Routes = [
       { path: 'users/edit/:userid', component: UserModificationComponent, canActivate: [RoleGuard] },
       { path: 'accounts', component: AccountManagementComponent, canActivate: [ActivateGuard] },
       { path: 'accounts/create/:userid', component: AccountCreationComponent, canActivate: [RoleGuard] },
-      { path: 'accounts/view/:accountid', component: AccountInformationComponent, canActivate: [RoleGuard] },
+      { path: 'accounts/view/:accountid', component: AccountInformationComponent, canActivate: [ActivateGuard] },
       { path: 'accounts/edit/:accountid', component: AccountModificationComponent, canActivate: [RoleGuard] },
       { path: 'accounts/withdraw/:accountid', component: AccountWithdrawalComponent, canActivate: [RoleGuard] },
       { path: 'log', component: AuditLogComponent, canActivate: [RoleGuard] },

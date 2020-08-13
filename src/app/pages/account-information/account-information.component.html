@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="info-history mt-2r">
+    <div *ngIf="currentUser.userType === 0" class="info-history mt-2r">
       <h4 class="fw-600">Lịch sử giao dịch</h4>
       <div class="info-content">
         <app-transaction-history [accountId]="selectedAccount.accountId"></app-transaction-history>

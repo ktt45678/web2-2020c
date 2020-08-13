@@ -95,10 +95,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.captchaRef.reset();
   }
 
-  resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
-  }
-
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

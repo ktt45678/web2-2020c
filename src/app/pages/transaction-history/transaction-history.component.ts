@@ -3,8 +3,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Subscription, fromEvent } from 'rxjs';
+import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { TransactionService } from '../../services/transaction.service';
 import { NotificationService } from '../../services/notification.service';
@@ -26,6 +26,7 @@ export class TransactionHistoryComponent implements OnInit, AfterViewInit, OnDes
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('startDate') startDate: ElementRef;
   @ViewChild('endDate') endDate: ElementRef;
+  @ViewChild('search') searchInput: ElementRef;
   @ViewChild(MatSelect) select: MatSelect;
   subscriptions = new Subscription();
 
@@ -41,6 +42,10 @@ export class TransactionHistoryComponent implements OnInit, AfterViewInit, OnDes
 
   ngAfterViewInit(): void {
     if (this.detailView) {
+      this.subscriptions.add(fromEvent(this.searchInput.nativeElement, 'keyup').pipe(debounceTime(200), distinctUntilChanged(), tap(() => {
+        this.paginator.pageIndex = 0;
+        this.loadTransactionsPage();
+      })).subscribe());
       this.subscriptions.add(this.paginator.page.pipe(tap(() => this.loadTransactionsPage())).subscribe());
       this.subscriptions.add(this.select.selectionChange.pipe(tap(() => this.loadTransactionsPage())).subscribe());
     }
@@ -49,16 +54,17 @@ export class TransactionHistoryComponent implements OnInit, AfterViewInit, OnDes
 
   onDateFilterChange() {
     if (this.startDate.nativeElement.value && this.endDate.nativeElement.value) {
+      this.paginator.pageIndex = 0;
       this.loadTransactionsPage();
     }
   }
 
   loadTransactionsPage() {
     if (!this.detailView) {
-      this.dataSource.loadTransactions(0, 5, '', '', '');
+      this.dataSource.loadTransactions(0, 5, '', '', '', '');
       return;
     }
-    this.dataSource.loadTransactions(this.paginator.pageIndex, this.paginator.pageSize, this.startDate.nativeElement.value, this.endDate.nativeElement.value, this.select.value, this.accountId);
+    this.dataSource.loadTransactions(this.paginator.pageIndex, this.paginator.pageSize, this.startDate.nativeElement.value, this.endDate.nativeElement.value, this.select.value, this.searchInput.nativeElement.value, this.accountId);
   }
 
   showError(error) {

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-import { AccountModel } from '../modules/models/account.model';
 import { TransferModel } from '../modules/models/transfer.model';
 
 @Injectable()
@@ -28,13 +27,14 @@ export class TransactionService {
     return this.http.get<any>(`${environment.apiUrl}/api/fee`, { params });
   }
 
-  findTransactions(start = 0, limit = 10, from = '', to = '', type = '', accountId?: string) {
+  findTransactions(start = 0, limit = 10, from = '', to = '', type = '', search = '', accountId?: string) {
     const params = {
       start: start.toString(),
       limit: limit.toString(),
       fromDate: from,
       toDate: to,
       type: type,
+      id: search,
       accountId: accountId ? accountId : null
     };
     if (accountId) {

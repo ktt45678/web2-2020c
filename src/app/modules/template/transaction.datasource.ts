@@ -26,9 +26,9 @@ export class TransactionDataSource implements DataSource<TransactionModel>{
     this.pageLengthSubject.complete();
   }
 
-  loadTransactions(start: number, limit: number, from: string, to: string, type: string, accountId?: string) {
+  loadTransactions(start: number, limit: number, from: string, to: string, type: string, search: string, accountId?: string) {
     this.loadingSubject.next(true);
-    this.transaction.findTransactions(start, limit, from, to, type, accountId).pipe(
+    this.transaction.findTransactions(start, limit, from, to, type, search, accountId).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
     ).subscribe(data => {

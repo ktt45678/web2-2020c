@@ -100,7 +100,7 @@ export class UserService {
     return this.http.get<any>(`${environment.apiUrl}/api/getbanklist`);
   }
 
-  findInfo(type = 'full') {
+  findInfo(type = 'all') {
     const params = { type };
     return this.http.get<UserModel>(`${environment.apiUrl}/api/getinfo`, { params });
   }

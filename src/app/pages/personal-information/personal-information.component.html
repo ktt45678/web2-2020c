@@ -1,6 +1,9 @@
 <div class="mt-2r">
+  <div *ngIf="!currentUser" class="body-spinner">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
   <div class="container">
-    <div class="user-info">
+    <div *ngIf="currentUser" class="user-info">
       <div class="info-head rounded shadow-sm p-3">
         <div class="info-content row justify-content-center">
           <div class="col-auto align-self-center">
