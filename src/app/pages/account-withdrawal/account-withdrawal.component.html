@@ -45,12 +45,28 @@
         </div>
         <div *ngIf="stage === 'savings'" class="withdrawal-sa">
           <form [formGroup]="saWithdrawalForm" (ngSubmit)="onSAWithdrawal(saWithdrawalForm.value)">
-            <div class="withdrawal-info mt-2r">
-              <p>Tài khoản trích tiền: <strong>{{selectedAccount.accountId}}</strong></p>
-              <p>Số dư hiện tại: <strong>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</strong></p>
-              <p>Kỳ hạn: <strong>{{selectedAccount.term}} tháng</strong></p>
+            <div *ngIf="selectedAccount && accountRate" class="withdrawal-info mt-2r row">
+              <div class="col-sm-7">
+                <p>Tài khoản trích tiền: <strong>{{selectedAccount.accountId}}</strong></p>
+                <p>Số dư hiện tại: <strong>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</strong></p>
+                <p>Kỳ hạn: <strong>{{selectedAccount.term}} tháng</strong></p>
+                <p>Kỳ hạn đã vượt: <strong>{{accountRate.termsPassed}}</strong></p>
+              </div>
+              <div class="col-sm-5">
+                <p>Ngày đã gửi: <strong>{{accountRate.daysPassed}}</strong></p>
+                <p>Tổng ngày gửi: <strong>{{accountRate.totalDaysPassed}}</strong></p>
+                <p>Quý đã gửi: <strong>{{accountRate.quarterYearPassed}}</strong></p>
+                <p>Tiền lãi: <strong>{{accountRate.profit | currency: selectedAccount.currencyType}}</strong></p>
+              </div>
             </div>
             <div>
+              <ng-container *ngIf="accountRate">
+                <p *ngIf="accountRate.daysPassed < accountRate.term * 30" class="text-info">Còn {{accountRate.term * 30 - accountRate.daysPassed}} ngày để hoàn thành kỳ hạn</p>
+                <p *ngIf="accountRate.daysPassed >= accountRate.term * 30" class="text-info">Đã hoàn thành kỳ hạn</p>
+              </ng-container>
+              <mat-progress-bar class="rounded" [value]="accountRate ? accountRate.daysPassed / (accountRate.term * 30) * 100 : 0"></mat-progress-bar>
+            </div>
+            <div class="mt-2">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Nội dung giao dịch</mat-label>
                 <textarea rows="5" formControlName="description" matInput></textarea>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 import { AccountModel } from '../modules/models/account.model';
+import { RateModel } from '../modules/models/rate.model';
 import { UserImageModel } from '../modules/models/user-image.model';
 import { UserModel } from '../modules/models/user.model';
 
@@ -68,6 +69,11 @@ export class ManagementService {
   findAvatar(userId: string) {
     const params = { userId };
     return this.http.get<UserImageModel[]>(`${environment.apiUrl}/api/upload/avatars`, { params });
+  }
+
+  findInterestRate(accountId: string) {
+    const params = { accountId };
+    return this.http.get<RateModel>(`${environment.apiUrl}/api/profit`, { params });
   }
 
   findSubmittedIdCards(userId: string) {

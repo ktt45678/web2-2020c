@@ -8,8 +8,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ManagementService } from 'src/app/services/management.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import { UserModel } from '../../modules/models/user.model';
 import { AccountModel } from '../../modules/models/account.model';
+import { RateModel } from '../../modules/models/rate.model';
+import { UserModel } from '../../modules/models/user.model';
 
 @Component({
   selector: 'app-account-withdrawal',
@@ -22,6 +23,7 @@ export class AccountWithdrawalComponent implements OnInit {
   stage: string;
   currentUser: UserModel;
   selectedAccount: AccountModel;
+  accountRate: RateModel;
   caWithdrawalForm: FormGroup;
   saWithdrawalForm: FormGroup;
 
@@ -51,6 +53,8 @@ export class AccountWithdrawalComponent implements OnInit {
   }
 
   createSAWithdrawalForm() {
+    const accountId = this.route.snapshot.paramMap.get('accountid');
+    this.manage.findInterestRate(accountId).subscribe(rate => this.accountRate = rate, error => this.showError(error));
     this.saWithdrawalForm = new FormGroup({
       description: new FormControl('')
     });

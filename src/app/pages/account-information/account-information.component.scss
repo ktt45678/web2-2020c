@@ -2,7 +2,11 @@
   font-weight: 600;
 }
 
-.account-info {
+:host ::ng-deep .mat-card-header-text {
+  margin-left: 0 !important;
+}
+
+.account-info, .account-rate {
   .info-content {
     h5 {
       font-size: 18px;

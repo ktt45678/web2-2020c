@@ -4,35 +4,71 @@
   </div>
   <div *ngIf="selectedAccount" class="container">
     <div class="account-info">
-      <h4 class="fw-600">Thông tin chi tiết</h4>
-      <div class="info-content row">
-        <div class="col-md-5">
-          <h5>Số tài khoản</h5>
-          <p>{{selectedAccount.accountId}}</p>
-          <h5>Loại tài khoản</h5>
-          <p>{{selectedAccount.accountType === 0 ? 'Thanh toán' : 'Tiết kiệm'}}</p>
-          <h5>Kỳ hạn</h5>
-          <p>{{selectedAccount.accountType === 1 ? selectedAccount.term + ' tháng' : 'Không có'}}</p>
-        </div>
-        <div class="col-md-4">
-          <h5>Số dư</h5>
-          <p>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</p>
-          <h5>Đơn vị tiền</h5>
-          <p>{{selectedAccount.currencyType}}</p>
-          <h5>Tình trạng</h5>
-          <p>{{selectedAccount.status === 1 ? 'Mở' : 'Đóng'}}</p>
-        </div>
-        <div class="col-md-3">
-          <h5>Ngày tạo</h5>
-          <p>{{selectedAccount.createdAt}}</p>
-          <h5>Ngày mở</h5>
-          <p>{{selectedAccount.openedDate}}</p>
-          <h5>Ngày đóng</h5>
-          <p>{{selectedAccount.closedDate || 'Không có'}}</p>
-        </div>
-      </div>
+      <h4 mat-card-title class="fw-600">Thông tin tài khoản</h4>
+      <mat-card>
+        <mat-card-content>
+          <div class="info-content row mt-2">
+            <div class="col-md-5">
+              <h5>Số tài khoản</h5>
+              <p>{{selectedAccount.accountId}}</p>
+              <h5>Loại tài khoản</h5>
+              <p>{{selectedAccount.accountType === 0 ? 'Thanh toán' : 'Tiết kiệm'}}</p>
+              <h5>Kỳ hạn</h5>
+              <p>{{selectedAccount.accountType === 1 ? selectedAccount.term + ' tháng' : 'Không có'}}</p>
+            </div>
+            <div class="col-md-4">
+              <h5>Số dư</h5>
+              <p>{{selectedAccount.balance | currency: selectedAccount.currencyType}}</p>
+              <h5>Đơn vị tiền</h5>
+              <p>{{selectedAccount.currencyType}}</p>
+              <h5>Tình trạng</h5>
+              <p>{{selectedAccount.status === 1 ? 'Mở' : 'Đóng'}}</p>
+            </div>
+            <div class="col-md-3">
+              <h5>Ngày tạo</h5>
+              <p>{{selectedAccount.createdAt}}</p>
+              <h5>Ngày mở</h5>
+              <p>{{selectedAccount.openedDate}}</p>
+              <h5>Ngày đóng</h5>
+              <p>{{selectedAccount.closedDate || 'Không có'}}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-    <div *ngIf="currentUser.userType === 0" class="info-history mt-2r">
+    <div *ngIf="selectedAccount.accountType === 1" class="account-rate mt-3">
+      <h4 mat-card-title class="fw-600">Thông tin tiết kiệm</h4>
+      <mat-card>
+        <mat-card-content>
+          <div *ngIf="accountRate" class="info-content row mt-2">
+            <div class="col-md-5">
+              <h5>Kỳ hạn</h5>
+              <p>{{accountRate.term + ' tháng'}}</p>
+              <h5>Kỳ hạn đã vượt</h5>
+              <p>{{accountRate.termsPassed}}</p>
+            </div>
+            <div class="col-md-4">
+              <h5>Tiền lãi</h5>
+              <p>{{accountRate.profit | currency: selectedAccount.currencyType}}</p>
+              <h5>Tổng ngày gửi</h5>
+              <p>{{accountRate.totalDaysPassed}}</p>
+            </div>
+            <div class="col-md-3">
+              <h5>Ngày đã gửi</h5>
+              <p>{{accountRate.daysPassed}}</p>
+              <h5>Quý đã gửi</h5>
+              <p>{{accountRate.quarterYearPassed}}</p>
+            </div>
+          </div>
+          <ng-container *ngIf="accountRate">
+            <p *ngIf="accountRate.daysPassed < accountRate.term * 30" class="text-info">Còn {{accountRate.term * 30 - accountRate.daysPassed}} ngày để hoàn thành kỳ hạn</p>
+            <p *ngIf="accountRate.daysPassed >= accountRate.term * 30" class="text-info">Đã hoàn thành kỳ hạn</p>
+          </ng-container>
+          <mat-progress-bar class="rounded" [value]="accountRate ? accountRate.daysPassed / (accountRate.term * 30) * 100 : 0"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div *ngIf="currentUser.userType === 0" class="info-history mt-3">
       <h4 class="fw-600">Lịch sử giao dịch</h4>
       <div class="info-content">
         <app-transaction-history [accountId]="selectedAccount.accountId"></app-transaction-history>
