@@ -13,7 +13,7 @@ export class ActivateGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot) {
     // Find user activation status
     return this.user.findStatus().pipe(map(status => {
-      if (status.approveStatus !== 0 && status.emailVerified !== 0) {
+      if (status.approveStatus === 1 && status.emailVerified === 1) {
         // Account is activated so return true
         return true;
       } else {
