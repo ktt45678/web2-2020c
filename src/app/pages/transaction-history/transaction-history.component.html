@@ -48,7 +48,7 @@
             Tài khoản <strong>{{transaction.accountIdA}}</strong> đã được thêm số tiền <strong>{{transaction.value | currency: transaction.currencyType}}</strong>
           </ng-container>
           <ng-container *ngIf="transaction.action === 'Chuyển khoản'">
-            Tài khoản <strong>{{transaction.accountIdA}}</strong> đã thực hiện chuyển <strong>{{transaction.value | currency: transaction.currencyType}}</strong> sang tài khoản <strong>{{transaction.accountIdB}}</strong> {{transaction.bankId ? 'thuộc ngân hàng ' + transaction.bankId : ''}}
+            Tài khoản <strong>{{transaction.accountIdA}}</strong> đã thực hiện chuyển <strong>{{transaction.value | currency: transaction.currencyType}}</strong> sang tài khoản <strong>{{transaction.accountIdB}}</strong> {{transaction.bankId ? 'từ ngân hàng ' + transaction.bankId : ''}}
           </ng-container>
         </td>
       </ng-container>
