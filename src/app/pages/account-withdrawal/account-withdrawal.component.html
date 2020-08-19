@@ -61,10 +61,10 @@
             </div>
             <div>
               <ng-container *ngIf="accountRate">
-                <p *ngIf="accountRate.daysPassed < accountRate.term * 30" class="text-info">Còn {{accountRate.term * 30 - accountRate.daysPassed}} ngày để hoàn thành kỳ hạn</p>
-                <p *ngIf="accountRate.daysPassed >= accountRate.term * 30" class="text-info">Đã hoàn thành kỳ hạn</p>
+                <p *ngIf="accountRate.totalDaysPassed < accountRate.term * 30" class="text-info">Còn {{accountRate.term * 30 - accountRate.totalDaysPassed}} ngày để hoàn thành kỳ hạn</p>
+                <p *ngIf="accountRate.totalDaysPassed >= accountRate.term * 30" class="text-info">Đã hoàn thành kỳ hạn</p>
               </ng-container>
-              <mat-progress-bar class="rounded" [value]="accountRate ? accountRate.daysPassed / (accountRate.term * 30) * 100 : 0"></mat-progress-bar>
+              <mat-progress-bar class="rounded" [value]="accountRate ? accountRate.totalDaysPassed / (accountRate.term * 30) * 100 : 0"></mat-progress-bar>
             </div>
             <div class="mt-2">
               <mat-form-field appearance="outline" class="w-100">
