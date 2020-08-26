@@ -3,7 +3,7 @@
     <button *ngIf="allowMenu" mat-icon-button (click)="openSideNav()">
       <mat-icon>menu</mat-icon>
     </button>
-    <a class="navbar-brand mr-auto" routerLink="/">
+    <a class="navbar-brand mr-auto" [routerLink]="allowMenu ? '/dashboard' : '/'">
       <img src="/assets/img/whitefoologohead.png" alt="logo">
       <img src="/assets/img/whitefoologocap.png" alt="logo">
     </a>

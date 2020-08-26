@@ -50,7 +50,7 @@
             <div>
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Mã xác thực</mat-label>
-                <input type="text" formControlName="code" matInput>
+                <input type="number" formControlName="code" matInput>
                 <mat-error *ngIf="code.errors?.required">
                   Mã xác thực hai bước là <strong>bắt buộc</strong>
                 </mat-error>
